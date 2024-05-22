@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -24,4 +24,52 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 245, 240, 230; /* Off-white/bone color */
+  --link-color: 60, 99, 246;
+  --highlight-color: 255, 159, 10;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 229, 231, 235;
+    --background-rgb: 245, 240, 230; /* Maintain off-white/bone color in dark mode */
+    --link-color: 144, 205, 244;
+    --highlight-color: 255, 159, 10;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: rgb(var(--link-color));
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  color: rgb(var(--foreground-rgb));
+}
+
+code {
+  background: rgba(var(--highlight-color), 0.1);
+  color: rgb(var(--highlight-color));
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
 }
