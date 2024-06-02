@@ -117,34 +117,55 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen py-4 bg-bone text-center">
-      <section className="max-w-2xl w-full px-4 py-6">
-        <h1 className="text-3xl font-medium mb-4 text-black">
-          Hey, I'm Aadit!
-        </h1>
-        <p className="text-lg mb-4 text-black">
-          I'm a student at Texas A&M University studying Computer Science and Mathematics. 
-        </p>
-      </section>
+    <main className="flex flex-col items-center justify-center min-h-screen py-8 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-center">
+      <div className="flex flex-row w-full max-w-6xl px-4">
+        <section className="w-1/2 px-6 py-8 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-lg shadow-lg border-2 border-black transform transition duration-500 hover:scale-105 mr-4">
+          <h1 className="text-4xl font-bold mb-6 text-white">
+            Hey, I'm Aadit!
+          </h1>
+          <p className="text-xl mb-6 text-white">
+            I'm a student at Texas A&M University studying Computer Science and Mathematics.
+          </p>
+          <div className="mt-8">
+            <div className="flex justify-between items-center text-white mb-4">
+              <span className="font-medium">Email</span>
+              <span className="flex-grow border-t border-dotted border-white mx-4"></span>
+              <a href="mailto:aadit2805@gmail.com" className="text-blue-200 hover:underline">Send</a>
+            </div>
+            <div className="flex justify-between items-center text-white mb-4">
+              <span className="font-medium">GitHub</span>
+              <span className="flex-grow border-t border-dotted border-white mx-4"></span>
+              <a href="https://github.com/aadit2805" className="text-blue-200 hover:underline">Follow</a>
+            </div>
+            <div className="flex justify-between items-center text-white">
+              <span className="font-medium">Twitter</span>
+              <span className="flex-grow border-t border-dotted border-white mx-4"></span>
+              <a href="https://twitter.com/aadit2805" className="text-blue-200 hover:underline">Follow</a>
+            </div>
+          </div>
+        </section>
 
-      <section className="max-w-2xl w-full px-4 py-6">
-        <p className="text-lg mb-4 text-black">
-          Here is some of the music I've been listening to lately!
-        </p>
-        <div className="flex justify-center mb-8">
-          <iframe 
-            src="https://spotify-recently-played-readme.vercel.app/api?user=aadit2805&unique=%7Btrue%7C1%7Con%7Cyes%7D" 
-            width="450" 
-            height="580" 
-            allow="encrypted-media"
-            title="Spotify Recently Played"
-          ></iframe>
-        </div>
-      </section>
+        <section className="w-1/2 px-6 py-8 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-lg shadow-lg border-2 border-black transform transition duration-500 hover:scale-105 ml-4">
+          <p className="text-xl mb-6 text-white">
+            Here is some of the music I've been listening to lately!
+          </p>
+          <div className="flex justify-center mb-8">
+            <iframe
+              src="https://spotify-recently-played-readme.vercel.app/api?user=aadit2805&unique=%7Btrue%7C1%7Con%7Cyes%7D"
+              width="450"
+              height="580"
+              allow="encrypted-media"
+              title="Spotify Recently Played"
+              className="rounded-lg shadow-lg"
+            ></iframe>
+          </div>
+        </section>
+      </div>
 
-      <footer className="text-center mt-8">
-        <p className="text-black text-sm">&copy; 2024, Aadit Shah. All rights reserved.</p>
+      <footer className="text-center mt-12">
+        <p className="text-white text-sm">&copy; 2024, Aadit Shah. All rights reserved.</p>
       </footer>
     </main>
   )
 }
+
