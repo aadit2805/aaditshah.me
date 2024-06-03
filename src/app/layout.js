@@ -1,5 +1,10 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Script from 'next/script'
+import '@fortawesome/fontawesome-svg-core/styles.css' // Import the CSS
+import { config } from '@fortawesome/fontawesome-svg-core'
+config.autoAddCss = false // Tell FontAwesome to skip adding the CSS automatically since it's being imported above
+import '../lib/fontAwesome' // Import the FontAwesome setup file
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +16,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+      </head>
+      <body className={inter.className}>
+        {children}
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"
+          strategy="beforeInteractive"
+        />
+      </body>
     </html>
   )
 }
