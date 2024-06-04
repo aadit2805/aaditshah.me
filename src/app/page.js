@@ -6,7 +6,7 @@ export default function Home() {
     <main className="flex flex-col items-center justify-center min-h-screen py-8 bg-black text-center font-inter">
       <div className="flex flex-row w-full max-w-6xl px-4">
         <section className="w-1/2 px-6 py-8 bg-black rounded-lg shadow-lg border-2 border-gray-700 transform transition duration-500 hover:scale-105 mr-4">
-          <h1 className="text-4xl font-semibold mb-6 text-white">
+          <h1 className="text-4xl fxont-semibold mb-6 text-white">
             howdy, i'm aadit!
           </h1>
           <p className="text-xl mb-6 text-white">
