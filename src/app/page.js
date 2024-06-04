@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen py-8 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-center">
+    <main className="flex flex-col items-center justify-center min-h-screen py-8 bg-black text-center font-inter">
       <div className="flex flex-row w-full max-w-6xl px-4">
-        <section className="w-1/2 px-6 py-8 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-lg shadow-lg border-2 border-black transform transition duration-500 hover:scale-105 mr-4">
-          <h1 className="text-4xl font-bold mb-6 text-white">
+        <section className="w-1/2 px-6 py-8 bg-black rounded-lg shadow-lg border-2 border-gray-700 transform transition duration-500 hover:scale-105 mr-4">
+          <h1 className="text-4xl font-semibold mb-6 text-white">
             howdy, i'm aadit!
           </h1>
           <p className="text-xl mb-6 text-white">
@@ -43,13 +43,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="w-1/2 px-6 py-8 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-lg shadow-lg border-2 border-black transform transition duration-500 hover:scale-105 ml-4">
+        <section className="w-1/2 px-6 py-8 bg-black rounded-lg shadow-lg border-2 border-gray-700 transform transition duration-500 hover:scale-105 ml-4">
           <p className="text-xl mb-6 text-white">
             here is some of the music i've been listening to lately!
           </p>
           <div className="flex justify-center mb-8">
             <iframe
-              src="https://spotify-recently-played-readme.vercel.app/api?user=aadit2805&count=8"
+              src="https://spotify-recently-played-readme.vercel.app/api?user=aadit2805&count=10"
               width="450"
               height="580"
               allow="encrypted-media"
