@@ -1,7 +1,7 @@
-// app/about-me/page.js
-import Image from 'next/image'
+// src/app/aboutme.js
+import Image from 'next/image';
 
-export default function AboutMe() {
+const AboutMe = () => {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen py-8 bg-black text-center font-inter">
       <section className="w-full max-w-4xl px-6 py-8 bg-gray-800 rounded-lg shadow-lg border-2 border-gray-700 transform transition duration-500 hover:scale-105">
@@ -23,5 +23,7 @@ export default function AboutMe() {
         />
       </section>
     </main>
-  )
+  );
 }
+
+export default AboutMe;
