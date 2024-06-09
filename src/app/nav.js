@@ -11,13 +11,13 @@ const Nav = () => {
       </div>
       <div className="space-x-8">
         <a href="/static/resume.pdf" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-          Resume
+          resume
         </a>
         <Link href="/aboutme" legacyBehavior>
-          <a className="text-white hover:text-gray-300">About Me</a>
+          <a className="text-white hover:text-gray-300">about me</a>
         </Link>
         <Link href="/portfolio" legacyBehavior>
-          <a className="text-white hover:text-gray-300">Portfolio</a>
+          <a className="text-white hover:text-gray-300">portfolio</a>
         </Link>
       </div>
     </nav>

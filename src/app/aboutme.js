@@ -14,16 +14,18 @@ const AboutMe = () => {
         <p className="text-xl mb-6 text-white">
           I enjoy building applications and exploring new technologies. In my free time, I love to listen to music and connect with others in the tech community.
         </p>
-        <Image
-          src="/path/to/your/image.jpg" // replace with your image path
-          alt="Aadit Shah"
-          width={200}
-          height={200}
-          className="rounded-full mx-auto"
-        />
+        <div className="mx-auto">
+          <Image
+            src="/path/to/your/image.jpg" // replace with your image path
+            alt="Aadit Shah"
+            width={200}
+            height={200}
+            className="rounded-full"
+          />
+        </div>
       </section>
     </main>
   );
-}
+};
 
 export default AboutMe;
