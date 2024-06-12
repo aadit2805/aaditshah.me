@@ -5,7 +5,7 @@ import Script from 'next/script';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '../lib/fontAwesome';
-import Nav from './nav';
+import Nav from '../components/nav';
 
 config.autoAddCss = false;
 

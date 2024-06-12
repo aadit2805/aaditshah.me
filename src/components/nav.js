@@ -1,4 +1,4 @@
-// src/app/nav.js
+
 import Link from 'next/link';
 
 const Nav = () => {
@@ -13,7 +13,7 @@ const Nav = () => {
         <a href="/static/resume.pdf" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
           resume
         </a>
-        <Link href="/aboutme" legacyBehavior>
+        <Link href="/about" legacyBehavior>
           <a className="text-white hover:text-gray-300">about me</a>
         </Link>
         <Link href="/portfolio" legacyBehavior>
