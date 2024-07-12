@@ -1,10 +1,9 @@
 // src/app/layout.js
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Script from 'next/script';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
-import '../lib/fontAwesome';
+import '../lib/fontAwesome'; // Ensure this file correctly imports and configures the icons
 import Nav from '../components/nav';
 
 config.autoAddCss = false;
@@ -28,10 +27,6 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Nav /> {/* Navigation bar */}
         <main>{children}</main>
-        <Script
-          src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"
-          strategy="beforeInteractive"
-        />
       </body>
     </html>
   );
