@@ -45,4 +45,32 @@ code {
   border-radius: 0.3em;
 }
 
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+.neon-orange-gradient {
+  background: linear-gradient(to bottom, #ff9b44, #fc6076);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.nav-link {
+  padding: 5px 10px;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.nav-link:not(:last-child) {
+  margin-right: 8px;
+}
+
+/* Adding explicit transition properties for color and background-color */
+.nav-link, .nav-button {
+  transition: color 1ms ease-in-out, background-color 1ms ease-in-out;
+}

@@ -1,26 +1,34 @@
+import React from 'react';
 import Link from 'next/link';
+import '../app/globals.css'; // Ensure this is the correct path
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
-const Nav = () => {
+library.add(faSun, faMoon);
+
+const Navbar = ({ isDarkMode, toggleTheme }) => {
   return (
-    <nav className="bg-black border-b border-gray-200 px-4 py-2 flex justify-between items-center">
-      <div className="text-xl font-semibold text-white">
-        <Link href="/" className="text-white hover:text-gray-300">
-          aadit shah
+    <nav className={`flex items-center justify-between p-4 ${isDarkMode ? 'bg-black' : 'bg-white'} shadow-md`}>
+      <Link href="/" legacyBehavior>
+        <a className="ml-4 text-lg font-semibold nav-link">{isDarkMode ? 'aadit shah' : 'aadit shah'}</a>
+      </Link>
+      <div className="flex items-center space-x-3">
+        <Link href="/portfolio" legacyBehavior>
+          <a className="nav-link text-lg font-semibold">{isDarkMode ? 'portfolio' : 'portfolio'}</a>
         </Link>
-      </div>
-      <div className="space-x-8">
-        <a href="/static/resume.pdf" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-          resume
-        </a>
-        <Link href="/portfolio" className="text-white hover:text-gray-300">
-          portfolio
+        <Link href="/reviews" legacyBehavior>
+          <a className="nav-link text-lg font-semibold">{isDarkMode ? 'reviews' : 'reviews'}</a>
         </Link>
-        <Link href="/reviews" className="text-white hover:text-gray-300">
-          reviews
+        <Link href="/resume.pdf" legacyBehavior>
+          <a className="nav-link text-lg font-semibold" target="_blank" rel="noopener noreferrer">{isDarkMode ? 'resume' : 'resume'}</a>
         </Link>
+        <button onClick={toggleTheme} className="nav-button text-lg font-semibold">
+          {isDarkMode ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
+        </button>
       </div>
     </nav>
   );
 };
 
-export default Nav;
+export default Navbar;
