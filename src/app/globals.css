@@ -2,27 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+[data-theme="light"] {
   --foreground-rgb: 0, 0, 0;
-  --background-rgb: 245, 240, 230; /* Off-white/bone color */
-  --link-color: 60, 99, 246;
-  --highlight-color: 255, 159, 10;
+  --background-rgb: 245, 240, 230;
+  --navbar-bg: 245, 240, 230;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 229, 231, 235;
-    --background-rgb: 18, 18, 18; /* Dark background */
-    --link-color: 144, 205, 244;
-    --highlight-color: 255, 159, 10;
-  }
+[data-theme="dark"] {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 18, 18, 18;
+  --navbar-bg: 18, 18, 18;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
   font-family: 'Inter', sans-serif;
-  line-height: 1.6;
+}
+
+nav {
+  background-color: rgb(var(--navbar-bg));
 }
 
 a {
@@ -41,7 +40,7 @@ h1, h2, h3 {
 code {
   background: rgba(var(--highlight-color), 0.1);
   color: rgb(var(--highlight-color));
-  padding: 0.2em 0.4em;
+  padding: 0.5em 0.4em;
   border-radius: 0.3em;
 }
 
@@ -73,4 +72,13 @@ code {
 /* Adding explicit transition properties for color and background-color */
 .nav-link, .nav-button {
   transition: color 1ms ease-in-out, background-color 1ms ease-in-out;
+}
+
+/* Add this below the existing .nav-link styles */
+.nav-link.gradient {
+  background: linear-gradient(to bottom, #ff9b44, #fc6076);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 1.25rem;
 }
