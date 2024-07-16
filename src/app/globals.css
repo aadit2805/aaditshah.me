@@ -69,12 +69,10 @@ code {
   margin-right: 8px;
 }
 
-/* Adding explicit transition properties for color and background-color */
 .nav-link, .nav-button {
   transition: color 1ms ease-in-out, background-color 1ms ease-in-out;
 }
 
-/* Add this below the existing .nav-link styles */
 .nav-link.gradient {
   background: linear-gradient(to bottom, #ff9b44, #fc6076);
   color: transparent;

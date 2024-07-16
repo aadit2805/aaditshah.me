@@ -59,17 +59,25 @@ export default function Home() {
               style={{ borderRadius: '12px', paddingLeft: '4rem' }}
               src="https://open.spotify.com/embed/playlist/2hJ9vjNCXEVrbPDmr8RRaY?utm_source=generator"
               width="50%"
-              height="520"
+              height="580"
               frameBorder="0"
               allowFullScreen=""
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
             ></iframe>
             <iframe
+              src="https://spotify-recently-played-readme.vercel.app/api?user=aadit2805&count=10"
+              width="50%"
+              height="580"
+              allow="encrypted-media"
+              title="Spotify Recently Played"
+              className="rounded-lg"
+            ></iframe>
+            <iframe
               style={{ borderRadius: '12px', paddingLeft: '2rem', paddingRight: '4rem' }}
               src="https://open.spotify.com/embed/playlist/2N0n81gJrPqZzFxeteHPUI?"
               width="50%"
-              height="520"
+              height="580"
               frameBorder="0"
               allowFullScreen=""
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
