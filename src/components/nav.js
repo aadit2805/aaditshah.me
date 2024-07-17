@@ -10,18 +10,9 @@ library.add(faSun, faMoon);
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 shadow-md bg-opacity-100">
-      <Link href="/" legacyBehavior>
-        <a className="ml-4 text-lg font-semibold nav-link gradient large">aadit shah</a>
-      </Link>
       <div className="flex items-center space-x-3">
-        <Link href="/music" legacyBehavior>
-          <a className="nav-link text-lg font-semibold">music</a>
-        </Link>
-        <Link href="/reviews" legacyBehavior>
-          <a className="nav-link text-lg font-semibold">reviews</a>
-        </Link>
-        <Link href="/resume.pdf" legacyBehavior>
-          <a className="nav-link text-lg font-semibold" target="_blank" rel="noopener noreferrer">resume</a>
+        <Link href="/" legacyBehavior>
+          <a className="ml-3 nav-link">Aadit Shah</a>
         </Link>
         <button 
           onClick={toggleTheme} 
@@ -30,6 +21,17 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         >
           <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
         </button>
+      </div>
+      <div className="flex items-center space-x-3">
+        <Link href="/music" legacyBehavior>
+          <a className="nav-link">Music</a>
+        </Link>
+        <Link href="/reviews" legacyBehavior>
+          <a className="nav-link">Reviews</a>
+        </Link>
+        <Link href="/resume.pdf" legacyBehavior>
+          <a className="nav-link" target="_blank" rel="noopener noreferrer">Resume</a>
+        </Link>
       </div>
     </nav>
   );

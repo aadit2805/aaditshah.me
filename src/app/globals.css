@@ -23,14 +23,24 @@ body {
 nav {
   background-color: rgb(var(--navbar-bg));
 }
-
 a {
-  color: rgb(var(--link-color));
-  text-decoration: none;
+  text-decoration: none; 
+  color: inherit; 
+  transition: background 0.3s, color 0.3s; 
+}
+.neon-orange-gradient {
+  background: linear-gradient(to bottom, #ff9b44, #fc6076);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  background: linear-gradient(to bottom, #ff9b44, #fc6076);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 h1, h2, h3 {
@@ -44,13 +54,6 @@ code {
   border-radius: 0.3em;
 }
 
-.neon-orange-gradient {
-  background: linear-gradient(to bottom, #ff9b44, #fc6076);
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
 .nav-link {
   padding: 5px 10px;
   background-color: transparent;
@@ -58,15 +61,7 @@ code {
   color: inherit;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
-  transition: color 0.3s;
-}
-
-.nav-link:hover {
-  text-decoration: underline;
-}
-
-.nav-link:not(:last-child) {
-  margin-right: 8px;
+  font-weight: 600;
 }
 
 .nav-link, .nav-button {

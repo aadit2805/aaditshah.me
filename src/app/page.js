@@ -52,14 +52,14 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center text-center font-inter pt-24"> 
         <div className="w-full max-w-2xl px-4">
           <section className="mb-12">
-            <h1 className="text-4xl font-semibold neon-orange-gradient">
-              howdy, i'm aadit!
+            <h1 className="text-4xl font-semibold neon-orange-gradient mb-6">
+              Howdy, I'm Aadit!
             </h1>
-            <h1 className="text-4xl font-semibold mb-6">
-              i'm a student at texas a&m studying computer science!
-            </h1>
-            <p className="text-xl mb-6">
-              feel free to connect with me!
+            <p className="text-lg">
+              I study at Texas A&M, majoring in Computer Science and Mathematics.
+            </p>
+            <p className="text-lg">
+              Feel free to connect with me down below!
             </p>
           </section>
           <section className="mb-12">
