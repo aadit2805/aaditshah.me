@@ -37,7 +37,7 @@ a {
 
 a:hover {
   text-decoration: none;
-  background: linear-gradient(to bottom, #ff9b44, #fc6076);
+  background: linear-gradient(to bottom,  #ff9b44, #fc6076);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -68,10 +68,3 @@ code {
   transition: color 1ms ease-in-out, background-color 1ms ease-in-out;
 }
 
-.nav-link.gradient {
-  background: linear-gradient(to bottom, #ff9b44, #fc6076);
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-size: 1.25rem;
-}

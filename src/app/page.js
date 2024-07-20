@@ -66,27 +66,27 @@ export default function Home() {
             <div className="flex flex-col items-start">
               <div className="flex items-center mb-4 w-full">
                 <FontAwesomeIcon icon="envelope" className="mr-2" />
-                <span className="font-medium">Email</span>
+                <span className="text-medium font-semibold">Email</span>
                 <span className={`flex-grow border-t border-dotted ${isDarkMode ? 'border-white' : 'border-gray-400'} mx-4`}></span>
-                <a href="mailto:aadit2805@gmail.com" className={`${isDarkMode ? 'text-blue-200' : 'text-blue-600'} hover:underline`}>Send</a>
+                <a href="mailto:aadit2805@gmail.com" className={`${isDarkMode ? 'text-white' : 'text-gray-400'}`}>Send</a>
               </div>
               <div className="flex items-center mb-4 w-full">
                 <FontAwesomeIcon icon={['fab', 'github']} className="mr-2" />
-                <span className="font-medium">GitHub</span>
+                <span className="text-medium font-semibold">GitHub</span>
                 <span className={`flex-grow border-t border-dotted ${isDarkMode ? 'border-white' : 'border-gray-400'} mx-4`}></span>
-                <a href="https://github.com/aadit2805" className={`${isDarkMode ? 'text-blue-200' : 'text-blue-600'} hover:underline`}>Follow</a>
+                <a href="https://github.com/aadit2805" className={`${isDarkMode ? 'text-white' : 'text-gray-400'}`}>Follow</a>
               </div>
               <div className="flex items-center mb-4 w-full">
                 <FontAwesomeIcon icon={['fab', 'linkedin']} className="mr-2" />
-                <span className="font-medium">LinkedIn</span>
+                <span className="text-medium font-semibold">LinkedIn</span>
                 <span className={`flex-grow border-t border-dotted ${isDarkMode ? 'border-white' : 'border-gray-400'} mx-4`}></span>
-                <a href="https://linkedin.com/in/aadit2805" className={`${isDarkMode ? 'text-blue-200' : 'text-blue-600'} hover:underline`}>Connect</a>
+                <a href="https://linkedin.com/in/aadit2805" className={`${isDarkMode ? 'text-white' : 'text-gray-400'}`}>Connect</a>
               </div>
               <div className="flex items-center w-full">
                 <FontAwesomeIcon icon={['fab', 'twitter']} className="mr-2" />
                 <span className="font-medium">Twitter</span>
                 <span className={`flex-grow border-t border-dotted ${isDarkMode ? 'border-white' : 'border-gray-400'} mx-4`}></span>
-                <a href="https://twitter.com/aadit2805" className={`${isDarkMode ? 'text-blue-200' : 'text-blue-600'} hover:underline`}>Follow</a>
+                <a href="https://twitter.com/aadit2805" className={`${isDarkMode ? 'text-white' : 'text-gray-400'}`}>Follow</a>
               </div>
             </div>
           </section>
