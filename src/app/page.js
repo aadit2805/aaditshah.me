@@ -84,7 +84,7 @@ export default function Home() {
               </div>
               <div className="flex items-center w-full">
                 <FontAwesomeIcon icon={['fab', 'twitter']} className="mr-2" />
-                <span className="font-medium">Twitter</span>
+                <span className="text-medium font-semibold">Twitter</span>
                 <span className={`flex-grow border-t border-dotted ${isDarkMode ? 'border-white' : 'border-gray-400'} mx-4`}></span>
                 <a href="https://twitter.com/aadit2805" className={`${isDarkMode ? 'text-white' : 'text-gray-400'}`}>Follow</a>
               </div>
