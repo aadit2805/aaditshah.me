@@ -22,7 +22,10 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
           <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
         </button>
       </div>
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-4">
+        <Link href="/portfolio" legacyBehavior>
+          <a className="nav-link">Portfolio</a>
+        </Link> 
         <Link href="/music" legacyBehavior>
           <a className="nav-link">Music</a>
         </Link>
