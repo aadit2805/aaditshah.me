@@ -54,11 +54,11 @@ export default function Home() {
           <h1 className="text-4xl font-semibold">
             here is some of the <span className="neon-orange-gradient">music</span> i've been listening to lately!
           </h1>
-          <div className="flex justify-center w-full mt-6">
+          <div className="flex justify-center w-full mt-6 space-x-4">
             <iframe
-              style={{ borderRadius: '12px', paddingLeft: '4rem' }}
+              style={{ borderRadius: '12px' }}
               src="https://open.spotify.com/embed/playlist/2hJ9vjNCXEVrbPDmr8RRaY?utm_source=generator"
-              width="50%"
+              width="32%"
               height="580"
               frameBorder="0"
               allowFullScreen=""
@@ -67,16 +67,16 @@ export default function Home() {
             ></iframe>
             <iframe
               src="https://spotify-recently-played-readme.vercel.app/api?user=aadit2805&count=10"
-              width="50%"
+              width="32%"
               height="580"
               allow="encrypted-media"
               title="Spotify Recently Played"
               className="rounded-lg"
             ></iframe>
             <iframe
-              style={{ borderRadius: '12px', paddingLeft: '2rem', paddingRight: '4rem' }}
+              style={{ borderRadius: '12px' }}
               src="https://open.spotify.com/embed/playlist/2N0n81gJrPqZzFxeteHPUI?"
-              width="50%"
+              width="32%"
               height="580"
               frameBorder="0"
               allowFullScreen=""
