@@ -1,0 +1,43 @@
+[
+    {
+        "id": 1,
+        "title": "Blonde",
+        "artist": "Frank Ocean",
+        "type": "music",
+        "rating": 9.8,
+        "reviewDate": "2024-07-27",
+        "image": "/images/blonde.png",
+        "review": ""  
+    },
+    {
+        "id": 2,
+        "title": "The Dark Knight",
+        "artist": "Christopher Nolan",
+        "type": "movie",
+        "rating": 10,
+        "reviewDate": "2024-07-27",
+        "image": "/images/darkknight.png",
+        "review": ""
+    },
+    {
+        "id": 3,
+        "title": "The Bear",
+        "artist": "FX",
+        "type": "show",
+        "rating": 9.3,
+        "reviewDate": "2024-07-27",
+        "image": "/images/thebear.png",
+        "review": ""
+    },
+    {
+        "id": 4,
+        "title": "House of Cards",
+        "artist": "Netflix", 
+        "type": "show", 
+        "rating": 8.8,
+        "reviewDate": "2024-07-30",
+        "image": "/images/houseofcards.png",
+        "review": ""
+    }
+  ]
+  
