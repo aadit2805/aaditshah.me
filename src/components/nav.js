@@ -24,17 +24,17 @@ const Navbar = ({ isDarkMode, theme, toggleTheme }) => {
         </button>
       </div>
       <div className="flex items-center space-x-4">
+      <Link href="/resume.pdf" className="nav-link" target="_blank" rel="noopener noreferrer">
+          Resume
+        </Link>
         <Link href="/portfolio" className="nav-link">
           Portfolio
         </Link> 
-        <Link href="/music" className="nav-link">
-          Music
-        </Link>
         <Link href="/reviews" className="nav-link">
           Reviews
         </Link>
-        <Link href="/resume.pdf" className="nav-link" target="_blank" rel="noopener noreferrer">
-          Resume
+        <Link href="/music" className="nav-link">
+          Music
         </Link>
       </div>
     </nav>
