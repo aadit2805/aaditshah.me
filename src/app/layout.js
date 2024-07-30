@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google';
+import { Lora } from 'next/font/google';
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -6,7 +6,7 @@ import '../lib/fontAwesome';
 
 config.autoAddCss = false;
 
-const inter = Inter({ subsets: ['latin'] });
+const lora = Lora({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Aadit Shah' ,
@@ -15,17 +15,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <head>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         />
       </head>
-      <body>
+      <body className={lora.className}>
         {children}
       </body>
     </html>
   );
 }
-
