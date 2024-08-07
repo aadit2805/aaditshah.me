@@ -83,9 +83,9 @@ const MediaRatingSystem = ({ theme }) => {
   }, [selectedItem]);
 
   const getRatingColor = (rating) => {
-    if (rating < 7) return '#E57373';  // Softer, darker red
-    if (rating < 8.5) return '#FFF176';  // Softer, darker yellow
-    return '#81C784';  // Softer, darker green
+    if (rating < 7) return '#E57373';  
+    if (rating < 8.5) return '#FFF176'; 
+    return '#81C784';  
   };
 
   const formatDate = (dateString) => {
@@ -93,9 +93,14 @@ const MediaRatingSystem = ({ theme }) => {
     return date.toLocaleDateString('en-US', { timeZone: 'UTC' });
   };
 
+  const truncateReview = (review, charLimit = 125) => {
+    if (review.length <= charLimit) return review;
+    return review.slice(0, charLimit).trim() + '...';
+  };
+
   return (
     <div className="w-full max-w-6xl mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-2 text-center neon-orange-gradient">film & music reviews</h1>
+      <h1 className="text-4xl font-bold mb-2 text-center">Film & Music Reviews</h1>
       <h1 className="text-xl font-semibold mb-8 text-center">need to write reviews lol</h1>
       
       <input
@@ -172,8 +177,7 @@ const MediaRatingSystem = ({ theme }) => {
             </button>
             {showReviews && item.review && (
               <div className="mt-4">
-                <h4 className="text-lg font-semibold mb-2">Review</h4>
-                <p className="text-base">{item.review}</p>
+                <p className="text-base">{truncateReview(item.review)}</p>
               </div>
             )}
           </div>
@@ -199,7 +203,11 @@ const MediaRatingSystem = ({ theme }) => {
             <div className="w-full h-96 mb-6 overflow-hidden rounded-lg">
               <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover" />
             </div>
-            {selectedItem.review && <p className="text-lg">{selectedItem.review}</p>}
+            {selectedItem.review && (
+              <div className="mt-4">
+                <p className="text-lg">{selectedItem.review}</p>
+              </div>
+            )}
           </div>
         </div>
       )}
