@@ -10,8 +10,8 @@
 
 [data-theme="dark"] {
   --foreground-rgb: 255, 255, 255;
-  --background-rgb: 18, 18, 18;
-  --navbar-bg: 18, 18, 18;
+  --background-rgb: 25, 25, 25;
+  --navbar-bg: 25, 25, 25;
 }
 
 body {
@@ -161,7 +161,6 @@ body.popup-open {
   overflow: hidden;
 }
 
-/* Hide scrollbars for all elements */
 * {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -170,8 +169,6 @@ body.popup-open {
 *::-webkit-scrollbar {
   display: none;
 }
-
-/* Ensure content is still scrollable */
 .scrollable-content {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
