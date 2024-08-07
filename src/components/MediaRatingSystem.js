@@ -100,9 +100,8 @@ const MediaRatingSystem = ({ theme }) => {
 
   return (
     <div className="w-full max-w-6xl mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-2 text-center">Film & Music Reviews</h1>
-      <h1 className="text-xl font-semibold mb-8 text-center">need to write reviews lol</h1>
-      
+      <h1 className="text-4xl font-bold mb-5 text-center">Film & Music Reviews</h1>
+
       <input
         type="text"
         placeholder="search for titles, artists..."
