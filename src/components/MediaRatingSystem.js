@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import revdata from '../app/reviews/revdata.json';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const MediaRatingSystem = ({ theme }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState('');
+  const [filterType, setFilterType] = useState('all');
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'desc' });
   const [mediaItems, setMediaItems] = useState(revdata);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -14,8 +15,8 @@ const MediaRatingSystem = ({ theme }) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleFilterType = (event) => {
-    setFilterType(event.target.value);
+  const handleFilterType = (value) => {
+    setFilterType(value);
   };
 
   const handleSort = (key) => {
@@ -35,7 +36,7 @@ const MediaRatingSystem = ({ theme }) => {
       item.artist.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .filter(item => 
-      filterType ? item.type === filterType : true
+      filterType === 'all' ? true : item.type === filterType
     )
     .sort((a, b) => {
       if (sortConfig.key === 'rating') {
@@ -107,7 +108,7 @@ const MediaRatingSystem = ({ theme }) => {
         placeholder="search for titles, artists..."
         value={searchTerm}
         onChange={handleSearch}
-        className="w-full p-4 mb-4 rounded-lg text-lg border border-gray-300 dark:border-gray-700"
+        className="w-full p-4 mb-4 rounded-xl text-lg border border-gray-300 dark:border-gray-700"
         style={{
           backgroundColor: 'rgb(var(--background-rgb))',
           color: 'rgb(var(--foreground-rgb))'
@@ -115,33 +116,30 @@ const MediaRatingSystem = ({ theme }) => {
       />
       <div className="mb-4 flex items-center justify-between flex-wrap">
         <div className="flex items-center gap-4 mb-2">
-          <select
-            value={filterType}
-            onChange={handleFilterType}
-            className="w-40 p-2 rounded-lg text-sm border border-gray-300 dark:border-gray-700"
-            style={{
-              backgroundColor: 'rgb(var(--background-rgb))',
-              color: 'rgb(var(--foreground-rgb))'
-            }}
-          >
-            <option value="">select media</option>
-            <option value="music">music</option>
-            <option value="movie">movie</option>
-            <option value="show">show</option>
-          </select>
+          <Select onValueChange={handleFilterType} value={filterType}>
+            <SelectTrigger className="w-[180px] border-gray-300 dark:border-gray-700 rounded-xl">
+              <SelectValue placeholder="select media" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">select media</SelectItem>
+              <SelectItem value="music">music</SelectItem>
+              <SelectItem value="movie">movie</SelectItem>
+              <SelectItem value="show">show</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         
         <div className="flex gap-4 flex-wrap">
           <button
             onClick={() => handleSort('rating')}
-            className="button"
+            className="button rounded-xl"
           >
             sort by rating {sortConfig.key === 'rating' ? (sortConfig.direction === 'desc' ? '↓' : '↑') : '↕'}
           </button>
 
           <button
             onClick={() => handleSort('date')}
-            className="button"
+            className="button rounded-xl"
           >
             sort by date {sortConfig.key === 'date' ? (sortConfig.direction === 'desc' ? '↓' : '↑') : '↕'}
           </button>
@@ -152,7 +150,7 @@ const MediaRatingSystem = ({ theme }) => {
         {filteredAndSortedItems.map(item => (
           <div 
             key={item.id} 
-            className="p-6 rounded-lg bg-opacity-10 border border-gray-300 dark:border-gray-700 shadow-lg cursor-pointer transition-transform hover:scale-105 relative"
+            className="p-6 rounded-xl bg-opacity-10 border border-gray-300 dark:border-gray-700 shadow-lg cursor-pointer transition-transform hover:scale-105 relative"
             style={{
               color: 'rgb(var(--foreground-rgb))',
               backgroundColor: 'rgba(var(--background-rgb), 0.1)'
@@ -162,7 +160,7 @@ const MediaRatingSystem = ({ theme }) => {
             <h3 className="text-2xl font-semibold mb-2">{item.title}</h3>
             <p className="text-lg mb-2">{item.artist}</p>
             <p className="text-sm mb-2">{formatDate(item.reviewDate)}</p>
-            <div className="w-full h-64 mb-4 overflow-hidden rounded-lg">
+            <div className="w-full h-64 mb-4 overflow-hidden rounded-xl">
               <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
             </div>
             <button 
@@ -187,7 +185,7 @@ const MediaRatingSystem = ({ theme }) => {
         <div className="popup-overlay">
           <div 
             ref={popupRef}
-            className="popup-content p-8 rounded-lg shadow-lg relative max-w-4xl w-11/12 max-h-90vh overflow-y-auto"
+            className="popup-content p-8 rounded-xl shadow-lg relative max-w-4xl w-11/12 max-h-90vh overflow-y-auto"
             style={{
               color: 'rgb(var(--foreground-rgb))',
               backgroundColor: 'rgb(var(--background-rgb))'
@@ -199,7 +197,7 @@ const MediaRatingSystem = ({ theme }) => {
             <h3 className="text-3xl font-semibold mb-4">{selectedItem.title}</h3>
             <p className="text-xl mb-2">{selectedItem.artist}</p>
             <p className="text-sm mb-2">{formatDate(selectedItem.reviewDate)}</p>
-            <div className="w-full h-96 mb-6 overflow-hidden rounded-lg">
+            <div className="w-full h-96 mb-6 overflow-hidden rounded-xl">
               <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover" />
             </div>
             {selectedItem.review && (

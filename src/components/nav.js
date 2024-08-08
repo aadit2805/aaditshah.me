@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import '../app/globals.css'; 
-import { Sun, Moon } from 'lucide-react';
+import { Sun, MoonStar } from 'lucide-react';
 
 const Navbar = ({ theme, toggleTheme }) => {
   const isThemeDark = theme === 'dark';
@@ -19,7 +19,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           className="nav-button text-lg font-semibold" 
           aria-label={isThemeDark ? 'Change to light theme' : 'Change to dark theme'}
         >
-          {isThemeDark ? <Sun size={20} /> : <Moon size={20} />}
+          {isThemeDark ? <Sun size={20} /> : <MoonStar size={20} />}
         </button>
       </div>
       <div className="flex items-center space-x-4">
