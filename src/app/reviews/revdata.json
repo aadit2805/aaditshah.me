@@ -47,7 +47,7 @@
         "rating": 9.1,
         "reviewDate": "2024-08-08",
         "image": "/images/oppenheimer.png",
-        "review": "I was able to experience this movie in a 70mm theater for the first time, to which I can say I was blown away. The cinematography and score were my bigget takeaways from thsi movie, as I found it to be much more impressive in those matters. The acting, plot, and storytelling were all fantastic, but I did feel like it lacked the depth that other Nolan films had, especially in the last third of the movie. However, I still throughouly enjoyed it, especially going through the mind of Oppenehimer himself and the catastrophic effects the Manhattan Project had on him."
+        "review": "I was able to experience this movie in a 70mm theater for the first time, to which I can say I was blown away. The cinematography and score were my bigget takeaways from this movie, as I found it to be much more impressive in those matters. The acting, plot, and storytelling were all fantastic, but I did feel like it lacked the depth that other Nolan films had, especially in the last third of the movie. However, I still throughouly enjoyed it, especially going through the mind of Oppenehimer himself and the catastrophic effects the Manhattan Project had on him."
     },
     {
         "id": 6,
@@ -58,7 +58,26 @@
         "reviewDate": "2024-08-08",
         "image": "/images/psych.png",
         "review": "Psych was pretty much my introduction to real television, and I still keep it as one of my favorite tv shows. The light-hearted, comedic duo of Shawn Spencer and Burton Guster are a classic, and the show's ability to pair such with crime-solving plots make it a fantastic watch. I especially enjoyted the yin-yang episodes, for I felt those were the most serious moments in the show where we really see the abilities of Shawn Spencer at a 100%. My favorite part of the show had to be Gus's nicknames, my favorite being Sh'Dynasy (comma to the top that's God's comma)."
+    },
+    {
+        "id": 7,
+        "title": "Utopia",
+        "artist": "Travis Scott",
+        "type": "music",
+        "rating": 8.5,
+        "reviewDate": "2024-08-09",
+        "image": "/images/utopia.png",
+        "review": "An incredibly hyped up return to his 2018 masterpiece 'Astroworld', Utopia saw lots of experimentation he'd not attempted before. Pulling lots of insporation from Ye in tracks like 'Circus Maximus', the attempts at generating a theme or message are lackluster and thin. Though I thorughly enojyed tracks such as 'My Eyes', 'Til Further Notice', and 'Telekenis', I felt a majority of the album didn't piece together the way his other works had. Going to his Brooklyn concert was a highlight though, and I'm excited for his future work."
+    },
+    {
+        "id": 8,
+        "title": "La La Land",
+        "artist": "Damien Chazelle",
+        "type": "movie",   
+        "rating": 8.7,
+        "reviewDate": "2024-08-09",
+        "image": "/images/lalaland.png",
+        "review": "I was never a fan of musicals, but La La Land changed that for me. What was a simple, romance story turned into an emotional rollercoaster off of the stunning chemistry between Ryan Gosling and Emma Stone. I believe the film's score and cinematography, espcially the usage of color were some of the films strongest suits and were what really made this film stand out from the rest in 2016. Damien Chazelle was able to one up himself from 'Whiplash', as this film set a new standard for musicals."
     }
-
   ]
   
