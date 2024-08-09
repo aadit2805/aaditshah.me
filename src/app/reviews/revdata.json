@@ -38,6 +38,27 @@
         "reviewDate": "2024-07-30",
         "image": "/images/houseofcards.png",
         "review": "First, this ranking will not include Season 6, for I think that's a complete seperate show in my opinion. Kevin Spacey portrays the character of Frank Underwood to a T, a power hungry sociopath who really never stops at nothing on his conquest to the top. Although I believe the show loses its suspense past the second season, I still find the acting, writing, and emotion to be top tier. I don't believe there will be a better poltical drama ever, but I still hope for one."
+    },
+    {
+        "id": 5,
+        "title": "Oppenheimer",
+        "artist": "Christopher Nolan",
+        "type": "movie",
+        "rating": 9.1,
+        "reviewDate": "2024-08-08",
+        "image": "/images/oppenheimer.png",
+        "review": "I was able to experience this movie in a 70mm theater for the first time, to which I can say I was blown away. The cinematography and score were my bigget takeaways from thsi movie, as I found it to be much more impressive in those matters. The acting, plot, and storytelling were all fantastic, but I did feel like it lacked the depth that other Nolan films had, especially in the last third of the movie. However, I still throughouly enjoyed it, especially going through the mind of Oppenehimer himself and the catastrophic effects the Manhattan Project had on him."
+    },
+    {
+        "id": 6,
+        "title": "Psych",
+        "artist": "USA Network",
+        "type": "show",
+        "rating": 8.3, 
+        "reviewDate": "2024-08-08",
+        "image": "/images/psych.png",
+        "review": "Psych was pretty much my introduction to real television, and I still keep it as one of my favorite tv shows. The light-hearted, comedic duo of Shawn Spencer and Burton Guster are a classic, and the show's ability to pair such with crime-solving plots make it a fantastic watch. I especially enjoyted the yin-yang episodes, for I felt those were the most serious moments in the show where we really see the abilities of Shawn Spencer at a 100%. My favorite part of the show had to be Gus's nicknames, my favorite being Sh'Dynasy (comma to the top that's God's comma)."
     }
+
   ]
   

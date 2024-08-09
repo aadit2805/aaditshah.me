@@ -85,7 +85,7 @@ const MediaRatingSystem = ({ theme }) => {
 
   const getRatingColor = (rating) => {
     if (rating < 7) return '#E57373';  
-    if (rating < 8.5) return '#FFF176'; 
+    if (rating < 8) return '#FFF176'; 
     return '#81C784';  
   };
 
