@@ -1,15 +1,5 @@
 [
     {
-        "id": 1,
-        "title": "Blonde",
-        "artist": "Frank Ocean",
-        "type": "music",
-        "rating": 9.8,
-        "reviewDate": "2024-07-27",
-        "image": "/images/blonde.png",
-        "review": "Blonde is a transcendent masterpiece that reshaped the music landscape, solidifying its place as a personal favorite and a timeless work of art. With standout tracks like 'Nights' and 'Pink + White,' the album’s brilliance is further highlighted by personal favorites such as 'Nikes,' 'Self Control,' and 'Solo.' Every song on this album is a gem, contributing to a flawless composition. Blonde is introspective, emotional, and deeply vulnerable album so unique that its impact will likely never be replicated."  
-    },
-    {
         "id": 2,
         "title": "The Dark Knight",
         "artist": "Christopher Nolan",
@@ -58,16 +48,6 @@
         "reviewDate": "2024-08-08",
         "image": "/images/psych.png",
         "review": "Psych was pretty much my introduction to real television, and I still keep it as one of my favorite tv shows. The light-hearted, comedic duo of Shawn Spencer and Burton Guster are a classic, and the show's ability to pair such with crime-solving plots make it a fantastic watch. I especially enjoyted the yin-yang episodes, for I felt those were the most serious moments in the show where we really see the abilities of Shawn Spencer at a 100%. My favorite part of the show had to be Gus's nicknames, my favorite being Sh'Dynasy (comma to the top that's God's comma)."
-    },
-    {
-        "id": 7,
-        "title": "Utopia",
-        "artist": "Travis Scott",
-        "type": "music",
-        "rating": 8.5,
-        "reviewDate": "2024-08-09",
-        "image": "/images/utopia.png",
-        "review": "An incredibly hyped up return to his 2018 masterpiece 'Astroworld', Utopia saw lots of experimentation he'd not attempted before. Pulling lots of insporation from Ye in tracks like 'Circus Maximus', the attempts at generating a theme or message are lackluster and thin. Though I thorughly enojyed tracks such as 'My Eyes', 'Til Further Notice', and 'Telekenis', I felt a majority of the album didn't piece together the way his other works had. Going to his Brooklyn concert was a highlight though, and I'm excited for his future work."
     },
     {
         "id": 8,

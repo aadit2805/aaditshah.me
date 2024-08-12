@@ -101,7 +101,7 @@ const MediaRatingSystem = ({ theme }) => {
 
   return (
     <div className="w-full max-w-6xl mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-5 text-center">Film & Music Reviews</h1>
+      <h1 className="text-4xl font-bold mb-5 text-center">Film & TV Reviews</h1>
 
       <input
         type="text"
@@ -122,7 +122,6 @@ const MediaRatingSystem = ({ theme }) => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">select media</SelectItem>
-              <SelectItem value="music">music</SelectItem>
               <SelectItem value="movie">movie</SelectItem>
               <SelectItem value="show">show</SelectItem>
             </SelectContent>
