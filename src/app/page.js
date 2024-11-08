@@ -21,11 +21,11 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center text-center pt-24"> 
         <div className="w-full max-w-2xl px-4">
           <section className="mb-12">
-            <h1 className="text-4xl font-semibold neon-orange-gradient mb-6">
-              Howdy, I'm Aadit!
+            <h1 className="text-4xl font-semibold mb-2">
+              Howdy, I'm <span className="neon-orange-gradient">Aadit</span>!
             </h1>
             <p className="text-lg">
-              I study at Texas A&M, majoring in Computer Science and Mathematics.
+              I study at <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}>Texas A&M</span>, majoring in <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}>Computer Science</span> and <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}>Mathematics</span>.
             </p>
             <p className="text-lg">
               Feel free to connect with me down below!

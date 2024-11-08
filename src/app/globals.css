@@ -1,7 +1,9 @@
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Theme variables */
 [data-theme="light"] {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 245, 240, 230;
@@ -14,6 +16,7 @@
   --navbar-bg: 25, 25, 25;
 }
 
+/* Global styles */
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
@@ -35,6 +38,18 @@ a {
   transition: background 0s, color 0s; 
 }
 
+h1, h2, h3 {
+  color: rgb(var(--foreground-rgb));
+}
+
+code {
+  background: rgba(var(--highlight-color), 0.1);
+  color: rgb(var(--highlight-color));
+  padding: 0.5em 0.4em;
+  border-radius: 0.3em;
+}
+
+/* Gradient text styles */
 .neon-orange-gradient {
   background: linear-gradient(to bottom, #ff9b44, #fc6076);
   color: transparent;
@@ -45,6 +60,37 @@ a {
   display: inline-block;
 }
 
+.neon-blue-gradient {
+  background: linear-gradient(to bottom, #669fcc, #74bcff, #518ed9);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 1.2;
+  padding-bottom: 0.1em;
+  display: inline-block;
+}
+
+.neon-maroon-gradient-light {
+  background: linear-gradient(to bottom, #a52a2a, #800000, #4b0000);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 1.2;
+  padding-bottom: 0.1em;
+  display: inline-block;
+}
+
+.neon-maroon-gradient-dark {
+  background: linear-gradient(to bottom, #b23c3c, #992222, #730000);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 1.2;
+  padding-bottom: 0.1em;
+  display: inline-block;
+}
+
+/* Special heading styles */
 h1.neon-orange-gradient {
   font-size: 2.5rem;
   text-shadow: 0 0 1px rgba(255,155,68,0.1);
@@ -64,6 +110,7 @@ h1.neon-orange-gradient::after {
   z-index: -1;
 }
 
+/* Link hover effect */
 a:hover {
   text-decoration: none;
   background: linear-gradient(to bottom,  #ff9b44, #fc6076);
@@ -72,17 +119,7 @@ a:hover {
   background-clip: text;
 }
 
-h1, h2, h3 {
-  color: rgb(var(--foreground-rgb));
-}
-
-code {
-  background: rgba(var(--highlight-color), 0.1);
-  color: rgb(var(--highlight-color));
-  padding: 0.5em 0.4em;
-  border-radius: 0.3em;
-}
-
+/* Navigation styles */
 .nav-link {
   padding: 5px 10px;
   background-color: transparent;
@@ -96,6 +133,7 @@ code {
   transition: color 0ms ease-in-out, background-color 0ms ease-in-out;
 }
 
+/* Button styles */
 .button {
   background: linear-gradient(to bottom, #ff9b44, #fc6076);
   color: var(--foreground-rgb);
@@ -126,6 +164,7 @@ code {
   transition: none;
 }
 
+/* Popup styles */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -161,6 +200,7 @@ body.popup-open {
   overflow: hidden;
 }
 
+/* Hide scrollbars */
 * {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -169,8 +209,9 @@ body.popup-open {
 *::-webkit-scrollbar {
   display: none;
 }
+
+/* Scrollable content */
 .scrollable-content {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-

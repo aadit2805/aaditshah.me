@@ -19,7 +19,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           className="nav-button text-lg font-semibold" 
           aria-label={isThemeDark ? 'Change to light theme' : 'Change to dark theme'}
         >
-          {isThemeDark ? <Sun size={20} /> : <MoonStar size={20} />}
+          {isThemeDark ? <Sun size={20} /> : <Sun size={20} />}
         </button>
       </div>
       <div className="flex items-center space-x-4">
