@@ -56,7 +56,7 @@
         "type": "movie",
         "rating": 8.7,
         "reviewDate": "2024-08-09",
-        "image": "/images/lalaland.png",
+        "image": "/images/lala.png",
         "review": "I was never a fan of musicals, but La La Land changed that for me. What was a simple, romance story turned into an emotional rollercoaster off of the stunning chemistry between Ryan Gosling and Emma Stone. I believe the film's score and cinematography, especially the usage of color, were some of the film's strongest suits and were what really made this film stand out from the rest in 2016. Damien Chazelle was able to one-up himself from 'Whiplash,' as this film set a new standard for musicals."
     },
     {
@@ -88,5 +88,35 @@
         "reviewDate": "2024-09-24",
         "image": "/images/dune2.png",
         "review": "I'm essentially combining my review of Part One with this, as Part One serves more as a stepping stone and lacks much of the plot, which is more than made up for in this extraordinary film. I was able to watch it in IMAX, and I was quite amazed—there's no other way to explain it. The acting was powerful, to the point where I slowly felt like I was becoming a believer in the prophecy. Chalamet’s performance is hands down some of the best I have seen recently, fully embracing the role of a messiah and playing it to perfection. In IMAX, I was truly able to grasp the cinematography and score that had been praised so highly. Zimmer once again does an excellent job of tying the soundtrack seamlessly with Villeneuve’s vision. I am extremely excited to see what Part 3 has in store and curious to see if the Dune trilogy will become the greatest trilogy of all time."
+    },
+    {
+        "id": 10,
+        "title": "The Social Network",
+        "artist": "David Fincher",
+        "type": "movie",
+        "rating": 9.9,
+        "reviewDate": "2024-11-08",
+        "image": "/images/socialnetwork.png",
+        "review": "When I was shown this film, I was skeptical at first. I mean, how good can a biopic about a student creating a social media platform be? And from there, I was clearly mistaken. First, the pacing was incredible. Fast in the right areas, slow when needed, it fit the metric of what Facebook was all about at the time. The soundtrack complements perfectly and ties the film together, from the beginning scene walking through Harvard Yard, the crew race in Holland, to the pulsating track playing through the creation of FaceMash. And lastly, the actors. The dichomity of Eisenberg and Garfield, best friends to worst enemies, was portrayed perfectly. While one was rooted in loyatly, the other was rooted in ruthlessness. Together, they created one of the most memorable films of the decade, perfectly encapsualting the true story of Facebook's creation and the lives destroyed in the process, showcased through their climax scene near the end where fame drew a wedge in their friendship."
+    },
+    {
+        "id": 11,
+        "title":"Zodiac",
+        "artist":"David Fincher",
+        "type":"movie",
+        "rating":9.2,
+        "reviewDate":"2024-11-09",
+        "image":"/images/zodiac.png",
+        "review": ""
+    },
+    {
+        "id": 12,
+        "title":"Nightcrawler",
+        "artist":"Dan Gilroy",
+        "type":"movie",
+        "rating":8.8,
+        "reviewDate":"2024-11-09",
+        "image":"/images/nightcrawler.png",
+        "review": ""
     }
 ]     
