@@ -4,19 +4,29 @@
 @tailwind utilities;
 
 /* Theme variables */
+:root {
+  --transition-duration: 200ms;
+}
+
 [data-theme="light"] {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 245, 240, 230;
   --navbar-bg: 245, 240, 230;
+  --gradient-orange: linear-gradient(to bottom, #ff9b44, #fc6076);
+  --gradient-orange-hover: linear-gradient(to bottom, #ffb36e, #fd7898);
+  --gradient-maroon: linear-gradient(to bottom, #a52a2a, #800000, #4b0000);
 }
 
 [data-theme="dark"] {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 25, 25, 25;
   --navbar-bg: 25, 25, 25;
+  --gradient-orange: linear-gradient(to bottom, #ff9b44, #fc6076);
+  --gradient-orange-hover: linear-gradient(to bottom, #e6863c, #d1556a);
+  --gradient-maroon: #B22222;
 }
 
-/* Global styles */
+/* Base styles */
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
@@ -28,16 +38,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-nav {
-  background-color: rgb(var(--navbar-bg));
-}
-
-a {
-  text-decoration: none; 
-  color: inherit; 
-  transition: background 0s, color 0s; 
-}
-
+/* Typography */
 h1, h2, h3 {
   color: rgb(var(--foreground-rgb));
 }
@@ -49,45 +50,103 @@ code {
   border-radius: 0.3em;
 }
 
-/* Gradient text styles */
-.neon-orange-gradient {
-  background: linear-gradient(to bottom, #ff9b44, #fc6076);
-  color: transparent;
-  -webkit-background-clip: text;
+/* Gradient text utilities */
+.gradient-text {
   background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   line-height: 1.2;
   padding-bottom: 0.1em;
   display: inline-block;
+}
+
+.neon-orange-gradient {
+  background: var(--gradient-orange);
+  @apply gradient-text;
 }
 
 .neon-blue-gradient {
   background: linear-gradient(to bottom, #669fcc, #74bcff, #518ed9);
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  line-height: 1.2;
-  padding-bottom: 0.1em;
-  display: inline-block;
+  @apply gradient-text;
 }
 
 .neon-maroon-gradient-light {
-  background: linear-gradient(to bottom, #a52a2a, #800000, #4b0000);
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  line-height: 1.2;
-  padding-bottom: 0.1em;
-  display: inline-block;
+  background: var(--gradient-maroon);
+  @apply gradient-text;
 }
 
 .neon-maroon-gradient-dark {
-  background: #B22222 ;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  line-height: 1.2;
-  padding-bottom: 0.1em;
-  display: inline-block;
+  background: var(--gradient-maroon);
+  @apply gradient-text;
+}
+
+/* Navigation styles */
+.nav-link {
+  @apply px-2.5 py-1.5 font-semibold;
+  transition: color var(--transition-duration) ease-in-out;
+}
+
+.nav-button {
+  transition: background-color var(--transition-duration) ease-in-out;
+}
+
+/* Button styles */
+.button {
+  background: var(--gradient-orange);
+  @apply text-[rgb(var(--foreground-rgb))] border-none py-2.5 px-5 rounded-full 
+         inline-block text-center text-sm cursor-pointer;
+  transition: background var(--transition-duration) ease-in-out;
+}
+
+.button:hover {
+  background: var(--gradient-orange-hover);
+}
+
+.button:focus {
+  @apply outline-none;
+}
+
+.button:active {
+  background: var(--gradient-orange);
+}
+
+/* Popup styles */
+.popup-overlay {
+  @apply fixed inset-0 flex items-center justify-center bg-black/50 z-[999];
+}
+
+.popup-content {
+  @apply bg-white p-5 rounded-lg w-4/5 max-w-2xl max-h-[80vh] overflow-y-auto 
+         relative scrollbar-none;
+}
+
+body.popup-open {
+  @apply overflow-hidden;
+}
+
+/* Utility classes */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-content {
+  @apply overflow-y-auto touch-pan-y;
+}
+
+/* Global styles */
+nav {
+  background-color: rgb(var(--navbar-bg));
+}
+
+a {
+  text-decoration: none; 
+  color: inherit; 
+  transition: color var(--transition-duration) ease-in-out;
 }
 
 /* Special heading styles */
@@ -113,91 +172,10 @@ h1.neon-orange-gradient::after {
 /* Link hover effect */
 a:hover {
   text-decoration: none;
-  background: linear-gradient(to bottom,  #ff9b44, #fc6076);
+  background: var(--gradient-orange);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-}
-
-/* Navigation styles */
-.nav-link {
-  padding: 5px 10px;
-  background-color: transparent;
-  border: none;
-  color: inherit;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.nav-link, .nav-button {
-  transition: color 0ms ease-in-out, background-color 0ms ease-in-out;
-}
-
-/* Button styles */
-.button {
-  background: linear-gradient(to bottom, #ff9b44, #fc6076);
-  color: var(--foreground-rgb);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
-  transition: background 0s, color 0s;
-  display: inline-block;
-  text-align: center;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-[data-theme="light"] .button:hover {
-  background: linear-gradient(to bottom, #ffb36e, #fd7898);
-}
-
-[data-theme="dark"] .button:hover {
-  background: linear-gradient(to bottom, #e6863c, #d1556a);
-}
-
-.button:focus {
-  outline: none;
-}
-
-.button:active {
-  background: linear-gradient(to bottom, #ff9b44, #fc6076);
-  transition: none;
-}
-
-/* Popup styles */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-.popup-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 640px;
-  height: auto;
-  max-height: 80%;
-  overflow-y: auto;
-  position: relative;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.popup-content::-webkit-scrollbar {
-  display: none;
-}
-
-body.popup-open {
-  overflow: hidden;
 }
 
 /* Hide scrollbars */
