@@ -120,7 +120,7 @@ const MediaRatingSystem = ({ theme }) => {
             <SelectTrigger className="w-[180px] border-gray-300 dark:border-gray-700 rounded-xl">
               <SelectValue placeholder="select media" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="z-50">
               <SelectItem value="all">select media</SelectItem>
               <SelectItem value="movie">movie</SelectItem>
               <SelectItem value="show">show</SelectItem>
@@ -171,11 +171,6 @@ const MediaRatingSystem = ({ theme }) => {
             >
               {item.rating}
             </button>
-            {showReviews && item.review && (
-              <div className="mt-4">
-                <p className="text-base">{truncateReview(item.review)}</p>
-              </div>
-            )}
           </div>
         ))}
       </div>

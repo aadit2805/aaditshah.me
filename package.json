@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/build-reviews.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-reviews": "node scripts/build-reviews.js"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.18",

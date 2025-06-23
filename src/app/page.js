@@ -50,8 +50,8 @@ export default function Home() {
             </h1>
             <p className="text-lg">
               I study at <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}>Texas A&M</span>, 
-              majoring in <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}>Computer Science</span> and 
-              <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}> Mathematics</span>.
+              majoring in <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}>Computer Science</span> and{' '}
+              <span className={`${isDarkMode ? 'neon-maroon-gradient-dark' : 'neon-maroon-gradient-light'}`}>Mathematics</span>.
             </p>
             <p className="text-lg">
               Feel free to connect with me down below!
