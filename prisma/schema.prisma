@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum ReviewType {
+  movie
+  show
+}
+
+model Review {
+  id         Int        @id @default(autoincrement())
+  title      String
+  artist     String
+  type       ReviewType
+  rating     Float
+  reviewDate DateTime
+  image      String
+  review     String?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}

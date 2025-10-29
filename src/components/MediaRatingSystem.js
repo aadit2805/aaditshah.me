@@ -11,6 +11,22 @@ const MediaRatingSystem = ({ theme }) => {
   const [showReviews, setShowReviews] = useState(true);
   const popupRef = useRef(null);
 
+  // Load latest reviews from API (falls back to bundled JSON on failure)
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/api/reviews');
+        if (res.ok) {
+          const data = await res.json();
+          setMediaItems(data);
+        }
+      } catch (_) {
+        // ignore and keep fallback data
+      }
+    };
+    load();
+  }, []);
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
