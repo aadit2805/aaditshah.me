@@ -7,17 +7,17 @@ import MediaRatingSystem from '@/components/MediaRatingSystem';
 import { useTheme } from '../../hooks/useTheme';
 
 export default function Reviews() {
-  const { theme, toggleTheme, mounted } = useTheme();
+  const { mounted } = useTheme();
 
   if (!mounted) {
     return null;
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'dark' : ''}`}>
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+    <div className="min-h-screen transition-colors duration-300">
+      <Navbar />
       <main className="flex flex-col items-center justify-center text-center font-inter pt-24">
-        <MediaRatingSystem theme={theme} />
+        <MediaRatingSystem />
       </main>
     </div>
   );

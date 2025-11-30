@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import revdata from '../app/reviews/revdata.json';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-const MediaRatingSystem = ({ theme }) => {
+const MediaRatingSystem = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'desc' });
@@ -166,7 +166,7 @@ const MediaRatingSystem = ({ theme }) => {
               className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg"
               style={{
                 backgroundColor: getRatingColor(item.rating),
-                color: theme === 'dark' ? 'rgb(var(--background-rgb))' : 'rgb(var(--foreground-rgb))',
+                color: 'rgb(var(--foreground-rgb))',
               }}
             >
               {item.rating}

@@ -7,17 +7,15 @@ import '../../lib/fontAwesome';
 import { useTheme } from '../../hooks/useTheme';
 
 export default function Music() {
-  const { theme, toggleTheme, mounted } = useTheme();
+  const { mounted } = useTheme();
 
   if (!mounted) {
     return null;
   }
 
-  const isDarkMode = theme === 'dark';
-
   return (
     <div className="min-h-screen transition-colors duration-0">
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar />
       <main className="flex flex-col items-center justify-center text-center font-inter pt-24">
         <section className="mb-12 w-full">
           <h1 className="text-4xl font-semibold">

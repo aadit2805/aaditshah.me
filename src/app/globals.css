@@ -6,24 +6,12 @@
 /* Theme variables */
 :root {
   --transition-duration: 200ms;
-}
-
-[data-theme="light"] {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 245, 240, 230;
   --navbar-bg: 245, 240, 230;
   --gradient-orange: linear-gradient(to bottom, #ff9b44, #fc6076);
   --gradient-orange-hover: linear-gradient(to bottom, #ffb36e, #fd7898);
   --gradient-maroon: linear-gradient(to bottom, #a52a2a, #800000, #4b0000);
-}
-
-[data-theme="dark"] {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 25, 25, 25;
-  --navbar-bg: 25, 25, 25;
-  --gradient-orange: linear-gradient(to bottom, #ff9b44, #fc6076);
-  --gradient-orange-hover: linear-gradient(to bottom, #e6863c, #d1556a);
-  --gradient-maroon: #B22222;
 }
 
 /* Base styles */
@@ -71,11 +59,6 @@ code {
 }
 
 .neon-maroon-gradient-light {
-  background: var(--gradient-maroon);
-  @apply gradient-text;
-}
-
-.neon-maroon-gradient-dark {
   background: var(--gradient-maroon);
   @apply gradient-text;
 }
