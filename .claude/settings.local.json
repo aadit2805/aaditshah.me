@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn@latest add card separator badge avatar dialog input textarea scroll-area -y)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev)"
+    ]
+  }
+}

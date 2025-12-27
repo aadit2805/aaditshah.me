@@ -1,15 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import revdata from '../app/reviews/revdata.json';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const MediaRatingSystem = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'desc' });
-  const [mediaItems, setMediaItems] = useState(revdata);
+  const [mediaItems] = useState(revdata);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [showReviews, setShowReviews] = useState(true);
-  const popupRef = useRef(null);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -26,182 +42,219 @@ const MediaRatingSystem = () => {
     }));
   };
 
-  const toggleReviews = () => {
-    setShowReviews(prev => !prev);
-  };
-
   const filteredAndSortedItems = mediaItems
-    .filter(item => 
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    .filter(item =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.artist.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter(item => 
+    .filter(item =>
       filterType === 'all' ? true : item.type === filterType
     )
     .sort((a, b) => {
       if (sortConfig.key === 'rating') {
         return sortConfig.direction === 'desc' ? b.rating - a.rating : a.rating - b.rating;
       } else if (sortConfig.key === 'date') {
-        return sortConfig.direction === 'desc' 
+        return sortConfig.direction === 'desc'
           ? new Date(b.reviewDate) - new Date(a.reviewDate)
           : new Date(a.reviewDate) - new Date(b.reviewDate);
       }
       return 0;
     });
 
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
-    document.body.classList.add('popup-open');
-  };
-
-  const handleClosePopup = () => {
-    setSelectedItem(null);
-    document.body.classList.remove('popup-open');
-  };
-
-  useEffect(() => {
-    const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
-        handleClosePopup();
-      }
-    };
-
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        handleClosePopup();
-      }
-    };
-
-    if (selectedItem) {
-      document.addEventListener('keydown', handleEscapeKey);
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [selectedItem]);
-
-  const getRatingColor = (rating) => {
-    if (rating < 7) return '#E57373';  
-    if (rating < 8) return '#FFF176'; 
-    return '#81C784';  
+  const getRatingStyle = (rating) => {
+    if (rating >= 8) return 'bg-sage-100 text-sage-700 border-sage-200';
+    if (rating >= 7) return 'bg-bone-200 text-espresso-600 border-bone-300';
+    return 'bg-terracotta-100 text-terracotta-700 border-terracotta-200';
   };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { timeZone: 'UTC' });
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      timeZone: 'UTC'
+    });
   };
 
-  const truncateReview = (review, charLimit = 125) => {
+  const truncateReview = (review, charLimit = 100) => {
+    if (!review) return '';
     if (review.length <= charLimit) return review;
     return review.slice(0, charLimit).trim() + '...';
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-5 text-center">Film & TV Reviews</h1>
+    <div className="w-full max-w-5xl mx-auto px-6">
+      {/* Header */}
+      <div className="mb-10 opacity-0 animate-fade-in-up">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-2 h-2 rounded-full bg-terracotta-400" />
+          <span className="text-sm font-medium text-espresso-500 uppercase tracking-wider">
+            Reviews
+          </span>
+        </div>
+        <h1 className="text-3xl md:text-4xl font-serif font-medium text-espresso-900 mb-3">
+          Film & TV Reviews
+        </h1>
+        <p className="text-espresso-500">
+          Thoughts on what I've been watching lately.
+        </p>
+      </div>
 
-      <input
-        type="text"
-        placeholder="search for titles, artists..."
-        value={searchTerm}
-        onChange={handleSearch}
-        className="w-full p-4 mb-4 rounded-xl text-lg border border-gray-300 dark:border-gray-700"
-        style={{
-          backgroundColor: 'rgb(var(--background-rgb))',
-          color: 'rgb(var(--foreground-rgb))'
-        }}
-      />
-      <div className="mb-4 flex items-center justify-between flex-wrap">
-        <div className="flex items-center gap-4 mb-2">
+      {/* Filters */}
+      <div className="mb-8 space-y-4 opacity-0 animate-fade-in animate-delay-100">
+        <Input
+          type="text"
+          placeholder="Search titles or directors..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="w-full bg-bone-50 border-bone-300 text-espresso-800 placeholder:text-espresso-400 focus:border-terracotta-400 focus:ring-terracotta-400"
+        />
+
+        <div className="flex flex-wrap items-center gap-3">
           <Select onValueChange={handleFilterType} value={filterType}>
-            <SelectTrigger className="w-[180px] border-gray-300 dark:border-gray-700 rounded-xl">
-              <SelectValue placeholder="select media" />
+            <SelectTrigger className="w-[140px] bg-bone-50 border-bone-300 text-espresso-700">
+              <SelectValue placeholder="All media" />
             </SelectTrigger>
-            <SelectContent className="z-50">
-              <SelectItem value="all">select media</SelectItem>
-              <SelectItem value="movie">movie</SelectItem>
-              <SelectItem value="show">show</SelectItem>
+            <SelectContent className="bg-bone-50 border-bone-300">
+              <SelectItem value="all">All media</SelectItem>
+              <SelectItem value="movie">Movies</SelectItem>
+              <SelectItem value="show">TV Shows</SelectItem>
             </SelectContent>
           </Select>
-        </div>
-        
-        <div className="flex gap-4 flex-wrap">
-          <button
-            onClick={() => handleSort('rating')}
-            className="button rounded-xl"
-          >
-            sort by rating {sortConfig.key === 'rating' ? (sortConfig.direction === 'desc' ? '↓' : '↑') : '↕'}
-          </button>
 
-          <button
-            onClick={() => handleSort('date')}
-            className="button rounded-xl"
-          >
-            sort by date {sortConfig.key === 'date' ? (sortConfig.direction === 'desc' ? '↓' : '↑') : '↕'}
-          </button>
+          <div className="flex gap-2">
+            <Button
+              variant={sortConfig.key === 'rating' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => handleSort('rating')}
+              className={sortConfig.key === 'rating'
+                ? 'bg-terracotta-500 hover:bg-terracotta-600 text-white'
+                : 'bg-bone-50 border-bone-300 text-espresso-600 hover:bg-bone-200 hover:text-espresso-800'
+              }
+            >
+              Rating {sortConfig.key === 'rating' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+            </Button>
+
+            <Button
+              variant={sortConfig.key === 'date' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => handleSort('date')}
+              className={sortConfig.key === 'date'
+                ? 'bg-terracotta-500 hover:bg-terracotta-600 text-white'
+                : 'bg-bone-50 border-bone-300 text-espresso-600 hover:bg-bone-200 hover:text-espresso-800'
+              }
+            >
+              Date {sortConfig.key === 'date' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {filteredAndSortedItems.map(item => (
-          <div 
-            key={item.id} 
-            className="p-6 rounded-xl bg-opacity-10 border border-gray-300 dark:border-gray-700 shadow-lg cursor-pointer transition-transform hover:scale-105 relative"
-            style={{
-              color: 'rgb(var(--foreground-rgb))',
-              backgroundColor: 'rgba(var(--background-rgb), 0.1)'
-            }}
-            onClick={() => handleItemClick(item)}
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-0 animate-fade-in-up animate-delay-200">
+        {filteredAndSortedItems.map((item, index) => (
+          <Card
+            key={item.id}
+            className="group bg-bone-50 border-bone-200 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+            onClick={() => setSelectedItem(item)}
+            style={{ animationDelay: `${index * 50}ms` }}
           >
-            <h3 className="text-2xl font-semibold mb-2">{item.title}</h3>
-            <p className="text-lg mb-2">{item.artist}</p>
-            <p className="text-sm mb-2">{formatDate(item.reviewDate)}</p>
-            <div className="w-full h-64 mb-4 overflow-hidden rounded-xl">
-              <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+            <div className="relative h-48 overflow-hidden">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/60 to-transparent" />
+
+              {/* Rating badge */}
+              <div className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm border ${getRatingStyle(item.rating)}`}>
+                {item.rating}
+              </div>
+
+              {/* Type badge */}
+              <Badge
+                variant="secondary"
+                className="absolute bottom-3 left-3 bg-bone-100/90 text-espresso-700 border-0"
+              >
+                {item.type === 'movie' ? 'Film' : 'TV'}
+              </Badge>
             </div>
-            <button 
-              className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg"
-              style={{
-                backgroundColor: getRatingColor(item.rating),
-                color: 'rgb(var(--foreground-rgb))',
-              }}
-            >
-              {item.rating}
-            </button>
-          </div>
+
+            <CardContent className="p-5">
+              <h3 className="font-serif text-lg font-medium text-espresso-900 mb-1 group-hover:text-terracotta-600 transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-sm text-espresso-500 mb-3">
+                {item.artist} · {formatDate(item.reviewDate)}
+              </p>
+              {item.review && (
+                <p className="text-sm text-espresso-600 leading-relaxed">
+                  {truncateReview(item.review)}
+                </p>
+              )}
+            </CardContent>
+          </Card>
         ))}
       </div>
 
-      {selectedItem && (
-        <div className="popup-overlay">
-          <div 
-            ref={popupRef}
-            className="popup-content p-8 rounded-xl shadow-lg relative max-w-4xl w-11/12 max-h-90vh overflow-y-auto"
-            style={{
-              color: 'rgb(var(--foreground-rgb))',
-              backgroundColor: 'rgb(var(--background-rgb))'
-            }}
-          >
-            <button onClick={handleClosePopup} className="absolute top-4 right-4 text-3xl">
-              &times;
-            </button>
-            <h3 className="text-3xl font-semibold mb-4">{selectedItem.title}</h3>
-            <p className="text-xl mb-2">{selectedItem.artist}</p>
-            <p className="text-sm mb-2">{formatDate(selectedItem.reviewDate)}</p>
-            <div className="w-full h-96 mb-6 overflow-hidden rounded-xl">
-              <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover" />
-            </div>
-            {selectedItem.review && (
-              <div className="mt-4">
-                <p className="text-lg">{selectedItem.review}</p>
-              </div>
-            )}
-          </div>
+      {/* Empty state */}
+      {filteredAndSortedItems.length === 0 && (
+        <div className="text-center py-16">
+          <p className="text-espresso-500">No reviews match your search.</p>
         </div>
       )}
+
+      {/* Dialog */}
+      <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
+        <DialogContent className="bg-bone-50 border-bone-200 max-w-2xl max-h-[85vh] overflow-y-auto">
+          {selectedItem && (
+            <>
+              <div className="relative h-64 -mx-6 -mt-6 mb-6 overflow-hidden rounded-t-lg">
+                <img
+                  src={selectedItem.image}
+                  alt={selectedItem.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/70 to-transparent" />
+
+                <div className={`absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg border-2 ${getRatingStyle(selectedItem.rating)}`}>
+                  {selectedItem.rating}
+                </div>
+
+                <div className="absolute bottom-4 left-4 right-4">
+                  <Badge
+                    variant="secondary"
+                    className="bg-bone-100/90 text-espresso-700 border-0 mb-2"
+                  >
+                    {selectedItem.type === 'movie' ? 'Film' : 'TV Show'}
+                  </Badge>
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-serif text-white">
+                      {selectedItem.title}
+                    </DialogTitle>
+                  </DialogHeader>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 text-sm text-espresso-500">
+                  <span>{selectedItem.artist}</span>
+                  <span className="w-1 h-1 rounded-full bg-espresso-300" />
+                  <span>{formatDate(selectedItem.reviewDate)}</span>
+                </div>
+
+                {selectedItem.review && (
+                  <p className="text-espresso-700 leading-relaxed">
+                    {selectedItem.review}
+                  </p>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
