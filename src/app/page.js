@@ -39,7 +39,7 @@ export default function Home() {
 
             <p className="text-lg md:text-xl text-espresso-600 leading-relaxed max-w-lg">
               Computer Science and Mathematics student at Texas A&M.
-              I build things for the web and think about problems worth solving.
+              I build solutions for the web and think about problems worth solving.
             </p>
           </div>
 

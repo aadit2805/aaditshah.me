@@ -35,7 +35,6 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { href: '/', label: 'Home' },
     { href: '/reviews', label: 'Reviews' },
     { href: '/music', label: 'Music' },
     { href: '/portfolio', label: 'Portfolio' },
