@@ -263,6 +263,39 @@
   @apply bg-terracotta-200 text-espresso-900;
 }
 
+/* Terminal selection */
+.bg-zinc-950 ::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: inherit;
+}
+
+/* Custom scrollbar for terminal */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-zinc-700::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-thumb-zinc-700::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thumb-zinc-700::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 4px;
+}
+
+.scrollbar-thumb-zinc-700::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Terminal text selection */
+.terminal-selection::selection {
+  background: rgba(16, 185, 129, 0.4);
+}
+
 /* Smooth image loading */
 img {
   opacity: 1;

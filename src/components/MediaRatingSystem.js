@@ -65,9 +65,9 @@ const MediaRatingSystem = () => {
   const remainingItems = filteredAndSortedItems.slice(1);
 
   const getRatingStyle = (rating) => {
-    if (rating >= 8) return 'bg-sage-500 text-white';
-    if (rating >= 7) return 'bg-bone-600 text-white';
-    return 'bg-terracotta-500 text-white';
+    if (rating >= 8) return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+    if (rating >= 7) return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+    return 'bg-red-500/20 text-red-400 border-red-500/30';
   };
 
   const formatDate = (dateString) => {
@@ -94,44 +94,35 @@ const MediaRatingSystem = () => {
 
   return (
     <div className="w-full">
-      {/* Grain overlay */}
-      <div className="grain" />
-
-      {/* Animated blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="blob blob-1" />
-        <div className="blob blob-2" />
-      </div>
-
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Header with Stats */}
-        <div className="mb-12 stagger-children">
+        <div className="mb-12">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
             <div>
-              <Badge className="mb-4 bg-terracotta-100 text-terracotta-700 border-0">
-                {totalReviews} Reviews
+              <Badge className="mb-4 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-mono">
+                {totalReviews} reviews
               </Badge>
-              <h1 className="text-4xl md:text-5xl font-serif font-medium text-espresso-900 mb-3">
-                Film & TV Reviews
+              <h1 className="text-4xl md:text-5xl font-mono font-bold text-zinc-100 mb-3">
+                ~/reviews
               </h1>
-              <p className="text-espresso-500 max-w-md">
-                Thoughts on what I've been watching. Unfiltered opinions on cinema and television.
+              <p className="text-zinc-500 font-mono text-sm max-w-md">
+                # Thoughts on what I've been watching. Unfiltered opinions.
               </p>
             </div>
 
             {/* Stats Cards */}
             <div className="flex gap-3">
-              <div className="px-4 py-3 bg-bone-50/80 backdrop-blur-sm rounded-xl border border-bone-200">
-                <p className="text-2xl font-serif font-medium text-espresso-900">{avgRating}</p>
-                <p className="text-xs text-espresso-500 uppercase tracking-wider">Avg Rating</p>
+              <div className="px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-800">
+                <p className="text-2xl font-mono font-bold text-emerald-400">{avgRating}</p>
+                <p className="text-xs text-zinc-600 uppercase tracking-wider font-mono">avg</p>
               </div>
-              <div className="px-4 py-3 bg-bone-50/80 backdrop-blur-sm rounded-xl border border-bone-200">
-                <p className="text-2xl font-serif font-medium text-espresso-900">{movieCount}</p>
-                <p className="text-xs text-espresso-500 uppercase tracking-wider">Films</p>
+              <div className="px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-800">
+                <p className="text-2xl font-mono font-bold text-cyan-400">{movieCount}</p>
+                <p className="text-xs text-zinc-600 uppercase tracking-wider font-mono">films</p>
               </div>
-              <div className="px-4 py-3 bg-bone-50/80 backdrop-blur-sm rounded-xl border border-bone-200">
-                <p className="text-2xl font-serif font-medium text-espresso-900">{showCount}</p>
-                <p className="text-xs text-espresso-500 uppercase tracking-wider">Shows</p>
+              <div className="px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-800">
+                <p className="text-2xl font-mono font-bold text-purple-400">{showCount}</p>
+                <p className="text-xs text-zinc-600 uppercase tracking-wider font-mono">shows</p>
               </div>
             </div>
           </div>
@@ -140,20 +131,20 @@ const MediaRatingSystem = () => {
           <div className="flex flex-wrap items-center gap-3">
             <Input
               type="text"
-              placeholder="Search..."
+              placeholder="grep -i ..."
               value={searchTerm}
               onChange={handleSearch}
-              className="w-full sm:w-64 bg-bone-50/80 backdrop-blur-sm border-bone-300 text-espresso-800 placeholder:text-espresso-400"
+              className="w-full sm:w-64 bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 font-mono focus:border-emerald-500 focus:ring-emerald-500/20"
             />
 
             <Select onValueChange={handleFilterType} value={filterType}>
-              <SelectTrigger className="w-[130px] bg-bone-50/80 backdrop-blur-sm border-bone-300 text-espresso-700">
+              <SelectTrigger className="w-[130px] bg-zinc-900 border-zinc-700 text-zinc-300 font-mono">
                 <SelectValue placeholder="All" />
               </SelectTrigger>
-              <SelectContent className="bg-bone-50 border-bone-300">
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="movie">Films</SelectItem>
-                <SelectItem value="show">Shows</SelectItem>
+              <SelectContent className="bg-zinc-900 border-zinc-700">
+                <SelectItem value="all" className="text-zinc-300 font-mono focus:bg-zinc-800">all</SelectItem>
+                <SelectItem value="movie" className="text-zinc-300 font-mono focus:bg-zinc-800">films</SelectItem>
+                <SelectItem value="show" className="text-zinc-300 font-mono focus:bg-zinc-800">shows</SelectItem>
               </SelectContent>
             </Select>
 
@@ -162,17 +153,17 @@ const MediaRatingSystem = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => handleSort('rating')}
-                className={`${sortConfig.key === 'rating' ? 'bg-espresso-900 text-bone-100 hover:bg-espresso-800' : 'text-espresso-600 hover:bg-bone-200'}`}
+                className={`font-mono ${sortConfig.key === 'rating' ? 'bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30' : 'text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300'}`}
               >
-                Rating {sortConfig.key === 'rating' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                rating {sortConfig.key === 'rating' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => handleSort('date')}
-                className={`${sortConfig.key === 'date' ? 'bg-espresso-900 text-bone-100 hover:bg-espresso-800' : 'text-espresso-600 hover:bg-bone-200'}`}
+                className={`font-mono ${sortConfig.key === 'date' ? 'bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30' : 'text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300'}`}
               >
-                Date {sortConfig.key === 'date' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
+                date {sortConfig.key === 'date' && (sortConfig.direction === 'desc' ? '↓' : '↑')}
               </Button>
             </div>
           </div>
@@ -182,7 +173,7 @@ const MediaRatingSystem = () => {
         {featuredItem && (
           <div className="mb-8">
             <Card
-              className="group bg-bone-50/80 backdrop-blur-sm border-bone-200 overflow-hidden hover-lift cursor-pointer"
+              className="group bg-zinc-900 border-zinc-800 overflow-hidden cursor-pointer hover:border-zinc-700 transition-all"
               onClick={() => setSelectedItem(featuredItem)}
             >
               <div className="grid md:grid-cols-2 gap-0">
@@ -190,30 +181,30 @@ const MediaRatingSystem = () => {
                   <img
                     src={featuredItem.image}
                     alt={featuredItem.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/60 via-transparent to-transparent" />
-                  <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium ${getRatingStyle(featuredItem.rating)}`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
+                  <div className={`absolute top-4 left-4 px-3 py-1 rounded border text-sm font-mono font-bold ${getRatingStyle(featuredItem.rating)}`}>
                     {featuredItem.rating}/10
                   </div>
                 </div>
-                <CardContent className="p-8 flex flex-col justify-center">
-                  <Badge variant="secondary" className="w-fit mb-4 bg-bone-200 text-espresso-600">
-                    {featuredItem.type === 'movie' ? 'Film' : 'TV Show'}
+                <CardContent className="p-8 flex flex-col justify-center bg-zinc-900">
+                  <Badge variant="secondary" className="w-fit mb-4 bg-zinc-800 text-zinc-400 border-zinc-700 font-mono text-xs">
+                    {featuredItem.type === 'movie' ? 'FILM' : 'SHOW'}
                   </Badge>
-                  <h2 className="text-2xl md:text-3xl font-serif font-medium text-espresso-900 mb-2 group-hover:text-terracotta-600 transition-colors">
+                  <h2 className="text-2xl md:text-3xl font-mono font-bold text-zinc-100 mb-2 group-hover:text-emerald-400 transition-colors">
                     {featuredItem.title}
                   </h2>
-                  <p className="text-espresso-500 mb-4">
+                  <p className="text-zinc-500 mb-4 font-mono text-sm">
                     {featuredItem.artist} · {formatDate(featuredItem.reviewDate)}
                   </p>
                   {featuredItem.review && (
-                    <p className="text-espresso-600 leading-relaxed">
+                    <p className="text-zinc-400 leading-relaxed font-mono text-sm">
                       {truncateReview(featuredItem.review, 200)}
                     </p>
                   )}
-                  <div className="mt-6 flex items-center gap-2 text-terracotta-500 group-hover:gap-3 transition-all">
-                    <span className="text-sm font-medium">Read review</span>
+                  <div className="mt-6 flex items-center gap-2 text-emerald-400 group-hover:gap-3 transition-all font-mono text-sm">
+                    <span>cat review.txt</span>
                     <span>→</span>
                   </div>
                 </CardContent>
@@ -227,7 +218,7 @@ const MediaRatingSystem = () => {
           {remainingItems.map((item, index) => (
             <Card
               key={item.id}
-              className="group bg-bone-50/80 backdrop-blur-sm border-bone-200 overflow-hidden hover-lift cursor-pointer"
+              className="group bg-zinc-900 border-zinc-800 overflow-hidden cursor-pointer hover:border-zinc-700 transition-all"
               onClick={() => setSelectedItem(item)}
               style={{ animationDelay: `${index * 50}ms` }}
             >
@@ -235,33 +226,33 @@ const MediaRatingSystem = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent" />
 
-                <div className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm ${getRatingStyle(item.rating)}`}>
+                <div className={`absolute top-3 right-3 w-10 h-10 rounded border flex items-center justify-center font-mono font-bold text-sm ${getRatingStyle(item.rating)}`}>
                   {item.rating}
                 </div>
 
                 <div className="absolute bottom-3 left-3 right-3">
                   <Badge
                     variant="secondary"
-                    className="bg-bone-100/90 text-espresso-700 border-0 mb-2"
+                    className="bg-zinc-900/90 text-zinc-400 border-zinc-700 mb-2 font-mono text-xs"
                   >
-                    {item.type === 'movie' ? 'Film' : 'TV'}
+                    {item.type === 'movie' ? 'FILM' : 'SHOW'}
                   </Badge>
-                  <h3 className="font-serif text-lg font-medium text-white leading-tight">
+                  <h3 className="font-mono text-lg font-bold text-zinc-100 leading-tight">
                     {item.title}
                   </h3>
                 </div>
               </div>
 
-              <CardContent className="p-4">
-                <p className="text-sm text-espresso-500 mb-2">
+              <CardContent className="p-4 bg-zinc-900">
+                <p className="text-sm text-zinc-500 mb-2 font-mono">
                   {item.artist} · {formatDate(item.reviewDate)}
                 </p>
                 {item.review && (
-                  <p className="text-sm text-espresso-600 leading-relaxed line-clamp-2">
+                  <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2 font-mono">
                     {truncateReview(item.review, 80)}
                   </p>
                 )}
@@ -273,40 +264,40 @@ const MediaRatingSystem = () => {
         {/* Empty state */}
         {filteredAndSortedItems.length === 0 && (
           <div className="text-center py-20">
-            <div className="w-16 h-16 rounded-full bg-bone-200 flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🎬</span>
+            <div className="font-mono text-zinc-500">
+              <p className="text-emerald-400 mb-2">$ grep "{searchTerm}"</p>
+              <p>No matches found.</p>
             </div>
-            <p className="text-espresso-500">No reviews match your search.</p>
           </div>
         )}
       </div>
 
       {/* Dialog */}
       <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-        <DialogContent className="bg-bone-50 border-bone-200 max-w-2xl max-h-[90vh] overflow-y-auto p-0">
+        <DialogContent className="bg-zinc-900 border-zinc-700 max-w-2xl max-h-[90vh] overflow-y-auto p-0">
           {selectedItem && (
             <>
               <div className="relative h-72 overflow-hidden">
                 <img
                   src={selectedItem.image}
                   alt={selectedItem.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover opacity-80"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/80 via-espresso-900/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent" />
 
-                <div className={`absolute top-4 right-4 px-4 py-2 rounded-full font-bold text-lg ${getRatingStyle(selectedItem.rating)}`}>
+                <div className={`absolute top-4 right-4 px-4 py-2 rounded border font-mono font-bold text-lg ${getRatingStyle(selectedItem.rating)}`}>
                   {selectedItem.rating}/10
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <Badge
                     variant="secondary"
-                    className="bg-bone-100/90 text-espresso-700 border-0 mb-3"
+                    className="bg-zinc-900/90 text-zinc-400 border-zinc-700 mb-3 font-mono"
                   >
-                    {selectedItem.type === 'movie' ? 'Film' : 'TV Show'}
+                    {selectedItem.type === 'movie' ? 'FILM' : 'SHOW'}
                   </Badge>
                   <DialogHeader>
-                    <DialogTitle className="text-3xl font-serif text-white pr-12">
+                    <DialogTitle className="text-3xl font-mono font-bold text-zinc-100 pr-12">
                       {selectedItem.title}
                     </DialogTitle>
                   </DialogHeader>
@@ -314,15 +305,15 @@ const MediaRatingSystem = () => {
               </div>
 
               <div className="p-6 space-y-4">
-                <div className="flex items-center gap-4 text-sm text-espresso-500 pb-4 border-b border-bone-200">
-                  <span className="font-medium text-espresso-700">{selectedItem.artist}</span>
-                  <span className="w-1 h-1 rounded-full bg-espresso-300" />
+                <div className="flex items-center gap-4 text-sm text-zinc-500 pb-4 border-b border-zinc-800 font-mono">
+                  <span className="text-zinc-300">{selectedItem.artist}</span>
+                  <span className="w-1 h-1 rounded-full bg-zinc-700" />
                   <span>{formatDate(selectedItem.reviewDate)}</span>
                 </div>
 
                 {selectedItem.review && (
-                  <div className="prose prose-stone max-w-none">
-                    <p className="text-espresso-700 leading-relaxed text-lg">
+                  <div className="prose prose-invert prose-zinc max-w-none">
+                    <p className="text-zinc-300 leading-relaxed text-base font-mono">
                       {selectedItem.review}
                     </p>
                   </div>
