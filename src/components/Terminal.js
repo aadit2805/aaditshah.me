@@ -216,14 +216,9 @@ const ABOUT_TEXT = `
   \x1b[1;38;5;250mCurrently interested in:\x1b[0m
 
     \x1b[38;5;79m❯\x1b[0m  Full-stack development
-    \x1b[38;5;79m❯\x1b[0m  Systems programming
     \x1b[38;5;79m❯\x1b[0m  AI/ML applications
-    \x1b[38;5;79m❯\x1b[0m  Developer tools & DX
 
   \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
-
-  I believe in writing \x1b[1mclean, efficient code\x1b[0m and creating
-  experiences that just work.
 
 `;
 
@@ -236,26 +231,25 @@ const SKILLS_TEXT = `
   \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m█████████████████████\x1b[0m  JavaScript / TypeScript
   \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m████████████████████\x1b[0m   Python
   \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m██████████████████\x1b[0m     Java
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m███████████████\x1b[0m        C / C++
-  \x1b[38;5;244m└──\x1b[0m \x1b[38;5;79m█████████████\x1b[0m          SQL
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m███████████████\x1b[0m        C++
+  \x1b[38;5;244m└──\x1b[0m \x1b[38;5;79m███████████\x1b[0m            SQL
 
   \x1b[1;38;5;250mFrontend\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;208mReact\x1b[0m / \x1b[38;5;250mNext.js\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;81mTailwind CSS\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;208mHTML\x1b[0m / \x1b[38;5;81mCSS\x1b[0m
-  \x1b[38;5;244m└──\x1b[0m \x1b[38;5;79mVue.js\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mReact\x1b[0m / \x1b[38;5;79mNext.js\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mTailwind CSS\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mHTML\x1b[0m / \x1b[38;5;79mCSS\x1b[0m
 
   \x1b[1;38;5;250mBackend\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mNode.js\x1b[0m / \x1b[38;5;250mExpress\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;81mPostgreSQL\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mNode.js\x1b[0m / \x1b[38;5;79mExpress\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mPostgreSQL\x1b[0m
   \x1b[38;5;244m└──\x1b[0m \x1b[38;5;79mMongoDB\x1b[0m
 
   \x1b[1;38;5;250mTools & Platforms\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;208mGit\x1b[0m / GitHub
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;81mDocker\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;208mAWS\x1b[0m / \x1b[38;5;250mVercel\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mGit\x1b[0m / \x1b[38;5;79mGitHub\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mAWS\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mVercel\x1b[0m
+  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mRailway\x1b[0m
   \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mLinux\x1b[0m
-  \x1b[38;5;244m└──\x1b[0m \x1b[38;5;168mFigma\x1b[0m
 
 `;
 
@@ -645,7 +639,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
        \x1b[4;38;5;81mopen.spotify.com/playlist/2hJ9vjNCXEVrbPDmr8RRaY\x1b[0m
 
   \x1b[38;5;79m[2]\x1b[0m  \x1b[38;5;250mFocus\x1b[0m
-       \x1b[38;5;244mDeep work & coding sessions\x1b[0m
+       \x1b[38;5;244mLocked in on work, great for the gym\x1b[0m
        \x1b[4;38;5;81mopen.spotify.com/playlist/2N0n81gJrPqZzFxeteHPUI\x1b[0m
 
   \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
