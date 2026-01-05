@@ -155,127 +155,123 @@ const ASCII_BANNER = `\x1b[38;5;79m
    ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝   ╚═╝   ╚═╝╚══════╝╚═╝  ╚═╝
 \x1b[0m`;
 
-const SYSTEM_INFO = `\x1b[38;5;244m───────────────────────────────────────────────────────────────────\x1b[0m
-\x1b[1;38;5;79maadit.sh\x1b[0m \x1b[38;5;244m—\x1b[0m \x1b[38;5;250mTerminal Portfolio v2.0.0\x1b[0m \x1b[38;5;244m(pid: %%PID%%)\x1b[0m
-\x1b[38;5;244m───────────────────────────────────────────────────────────────────\x1b[0m
+const ASCII_BANNER_MOBILE = `\x1b[38;5;79m
+  █████╗  █████╗ ██████╗ ██╗████████╗
+ ██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝
+ ███████║███████║██║  ██║██║   ██║
+ ██╔══██║██╔══██║██║  ██║██║   ██║
+ ██║  ██║██║  ██║██████╔╝██║   ██║
+ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝   ╚═╝
+          ███████╗██╗  ██╗
+          ██╔════╝██║  ██║
+          ███████╗███████║
+          ╚════██║██╔══██║
+       ██╗███████║██║  ██║
+       ╚═╝╚══════╝╚═╝  ╚═╝
+\x1b[0m`;
 
-  \x1b[38;5;79m◉\x1b[0m  \x1b[1mCS & Mathematics\x1b[0m @ Texas A&M University
-  \x1b[38;5;79m◉\x1b[0m  Building for the web. Thinking about hard problems.
+const SYSTEM_INFO = `\x1b[1;38;5;79maadit.sh\x1b[0m \x1b[38;5;244m—\x1b[0m \x1b[38;5;250mv2.0.0\x1b[0m \x1b[38;5;244m(pid: %%PID%%)\x1b[0m
 
-  \x1b[38;5;244mKeyboard:\x1b[0m \x1b[1;38;5;79m⌘T\x1b[0m \x1b[38;5;244mnew tab\x1b[0m \x1b[38;5;244m│\x1b[0m \x1b[1;38;5;79m⌘W\x1b[0m \x1b[38;5;244mclose tab\x1b[0m \x1b[38;5;244m│\x1b[0m \x1b[1;38;5;79m⌘1-9\x1b[0m \x1b[38;5;244mswitch tab\x1b[0m
+\x1b[38;5;79m◉\x1b[0m \x1b[1mCS & Math\x1b[0m @ Texas A&M
+\x1b[38;5;79m◉\x1b[0m Building for the web
 
 `;
 
 const HELP_TEXT = `
-\x1b[1;38;5;79mCOMMANDS\x1b[0m                                                    \x1b[38;5;244m[aadit.sh]\x1b[0m
-\x1b[38;5;244m─────────────────────────────────────────────────────────────────────\x1b[0m
+\x1b[1;38;5;79m━━━ COMMANDS ━━━\x1b[0m
 
-  \x1b[1;38;5;250mNavigation\x1b[0m
-    \x1b[38;5;79mabout\x1b[0m           \x1b[38;5;244m│\x1b[0m  Who I am and what I do
-    \x1b[38;5;79mskills\x1b[0m          \x1b[38;5;244m│\x1b[0m  Technical skills & stack
-    \x1b[38;5;79mprojects\x1b[0m        \x1b[38;5;244m│\x1b[0m  View my work
-    \x1b[38;5;79msocials\x1b[0m         \x1b[38;5;244m│\x1b[0m  Find me on the internet
-    \x1b[38;5;79mresume\x1b[0m          \x1b[38;5;244m│\x1b[0m  Download my resume
+\x1b[1;38;5;250mNavigation\x1b[0m
+  \x1b[38;5;79mabout\x1b[0m      Who I am
+  \x1b[38;5;79mskills\x1b[0m     Technical stack
+  \x1b[38;5;79mprojects\x1b[0m   View my work
+  \x1b[38;5;79msocials\x1b[0m    Find me online
+  \x1b[38;5;79mresume\x1b[0m     Download resume
 
-  \x1b[1;38;5;250mMedia\x1b[0m
-    \x1b[38;5;79mreviews\x1b[0m         \x1b[38;5;244m│\x1b[0m  Interactive film & TV reviews (TUI)
-    \x1b[38;5;79mmusic\x1b[0m           \x1b[38;5;244m│\x1b[0m  What I'm listening to
+\x1b[1;38;5;250mMedia\x1b[0m
+  \x1b[38;5;79mreviews\x1b[0m    Film & TV reviews
+  \x1b[38;5;79mmusic\x1b[0m      What I'm listening to
 
-  \x1b[1;38;5;250mInteractive\x1b[0m
-    \x1b[38;5;79mchat\x1b[0m            \x1b[38;5;244m│\x1b[0m  Chat with AI Aadit
+\x1b[1;38;5;250mInteractive\x1b[0m
+  \x1b[38;5;79mchat\x1b[0m       Chat with AI Aadit
 
-  \x1b[1;38;5;250mSystem\x1b[0m
-    \x1b[38;5;79mneofetch\x1b[0m        \x1b[38;5;244m│\x1b[0m  System information
-    \x1b[38;5;79menv\x1b[0m             \x1b[38;5;244m│\x1b[0m  Environment variables
-    \x1b[38;5;79mls\x1b[0m              \x1b[38;5;244m│\x1b[0m  List directory contents
-    \x1b[38;5;79mpwd\x1b[0m             \x1b[38;5;244m│\x1b[0m  Print working directory
-    \x1b[38;5;79mclear\x1b[0m           \x1b[38;5;244m│\x1b[0m  Clear the terminal
-
-\x1b[38;5;244m─────────────────────────────────────────────────────────────────────\x1b[0m
-  \x1b[1;38;5;250mKeyboard Shortcuts\x1b[0m
-    \x1b[38;5;244m⌘T\x1b[0m New tab     \x1b[38;5;244m│\x1b[0m  \x1b[38;5;244m⌘W\x1b[0m Close tab   \x1b[38;5;244m│\x1b[0m  \x1b[38;5;244m⌘1-9\x1b[0m Switch tab
-    \x1b[38;5;244m⌘⌫\x1b[0m Del line    \x1b[38;5;244m│\x1b[0m  \x1b[38;5;244m⌥⌫\x1b[0m Del word    \x1b[38;5;244m│\x1b[0m  \x1b[38;5;244m⌃R\x1b[0m History search
-    \x1b[38;5;244m⌃A\x1b[0m Line start  \x1b[38;5;244m│\x1b[0m  \x1b[38;5;244m⌃E\x1b[0m Line end    \x1b[38;5;244m│\x1b[0m  \x1b[38;5;244m⌃L\x1b[0m Clear screen
+\x1b[1;38;5;250mSystem\x1b[0m
+  \x1b[38;5;79mneofetch\x1b[0m   System info
+  \x1b[38;5;79mls\x1b[0m         List files
+  \x1b[38;5;79mclear\x1b[0m      Clear terminal
 
 `;
 
 const ABOUT_TEXT = `
-\x1b[1;38;5;79m┌──────────────────────────────────────────────────────────────────┐
-│  ABOUT                                                           │
-└──────────────────────────────────────────────────────────────────┘\x1b[0m
+\x1b[1;38;5;79m━━━ ABOUT ━━━\x1b[0m
 
-  Howdy, I'm \x1b[1;38;5;79mAadit Shah\x1b[0m.
+Howdy, I'm \x1b[1;38;5;79mAadit Shah\x1b[0m.
 
-  I'm a Computer Science and Mathematics student at \x1b[1mTexas A&M
-  University\x1b[0m. I build solutions for the web and think about
-  problems worth solving.
+I'm a Computer Science and Mathematics
+student at \x1b[1mTexas A&M University\x1b[0m.
 
-  \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
+I build solutions for the web and
+think about problems worth solving.
 
-  \x1b[1;38;5;250mCurrently interested in:\x1b[0m
-
-    \x1b[38;5;79m❯\x1b[0m  Full-stack development
-    \x1b[38;5;79m❯\x1b[0m  AI/ML applications
-
-  \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
+\x1b[1;38;5;250mCurrently interested in:\x1b[0m
+  \x1b[38;5;79m❯\x1b[0m Full-stack development
+  \x1b[38;5;79m❯\x1b[0m AI/ML applications
 
 `;
 
 const SKILLS_TEXT = `
-\x1b[1;38;5;79m┌──────────────────────────────────────────────────────────────────┐
-│  SKILLS                                                          │
-└──────────────────────────────────────────────────────────────────┘\x1b[0m
+\x1b[1;38;5;79m━━━ SKILLS ━━━\x1b[0m
 
-  \x1b[1;38;5;250mLanguages\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m█████████████████████\x1b[0m  JavaScript / TypeScript
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m████████████████████\x1b[0m   Python
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m██████████████████\x1b[0m     Java
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79m███████████████\x1b[0m        C++
-  \x1b[38;5;244m└──\x1b[0m \x1b[38;5;79m███████████\x1b[0m            SQL
+\x1b[1;38;5;250mLanguages\x1b[0m
+  \x1b[38;5;79m❯\x1b[0m JavaScript / TypeScript
+  \x1b[38;5;79m❯\x1b[0m Python
+  \x1b[38;5;79m❯\x1b[0m Java
+  \x1b[38;5;79m❯\x1b[0m C++
+  \x1b[38;5;79m❯\x1b[0m SQL
 
-  \x1b[1;38;5;250mFrontend\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mReact\x1b[0m / \x1b[38;5;79mNext.js\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mTailwind CSS\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mHTML\x1b[0m / \x1b[38;5;79mCSS\x1b[0m
+\x1b[1;38;5;250mFrontend\x1b[0m
+  \x1b[38;5;79m❯\x1b[0m React / Next.js
+  \x1b[38;5;79m❯\x1b[0m Tailwind CSS
+  \x1b[38;5;79m❯\x1b[0m HTML / CSS
 
-  \x1b[1;38;5;250mBackend\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mNode.js\x1b[0m / \x1b[38;5;79mExpress\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mPostgreSQL\x1b[0m
-  \x1b[38;5;244m└──\x1b[0m \x1b[38;5;79mMongoDB\x1b[0m
+\x1b[1;38;5;250mBackend\x1b[0m
+  \x1b[38;5;79m❯\x1b[0m Node.js / Express
+  \x1b[38;5;79m❯\x1b[0m PostgreSQL
+  \x1b[38;5;79m❯\x1b[0m MongoDB
 
-  \x1b[1;38;5;250mTools & Platforms\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mGit\x1b[0m / \x1b[38;5;79mGitHub\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mAWS\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mVercel\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mRailway\x1b[0m
-  \x1b[38;5;244m├──\x1b[0m \x1b[38;5;79mLinux\x1b[0m
+\x1b[1;38;5;250mTools & Platforms\x1b[0m
+  \x1b[38;5;79m❯\x1b[0m Git / GitHub
+  \x1b[38;5;79m❯\x1b[0m AWS / Vercel / Railway
+  \x1b[38;5;79m❯\x1b[0m Linux
 
 `;
 
 const SOCIALS_TEXT = `
-\x1b[1;38;5;79m┌──────────────────────────────────────────────────────────────────┐
-│  SOCIALS                                                         │
-└──────────────────────────────────────────────────────────────────┘\x1b[0m
+\x1b[1;38;5;79m━━━ SOCIALS ━━━\x1b[0m
 
-  Find me on the internet:
+Find me on the internet:
 
-    \x1b[38;5;79m◉\x1b[0m  \x1b[1mGitHub\x1b[0m        \x1b[38;5;244m─────\x1b[0m  \x1b[4;38;5;81mgithub.com/aadit2805\x1b[0m
-    \x1b[38;5;79m◉\x1b[0m  \x1b[1mLinkedIn\x1b[0m      \x1b[38;5;244m─────\x1b[0m  \x1b[4;38;5;81mlinkedin.com/in/aadit2805\x1b[0m
-    \x1b[38;5;79m◉\x1b[0m  \x1b[1mTwitter\x1b[0m       \x1b[38;5;244m─────\x1b[0m  \x1b[4;38;5;81mtwitter.com/aadit2805\x1b[0m
-    \x1b[38;5;79m◉\x1b[0m  \x1b[1mEmail\x1b[0m         \x1b[38;5;244m─────\x1b[0m  \x1b[4;38;5;81maadit2805@gmail.com\x1b[0m
+\x1b[38;5;79m◉\x1b[0m \x1b[1mGitHub\x1b[0m
+  \x1b[4;38;5;81mgithub.com/aadit2805\x1b[0m
+
+\x1b[38;5;79m◉\x1b[0m \x1b[1mLinkedIn\x1b[0m
+  \x1b[4;38;5;81mlinkedin.com/in/aadit2805\x1b[0m
+
+\x1b[38;5;79m◉\x1b[0m \x1b[1mTwitter\x1b[0m
+  \x1b[4;38;5;81mtwitter.com/aadit2805\x1b[0m
+
+\x1b[38;5;79m◉\x1b[0m \x1b[1mEmail\x1b[0m
+  \x1b[4;38;5;81maadit2805@gmail.com\x1b[0m
 
 `;
 
 const PROJECTS_TEXT = `
-\x1b[1;38;5;79m┌──────────────────────────────────────────────────────────────────┐
-│  PROJECTS                                                        │
-└──────────────────────────────────────────────────────────────────┘\x1b[0m
+\x1b[1;38;5;79m━━━ PROJECTS ━━━\x1b[0m
 
-  Check out my work on GitHub:
+Check out my work on GitHub:
 
-    \x1b[38;5;79m❯\x1b[0m  \x1b[4;38;5;81mgithub.com/aadit2805\x1b[0m
+  \x1b[38;5;79m❯\x1b[0m \x1b[4;38;5;81mgithub.com/aadit2805\x1b[0m
 
-  Or type '\x1b[38;5;79msocials\x1b[0m' to find other ways to connect.
+Or type '\x1b[38;5;79msocials\x1b[0m' to connect.
 
 `;
 
@@ -338,6 +334,7 @@ const Terminal = () => {
   const [dimensions, setDimensions] = useState({ cols: 120, rows: 40 });
   const [uptime, setUptime] = useState(0);
   const [memoryInfo, setMemoryInfo] = useState({ used: 0, total: 0, percent: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   // Reviews data
   const [reviewsData, setReviewsData] = useState([]);
@@ -352,19 +349,32 @@ const Terminal = () => {
     }).catch(() => setReviewsData([]));
   }, []);
 
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Helper to get appropriate banner
+  const getBanner = useCallback(() => {
+    return (typeof window !== 'undefined' && window.innerWidth < 640) ? ASCII_BANNER_MOBILE : ASCII_BANNER;
+  }, []);
+
   // Initialize first tab
   useEffect(() => {
     const pid = Math.floor(Math.random() * 90000) + 10000;
     setBasePid(pid);
     const firstTab = createTabSession(1, pid);
     firstTab.lines = [
-      { type: 'raw', content: ASCII_BANNER },
+      { type: 'raw', content: getBanner() },
       { type: 'raw', content: SYSTEM_INFO.replace('%%PID%%', pid.toString()) },
     ];
     setTabs([firstTab]);
     setActiveTabId(1);
     setNextTabId(2);
-  }, []);
+  }, [getBanner]);
 
   // Get active tab
   const activeTab = useMemo(() => tabs.find(t => t.id === activeTabId), [tabs, activeTabId]);
@@ -381,13 +391,13 @@ const Terminal = () => {
     const newPid = basePid + nextTabId;
     const newTab = createTabSession(nextTabId, newPid);
     newTab.lines = [
-      { type: 'raw', content: ASCII_BANNER },
+      { type: 'raw', content: getBanner() },
       { type: 'raw', content: SYSTEM_INFO.replace('%%PID%%', newPid.toString()) },
     ];
     setTabs(prev => [...prev, newTab]);
     setActiveTabId(nextTabId);
     setNextTabId(prev => prev + 1);
-  }, [basePid, nextTabId]);
+  }, [basePid, nextTabId, getBanner]);
 
   // Close tab
   const closeTab = useCallback((tabId) => {
@@ -398,7 +408,7 @@ const Terminal = () => {
         const newPid = basePid + nextTabId;
         const newTab = createTabSession(nextTabId, newPid);
         newTab.lines = [
-          { type: 'raw', content: ASCII_BANNER },
+          { type: 'raw', content: getBanner() },
           { type: 'raw', content: SYSTEM_INFO.replace('%%PID%%', newPid.toString()) },
         ];
         setNextTabId(n => n + 1);
@@ -412,7 +422,7 @@ const Terminal = () => {
       }
       return newTabs;
     });
-  }, [activeTabId, basePid, nextTabId]);
+  }, [activeTabId, basePid, nextTabId, getBanner]);
 
   // Uptime counter & memory tracking
   useEffect(() => {
@@ -1007,6 +1017,32 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
     return false;
   }, [activeTab, updateActiveTab, generateReviewsTUI, reviewsData]);
 
+  // Handle command submission (used by both Enter key and mobile send button)
+  const handleSubmit = useCallback(async () => {
+    if (!activeTab || activeTab.isTyping) return;
+
+    const cmd = activeTab.currentInput;
+    setShowAutocomplete(false);
+
+    const inputLine = { type: 'input', content: cmd, isChat: activeTab.isInChatMode };
+    const newHistory = cmd.trim() ? [...activeTab.commandHistory, cmd] : activeTab.commandHistory;
+
+    updateActiveTab({
+      lines: [...activeTab.lines, inputLine],
+      commandHistory: newHistory,
+      historyIndex: -1,
+      currentInput: '',
+      cursorPosition: 0
+    });
+
+    const result = await processCommand(cmd);
+    if (result) {
+      setTabs(prev => prev.map(tab =>
+        tab.id === activeTabId ? { ...tab, lines: [...tab.lines, result] } : tab
+      ));
+    }
+  }, [activeTab, activeTabId, processCommand, updateActiveTab]);
+
   // Handle key press
   const handleKeyDown = async (e) => {
     if (!activeTab) return;
@@ -1207,26 +1243,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
     // Enter
     if (e.key === 'Enter' && !activeTab.isTyping) {
       e.preventDefault();
-      const cmd = activeTab.currentInput;
-      setShowAutocomplete(false);
-
-      const inputLine = { type: 'input', content: cmd, isChat: activeTab.isInChatMode };
-      const newHistory = cmd.trim() ? [...activeTab.commandHistory, cmd] : activeTab.commandHistory;
-
-      updateActiveTab({
-        lines: [...activeTab.lines, inputLine],
-        commandHistory: newHistory,
-        historyIndex: -1,
-        currentInput: '',
-        cursorPosition: 0
-      });
-
-      const result = await processCommand(cmd);
-      if (result) {
-        setTabs(prev => prev.map(tab =>
-          tab.id === activeTabId ? { ...tab, lines: [...tab.lines, result] } : tab
-        ));
-      }
+      handleSubmit();
     }
 
     // Arrow Up (history)
@@ -1484,25 +1501,30 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
 
           {/* Input line (hidden in interactive mode) */}
           {!isSearchMode && !activeTab.interactiveMode && (
-            <div className="flex items-center gap-2 mt-1 py-0.5">
+            <div className="flex items-center gap-2 mt-1 py-2 sm:py-0.5">
               {activeTab.isInChatMode ? (
                 <span className="text-purple-400 font-bold shrink-0"><span className="text-purple-500">❯</span> you</span>
               ) : (
                 <span className="prompt-ps1 flex items-center gap-1 shrink-0">
-                  <span className="text-emerald-400 font-semibold">{SHELL_ENV.USER}</span>
-                  <span className="text-zinc-600">@</span>
-                  <span className="text-cyan-400">{SHELL_ENV.HOSTNAME}</span>
-                  <span className="text-zinc-600">:</span>
-                  <span className="text-blue-400">~</span>
-                  <span className="text-zinc-500 text-xs ml-1">git:(<span className="text-orange-400">{SHELL_ENV.GIT_BRANCH}</span>)</span>
+                  {/* Full prompt on desktop, simplified on mobile */}
+                  <span className="hidden sm:inline-flex items-center gap-1">
+                    <span className="text-emerald-400 font-semibold">{SHELL_ENV.USER}</span>
+                    <span className="text-zinc-600">@</span>
+                    <span className="text-cyan-400">{SHELL_ENV.HOSTNAME}</span>
+                    <span className="text-zinc-600">:</span>
+                    <span className="text-blue-400">~</span>
+                    <span className="text-zinc-500 text-xs ml-1">git:(<span className="text-orange-400">{SHELL_ENV.GIT_BRANCH}</span>)</span>
+                  </span>
+                  {/* Simplified prompt on mobile */}
+                  <span className="sm:hidden text-emerald-400 font-semibold">~</span>
                   <span className="text-emerald-400 ml-1 font-bold">❯</span>
                 </span>
               )}
-              <div className="flex-1 relative ml-1">
+              <div className="flex-1 relative ml-1 min-h-[24px] flex items-center" onClick={() => hiddenInputRef.current?.focus()}>
                 {activeTab.currentInput.length === 0 ? (
                   <>
                     {renderCursor()}
-                    <span className="text-zinc-500">Type <span className="text-emerald-400 font-bold">help</span> to see available commands</span>
+                    <span className="text-zinc-500 text-sm sm:text-base">Type <span className="text-emerald-400 font-bold">help</span> to see available commands</span>
                   </>
                 ) : (
                   <>
@@ -1513,6 +1535,16 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
                 )}
                 <input ref={hiddenInputRef} type="text" className="absolute opacity-0 w-0 h-0" onKeyDown={handleKeyDown} autoFocus autoComplete="off" spellCheck={false} />
               </div>
+              {/* Mobile send button */}
+              <button
+                onClick={handleSubmit}
+                className="sm:hidden shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400 active:bg-emerald-500/30 transition-colors"
+                aria-label="Send command"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                  <path d="M3.105 2.288a.75.75 0 0 0-.826.95l1.414 4.926A1.5 1.5 0 0 0 5.135 9.25h6.115a.75.75 0 0 1 0 1.5H5.135a1.5 1.5 0 0 0-1.442 1.086l-1.414 4.926a.75.75 0 0 0 .826.95 28.897 28.897 0 0 0 15.293-7.155.75.75 0 0 0 0-1.114A28.897 28.897 0 0 0 3.105 2.288Z" />
+                </svg>
+              </button>
             </div>
           )}
 
@@ -1567,10 +1599,15 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
         </motion.div>
       </div>
 
-      {/* Mobile hint */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="fixed bottom-4 left-0 right-0 text-center sm:hidden">
-        <span className="text-zinc-700 text-xs px-3 py-1.5 bg-zinc-900/50 rounded-full">
-          Tap to focus • Type <span className="text-emerald-500">help</span>
+      {/* Mobile hint - only show briefly */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="fixed bottom-4 left-0 right-0 text-center sm:hidden pointer-events-none"
+      >
+        <span className="text-zinc-600 text-xs px-3 py-1.5 bg-zinc-900/80 rounded-full backdrop-blur-sm">
+          Tap input to type • Press <span className="text-emerald-500">↵</span> or send button
         </span>
       </motion.div>
 
