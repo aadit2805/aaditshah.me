@@ -162,7 +162,6 @@ const SYSTEM_INFO = `\x1b[38;5;244m───────────────
   \x1b[38;5;79m◉\x1b[0m  \x1b[1mCS & Mathematics\x1b[0m @ Texas A&M University
   \x1b[38;5;79m◉\x1b[0m  Building for the web. Thinking about hard problems.
 
-  \x1b[38;5;244mType\x1b[0m \x1b[1;38;5;79mhelp\x1b[0m \x1b[38;5;244mto see available commands.\x1b[0m
   \x1b[38;5;244mKeyboard:\x1b[0m \x1b[1;38;5;79m⌘T\x1b[0m \x1b[38;5;244mnew tab\x1b[0m \x1b[38;5;244m│\x1b[0m \x1b[1;38;5;79m⌘W\x1b[0m \x1b[38;5;244mclose tab\x1b[0m \x1b[38;5;244m│\x1b[0m \x1b[1;38;5;79m⌘1-9\x1b[0m \x1b[38;5;244mswitch tab\x1b[0m
 
 `;
@@ -1500,9 +1499,18 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
                 </span>
               )}
               <div className="flex-1 relative ml-1">
-                <span className="text-zinc-100 whitespace-pre">{activeTab.currentInput.slice(0, activeTab.cursorPosition)}</span>
-                {renderCursor()}
-                <span className="text-zinc-100 whitespace-pre">{activeTab.currentInput.slice(activeTab.cursorPosition + 1)}</span>
+                {activeTab.currentInput.length === 0 ? (
+                  <>
+                    {renderCursor()}
+                    <span className="text-zinc-500">Type <span className="text-emerald-400 font-bold">help</span> to see available commands</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-zinc-100 whitespace-pre">{activeTab.currentInput.slice(0, activeTab.cursorPosition)}</span>
+                    {renderCursor()}
+                    <span className="text-zinc-100 whitespace-pre">{activeTab.currentInput.slice(activeTab.cursorPosition + 1)}</span>
+                  </>
+                )}
                 <input ref={hiddenInputRef} type="text" className="absolute opacity-0 w-0 h-0" onKeyDown={handleKeyDown} autoFocus autoComplete="off" spellCheck={false} />
               </div>
             </div>
