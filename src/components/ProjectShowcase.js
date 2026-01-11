@@ -36,7 +36,7 @@ const ProjectShowcase = () => {
                 {projects.length} projects
               </Badge>
               <h1 className="text-4xl md:text-5xl font-mono font-bold text-zinc-100 mb-3">
-                ~/portfolio
+                ~/projects
               </h1>
             </div>
           </div>

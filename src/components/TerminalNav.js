@@ -16,12 +16,18 @@ const TerminalNav = ({ currentPage }) => {
         </Link>
 
         <div className="flex items-center gap-1 font-mono text-sm">
-          <span className="text-zinc-600">aadit@portfolio:</span>
+          <span className="text-zinc-600">aadit@dev:</span>
           <span className="text-blue-400">~/{currentPage}</span>
           <span className="text-zinc-600">$</span>
         </div>
 
         <div className="flex items-center gap-4 font-mono text-sm">
+          <Link
+            href="/portfolio"
+            className={`transition-colors ${currentPage === 'projects' ? 'text-emerald-400' : 'text-zinc-500 hover:text-zinc-300'}`}
+          >
+            projects
+          </Link>
           <Link
             href="/reviews"
             className={`transition-colors ${currentPage === 'reviews' ? 'text-emerald-400' : 'text-zinc-500 hover:text-zinc-300'}`}

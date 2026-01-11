@@ -7,7 +7,7 @@ import ProjectShowcase from '../../components/ProjectShowcase';
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-zinc-950">
-      <TerminalNav currentPage="portfolio" />
+      <TerminalNav currentPage="projects" />
 
       <main className="relative z-10 py-24">
         <ProjectShowcase />
