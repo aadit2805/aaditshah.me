@@ -513,8 +513,13 @@ const Terminal = () => {
     }
   }, []);
 
-  // Focus handling
-  const handleTerminalClick = () => hiddenInputRef.current?.focus();
+  // Focus handling - only focus if no text is selected
+  const handleTerminalClick = () => {
+    const selection = window.getSelection();
+    if (!selection || selection.toString().length === 0) {
+      hiddenInputRef.current?.focus();
+    }
+  };
 
   // Format uptime
   const formatUptime = (seconds) => {
@@ -1358,7 +1363,41 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
   // Render ANSI text
   const renderAnsiText = (text) => {
     const segments = parseAnsi(text);
-    return segments.map((segment, i) => <span key={i} style={segment.style}>{segment.text}</span>);
+    // URL regex - must have domain.tld format with valid TLD, exclude .js/.ts etc
+    const urlRegex = /((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+\.(?:com|org|net|io|dev|co|me|app|xyz|tech|ai|gg|tv|fm|so)(?:\/[^\s]*)?)/g;
+
+    return segments.map((segment, i) => {
+      // Check if segment contains a URL
+      const parts = segment.text.split(urlRegex);
+      if (parts.length === 1) {
+        return <span key={i} style={segment.style}>{segment.text}</span>;
+      }
+
+      // Render with clickable links
+      return (
+        <span key={i} style={segment.style}>
+          {parts.map((part, j) => {
+            if (urlRegex.test(part)) {
+              urlRegex.lastIndex = 0; // Reset regex state
+              const href = part.startsWith('http') ? part : `https://${part}`;
+              return (
+                <a
+                  key={j}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sky-400 underline hover:text-emerald-400 transition-colors cursor-pointer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {part}
+                </a>
+              );
+            }
+            return part;
+          })}
+        </span>
+      );
+    });
   };
 
   // Render line
