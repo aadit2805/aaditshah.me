@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "title": "GitaChat",
+    "tagline": "Spiritual guidance from the Bhagavad Gita",
+    "description": "A semantic search application that finds the most relevant verse from 700+ Bhagavad Gita verses based on natural language queries. Uses 768-dimensional embeddings for accurate matching and GPT-powered commentary summarization to provide personalized spiritual insights.",
+    "technologies": ["Next.js", "FastAPI", "Pinecone", "Sentence Transformers", "OpenAI", "Clerk", "Supabase"],
+    "highlights": [
+      "Semantic search across 700 verses using BAAI/bge-base-en-v1.5 embeddings",
+      "Summarized commentary for contextual understanding",
+      "Query history persistence with user authentication"
+    ],
+    "image": "/images/gitachat.png",
+    "github": "https://github.com/aadit2805/gitachat.org",
+    "live": "",
+    "featured": true,
+    "date": "2024-12"
+  },
+  {
+    "id": 2,
+    "title": "Espress",
+    "tagline": "Your personal coffee companion",
+    "description": "A full-stack coffee logging app that helps users track drinks, discover flavor preferences, and get personalized recommendations. Features an interactive ranking system, comprehensive analytics, and Claude-powered natural language input parsing.",
+    "technologies": ["Next.js", "Express.js", "PostgreSQL", "Claude AI", "Clerk", "Google Maps API", "Framer Motion"],
+    "highlights": [
+      "Natural language parsing for drink logging",
+      "Binary comparison ranking system for taste profiling",
+      "Spending analytics and flavor trend visualization"
+    ],
+    "image": "/images/espress.png",
+    "github": "https://github.com/aadit2805/espress",
+    "live": "",
+    "featured": true,
+    "date": "2025-01"
+  }
+]
