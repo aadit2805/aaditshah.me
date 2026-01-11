@@ -180,10 +180,10 @@ const SYSTEM_INFO = `\x1b[1;38;5;79maadit.sh\x1b[0m \x1b[38;5;244m—\x1b[0m \x1
 const HELP_TEXT = `
 \x1b[1;38;5;79m━━━ COMMANDS ━━━\x1b[0m
 
-\x1b[1;38;5;250mNavigation\x1b[0m
+\x1b[1;38;5;250mNavigation\x1b[0m \x1b[38;5;244m(use directly or with 'cd')\x1b[0m
   \x1b[38;5;79mabout\x1b[0m      Who I am
   \x1b[38;5;79mskills\x1b[0m     Technical stack
-  \x1b[38;5;79mprojects\x1b[0m   View my work
+  \x1b[38;5;79mprojects\x1b[0m   View my projects
   \x1b[38;5;79msocials\x1b[0m    Find me online
   \x1b[38;5;79mresume\x1b[0m     Download resume
 
@@ -267,11 +267,17 @@ Find me on the internet:
 const PROJECTS_TEXT = `
 \x1b[1;38;5;79m━━━ PROJECTS ━━━\x1b[0m
 
-Check out my work on GitHub:
+\x1b[1;38;5;250m[1] GitaChat\x1b[0m
+    \x1b[38;5;79m❯\x1b[0m Spiritual guidance from the Bhagavad Gita
+    \x1b[38;5;244mSemantic search across 700+ verses with synthesized commentary\x1b[0m
+    \x1b[38;5;244mStack:\x1b[0m Next.js, FastAPI, Pinecone, Sentence Transformers, OpenAI
+    \x1b[4;38;5;81mgithub.com/aadit2805/gitachat.org\x1b[0m
 
-  \x1b[38;5;79m❯\x1b[0m \x1b[4;38;5;81mgithub.com/aadit2805\x1b[0m
-
-Or type '\x1b[38;5;79msocials\x1b[0m' to connect.
+\x1b[1;38;5;250m[2] Espress\x1b[0m
+    \x1b[38;5;79m❯\x1b[0m Your personal coffee companion
+    \x1b[38;5;244mTrack drinks, discover flavors, get personalized recommendations\x1b[0m
+    \x1b[38;5;244mStack:\x1b[0m Next.js, Express.js, PostgreSQL, Claude AI, Google Maps
+    \x1b[4;38;5;81mgithub.com/aadit2805/espress\x1b[0m
 
 `;
 
@@ -281,6 +287,9 @@ const COMMANDS = [
   'cat', 'echo', 'env', 'whoami', 'date', 'neofetch', 'exit',
   'history', 'which', 'man', 'grep', 'head', 'tail', 'tree'
 ];
+
+// Navigation commands that work with 'cd'
+const NAV_COMMANDS = ['about', 'skills', 'projects', 'socials', 'resume', 'reviews', 'music'];
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TAB SESSION STATE
@@ -804,8 +813,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
         return { type: 'raw', content: SKILLS_TEXT };
       case 'projects':
       case 'work':
-      case 'portfolio':
-        return { type: 'raw', content: PROJECTS_TEXT };
+        return { type: 'projects', content: PROJECTS_TEXT };
       case 'socials':
       case 'contact':
       case 'links':
@@ -857,8 +865,31 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
         return { type: 'error', content: `\n\x1b[31mls:\x1b[0m cannot access '${path}'\n` };
       case 'pwd':
         return { type: 'raw', content: `\n${SHELL_ENV.PWD}\n` };
-      case 'cd':
-        return { type: 'raw', content: args[1] && args[1] !== '~' ? '\n\x1b[38;5;244mSingle-page terminal.\x1b[0m\n' : '' };
+      case 'cd': {
+        const target = args[1]?.toLowerCase();
+        if (!target || target === '~' || target === '.') return null;
+        // Handle cd to navigation commands
+        if (target === 'about') return { type: 'raw', content: ABOUT_TEXT };
+        if (target === 'skills') return { type: 'raw', content: SKILLS_TEXT };
+        if (target === 'projects' || target === 'work') return { type: 'projects', content: PROJECTS_TEXT };
+        if (target === 'socials' || target === 'contact' || target === 'links') return { type: 'raw', content: SOCIALS_TEXT };
+        if (target === 'reviews') {
+          updateActiveTab({
+            interactiveMode: 'reviews',
+            reviewsState: { selectedIndex: 0, filterType: 'all', sortBy: 'date', sortDir: 'desc', searchQuery: '', viewingReview: null }
+          });
+          return { type: 'raw', content: generateReviewsTUI({ selectedIndex: 0, filterType: 'all', sortBy: 'date', sortDir: 'desc', searchQuery: '', viewingReview: null }) };
+        }
+        if (target === 'music') {
+          updateActiveTab({ interactiveMode: 'music' });
+          return { type: 'raw', content: generateMusicTUI() };
+        }
+        if (target === 'resume' || target === 'cv') {
+          window.open('/resume.pdf', '_blank');
+          return { type: 'raw', content: '\n\x1b[38;5;79m❯\x1b[0m Opening resume...\n' };
+        }
+        return { type: 'error', content: `\n\x1b[31mcd:\x1b[0m no such directory: ${target}\n` };
+      }
       case 'date':
         return { type: 'raw', content: `\n${new Date().toString()}\n` };
       case 'whoami':
@@ -1384,6 +1415,24 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
           <motion.pre key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-zinc-300 whitespace-pre-wrap font-mono">
             {renderAnsiText(line.content)}
           </motion.pre>
+        );
+      case 'projects':
+        return (
+          <motion.div key={index} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.15 }}>
+            <pre className="text-zinc-300 whitespace-pre-wrap font-mono leading-relaxed">
+              {renderAnsiText(line.content)}
+            </pre>
+            <div className="mt-2 mb-4">
+              <button
+                onClick={() => window.location.href = '/portfolio'}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-400 font-mono text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span className="text-emerald-500">❯</span>
+                <span>View Full Portfolio</span>
+                <span className="text-zinc-500">→</span>
+              </button>
+            </div>
+          </motion.div>
         );
       default:
         return <div key={index} className="text-zinc-300">{renderAnsiText(line.content)}</div>;
