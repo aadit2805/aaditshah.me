@@ -3,6 +3,7 @@ import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '../lib/fontAwesome';
+import { Analytics } from '@vercel/analytics/react';
 
 config.autoAddCss = false;
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${lora.variable} ${inter.variable}`}>
       <body className="font-serif antialiased">
         {children}
+        <Analytics />
       </body>
     </html>
   );

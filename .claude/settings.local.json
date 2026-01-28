@@ -12,7 +12,8 @@
       "Bash(npm install @anthropic-ai/sdk)",
       "Bash(npx next build:*)",
       "Bash(npm install:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(wc:*)"
     ]
   }
 }
