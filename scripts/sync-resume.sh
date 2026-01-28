@@ -17,7 +17,7 @@ log() {
 }
 
 notify() {
-    osascript -e "display notification \"$1\" with title \"Resume Sync\""
+    terminal-notifier -title "Resume Sync" -message "$1" -ignoreDnD -sound default
 }
 
 notify "Resume change detected..."
