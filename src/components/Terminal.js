@@ -113,7 +113,7 @@ const SHELL_ENV = {
   USER: 'aadit',
   HOME: '/home/aadit',
   PWD: '/home/aadit',
-  SHELL: '/usr/bin/zsh',
+  SHELL: '/bin/bash',
   TERM: 'xterm-256color',
   LANG: 'en_US.UTF-8',
   EDITOR: 'nvim',
@@ -130,7 +130,7 @@ const SHELL_ENV = {
 const FILESYSTEM = {
   '/home/aadit': {
     type: 'dir',
-    contents: ['about.txt', 'skills.txt', 'socials.txt', 'projects/', '.config/', '.ssh/', 'resume.pdf', '.zshrc', '.gitconfig']
+    contents: ['about.txt', 'skills.txt', 'socials.txt', 'projects/', '.config/', '.ssh/', 'resume.pdf', '.bashrc', '.gitconfig']
   },
   '/home/aadit/projects': {
     type: 'dir',
@@ -298,7 +298,7 @@ const NAV_COMMANDS = ['about', 'skills', 'projects', 'socials', 'resume', 'revie
 const createTabSession = (id, pid) => ({
   id,
   pid,
-  name: 'zsh',
+  name: 'bash',
   lines: [],
   commandHistory: [],
   historyIndex: -1,
@@ -539,7 +539,7 @@ const Terminal = () => {
 \x1b[38;5;79m     .;loddo:' loolloddol;.     \x1b[1;38;5;79mKernel\x1b[0m: Next.js 14.2.35
 \x1b[38;5;79m   cKMMMMMMMMMMNWMMMMMMMMMM0:   \x1b[1;38;5;79mUptime\x1b[0m: ${formatUptime(uptime)}
 \x1b[38;5;79m .KMMMMMMMMMMMMMMMMMMMMMMMWd.   \x1b[1;38;5;79mPackages\x1b[0m: 42 (npm)
-\x1b[38;5;79m XMMMMMMMMMMMMMMMMMMMMMMMX.     \x1b[1;38;5;79mShell\x1b[0m: zsh 5.9
+\x1b[38;5;79m XMMMMMMMMMMMMMMMMMMMMMMMX.     \x1b[1;38;5;79mShell\x1b[0m: bash 5.2
 \x1b[38;5;79m;MMMMMMMMMMMMMMMMMMMMMMMM:      \x1b[1;38;5;79mResolution\x1b[0m: ${dimensions.cols}x${dimensions.rows}
 \x1b[38;5;79m:MMMMMMMMMMMMMMMMMMMMMMMM:      \x1b[1;38;5;79mTerminal\x1b[0m: ghostty ${TERM_CONFIG.version}
 \x1b[38;5;79m.MMMMMMMMMMMMMMMMMMMMMMMMX.     \x1b[1;38;5;79mCPU\x1b[0m: ${navigator.hardwareConcurrency || 8} cores
@@ -912,7 +912,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
         if (file === 'about.txt') return { type: 'raw', content: ABOUT_TEXT };
         if (file === 'skills.txt') return { type: 'raw', content: SKILLS_TEXT };
         if (file === 'socials.txt') return { type: 'raw', content: SOCIALS_TEXT };
-        if (file === '.zshrc') return { type: 'raw', content: `\n\x1b[38;5;244m# ~/.zshrc\x1b[0m\nexport EDITOR=nvim\nexport TERM=xterm-256color\nalias ll='ls -la'\nalias vim='nvim'\n` };
+        if (file === '.bashrc') return { type: 'raw', content: `\n\x1b[38;5;244m# ~/.bashrc\x1b[0m\nexport EDITOR=nvim\nexport TERM=xterm-256color\nalias ll='ls -la'\nalias vim='nvim'\n` };
         return { type: 'error', content: `\n\x1b[31mcat:\x1b[0m ${file}: No such file\n` };
       case 'neofetch':
       case 'fastfetch':
@@ -929,10 +929,10 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
 ├── \x1b[38;5;208mresume.pdf\x1b[0m
 ├── \x1b[38;5;250msocials.txt\x1b[0m
 ├── \x1b[1;38;5;81m.config/\x1b[0m
-└── \x1b[38;5;244m.zshrc\x1b[0m
+└── \x1b[38;5;244m.bashrc\x1b[0m
 ` };
       case 'ps':
-        return { type: 'raw', content: `\n\x1b[1m  PID TTY      CMD\x1b[0m\n    1 pts/0    zsh\n${activeTab.pid} pts/0    aadit.sh\n` };
+        return { type: 'raw', content: `\n\x1b[1m  PID TTY      CMD\x1b[0m\n    1 pts/0    bash\n${activeTab.pid} pts/0    aadit.sh\n` };
       case 'top':
       case 'htop':
         return { type: 'raw', content: `\n\x1b[1;7m  top - ${new Date().toLocaleTimeString()} up ${formatUptime(uptime)} \x1b[0m\nTasks: ${tabs.length + 2} total\n%Cpu: ${(Math.random() * 2).toFixed(1)} us\nMiB Mem: ${memoryInfo.total} total, ${memoryInfo.used} used (${memoryInfo.percent}%)\n\n\x1b[1;7m  PID USER   CPU  MEM  CMD \x1b[0m\n${activeTab.pid} aadit  ${(Math.random() * 2).toFixed(1)}%  ${memoryInfo.percent}%  aadit.sh\n` };
@@ -944,7 +944,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
       case '':
         return null;
       default:
-        return { type: 'error', content: `\n\x1b[31mzsh:\x1b[0m command not found: ${mainCmd}\n` };
+        return { type: 'error', content: `\n\x1b[31mbash:\x1b[0m command not found: ${mainCmd}\n` };
     }
   }, [activeTab, updateActiveTab, generateNeofetch, generateReviewsTUI, generateMusicTUI, uptime, tabs.length, memoryInfo]);
 
@@ -1522,7 +1522,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             <div className="flex items-center gap-3 text-xs">
               <span className="text-zinc-600 font-medium">{SHELL_ENV.USER}@{SHELL_ENV.HOSTNAME}</span>
               <span className="text-zinc-700">—</span>
-              <span className="text-zinc-500">{activeTab.interactiveMode || (activeTab.isInChatMode ? 'chat' : 'zsh')}</span>
+              <span className="text-zinc-500">{activeTab.interactiveMode || (activeTab.isInChatMode ? 'chat' : 'bash')}</span>
               <span className="text-zinc-700">—</span>
               <span className="text-zinc-600">{dimensions.cols}×{dimensions.rows}</span>
             </div>
@@ -1544,7 +1544,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-t-lg text-xs cursor-pointer shrink-0 ${tab.id === activeTabId ? 'bg-[#0d0d0f] text-zinc-300' : 'bg-transparent text-zinc-600 hover:text-zinc-400'}`}
               >
                 <span className={`w-2 h-2 rounded-full ${tab.id === activeTabId ? 'bg-emerald-500 animate-pulse' : 'bg-zinc-700'}`} />
-                <span>{tab.interactiveMode || (tab.isInChatMode ? 'chat' : 'zsh')}</span>
+                <span>{tab.interactiveMode || (tab.isInChatMode ? 'chat' : 'bash')}</span>
                 <span className="text-zinc-700 text-[10px]">⌘{idx + 1}</span>
                 {tabs.length > 1 && (
                   <span
