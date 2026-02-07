@@ -1531,6 +1531,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             <div className="flex items-center gap-3 text-xs text-zinc-600">
               <span className="text-zinc-700">PID {activeTab.pid}</span>
               <span className="text-emerald-500/70">{memoryInfo.used}MB</span>
+              <a href="/" className="text-zinc-500 hover:text-emerald-400 transition-colors">← home</a>
             </div>
           </div>
 
