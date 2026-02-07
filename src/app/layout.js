@@ -1,4 +1,4 @@
-import { Lora, Inter } from 'next/font/google';
+import { Lora, Inter, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -19,6 +19,13 @@ const inter = Inter({
   display: 'swap',
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  weight: ['300', '400'],
+  display: 'swap',
+});
+
 export const metadata = {
   title: 'Aadit Shah',
   description: 'CS & Math @ Texas A&M',
@@ -26,7 +33,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${lora.variable} ${inter.variable}`}>
+    <html lang="en" className={`${lora.variable} ${inter.variable} ${cormorant.variable}`}>
       <body className="font-serif antialiased">
         {children}
         <Analytics />

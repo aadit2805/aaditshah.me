@@ -1,15 +1,14 @@
 "use client";
 
 import React from 'react';
-import TerminalNav from '../../components/TerminalNav';
+import MinimalNav from '../../components/MinimalNav';
 import ProjectShowcase from '../../components/ProjectShowcase';
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen bg-zinc-950">
-      <TerminalNav currentPage="projects" />
-
-      <main className="relative z-10 py-24">
+    <div className="min-h-screen bg-landing-bg">
+      <MinimalNav currentPage="projects" />
+      <main>
         <ProjectShowcase />
       </main>
     </div>

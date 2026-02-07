@@ -69,6 +69,15 @@ module.exports = {
           900: '#353C2F',
           950: '#1A1E16',
         },
+        // Landing page palette
+        landing: {
+          bg: '#f5f2e9',
+          primary: '#1A1A1A',
+          secondary: '#4A4A4A',
+          muted: '#6A6A6A',
+          border: '#E8E8E6',
+          hover: '#2A2A2A',
+        },
         // Shadcn color system
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -107,6 +116,7 @@ module.exports = {
       fontFamily: {
         serif: ['var(--font-lora)', 'Georgia', 'serif'],
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

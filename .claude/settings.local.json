@@ -13,7 +13,21 @@
       "Bash(npx next build:*)",
       "Bash(npm install:*)",
       "Bash(find:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(launchctl list:*)",
+      "Bash(xattr:*)",
+      "Bash(launchctl unload:*)",
+      "Bash(launchctl load:*)",
+      "Bash(sudo cp:*)",
+      "Bash(sudo chmod:*)",
+      "WebFetch(domain:www.ekzhang.com)",
+      "WebFetch(domain:ekzhang.com)",
+      "Bash(curl:*)",
+      "WebFetch(domain:ishanshah.me)",
+      "Bash(gh repo view:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(npx shadcn@latest add:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

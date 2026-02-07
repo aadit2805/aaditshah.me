@@ -1,26 +1,42 @@
 [
   {
     "id": 1,
-    "title": "GitaChat",
-    "tagline": "Spiritual guidance from the Bhagavad Gita",
-    "description": "A semantic search application that finds the most relevant verse from 700+ Bhagavad Gita verses based on natural language queries. Uses 768-dimensional embeddings for accurate matching and GPT-powered commentary summarization to provide personalized spiritual insights.",
-    "technologies": ["Next.js", "FastAPI", "Pinecone", "Sentence Transformers", "OpenAI", "Clerk", "Supabase"],
+    "title": "Drift",
+    "tagline": "Monte Carlo financial simulation platform",
+    "description": "Monte Carlo simulations to predict the likelihood of hitting your financial goals. Won Capital One's challenge at TAMUhack!",
+    "technologies": ["Next.js", "TypeScript", "Express.js", "Python", "NumPy", "Three.js", "Google Gemini", "ElevenLabs"],
     "highlights": [
-      "Semantic search across 700 verses using BAAI/bge-base-en-v1.5 embeddings",
-      "Summarized commentary for contextual understanding",
-      "Query history persistence with user authentication"
+      "100,000 parallel simulations in ~500ms using Python multiprocessing",
+      "Natural language goal parsing with Google Gemini",
+      "Winner of Capital One Challenge at TAMUhack"
     ],
-    "image": "/images/gitachat.png",
-    "github": "https://github.com/aadit2805/gitachat.org",
+    "image": "/images/drift.png",
+    "github": "https://github.com/aadit2805/drift",
     "live": "",
     "featured": true,
-    "date": "2024-12"
+    "date": "2026-01"
   },
   {
     "id": 2,
+    "title": "Double Down",
+    "tagline": "Bet on it with friends",
+    "description": "Native iOS app for placing friendly bets with friends. Real-time sync powered by Convex.",
+    "technologies": ["Swift", "TypeScript", "Convex"],
+    "highlights": [
+      "Native iOS app built with Swift",
+      "Real-time backend powered by Convex"
+    ],
+    "image": "/images/double-down.png",
+    "github": "https://github.com/aadit2805/double-down",
+    "live": "",
+    "featured": true,
+    "date": "2026-01"
+  },
+  {
+    "id": 3,
     "title": "Espress",
     "tagline": "Your personal coffee companion",
-    "description": "A full-stack coffee logging app that helps users track drinks, discover flavor preferences, and get personalized recommendations. Features an interactive ranking system, comprehensive analytics, and Claude-powered natural language input parsing.",
+    "description": "Track your coffee drinks, discover flavor preferences, and get recommendations for what to order next.",
     "technologies": ["Next.js", "Express.js", "PostgreSQL", "Claude AI", "Clerk", "Google Maps API", "Framer Motion"],
     "highlights": [
       "Natural language parsing for drink logging",
@@ -32,5 +48,38 @@
     "live": "",
     "featured": true,
     "date": "2025-12"
+  },
+  {
+    "id": 4,
+    "title": "Panda Express POS",
+    "tagline": "Full-stack point-of-sale system",
+    "description": "Full POS system for Panda Express with customer ordering, inventory management, and real time order tracking.",
+    "technologies": ["TypeScript", "React", "Node.js", "CSS"],
+    "highlights": [
+      "Monorepo architecture with separate frontend and backend",
+      "Full POS functionality for restaurant operations"
+    ],
+    "image": "/images/panda-pos.png",
+    "github": "https://github.com/aadit2805/project3_group7_deploy",
+    "live": "https://project3-group7.up.railway.app/",
+    "featured": true,
+    "date": "2025-08"
+  },
+  {
+    "id": 5,
+    "title": "GitaChat",
+    "tagline": "Spiritual guidance from the Bhagavad Gita",
+    "description": "Semantic search across 700+ Bhagavad Gita verses with AI-summarized commentary for spiritual guidance.",
+    "technologies": ["Next.js", "FastAPI", "Pinecone", "Sentence Transformers", "OpenAI", "Clerk", "Supabase"],
+    "highlights": [
+      "Semantic search across 700 verses using BAAI/bge-base-en-v1.5 embeddings",
+      "Summarized commentary for contextual understanding",
+      "Query history persistence with user authentication"
+    ],
+    "image": "/images/gitachat.png",
+    "github": "https://github.com/aadit2805/gitachat.org",
+    "live": "https://gitachat.org",
+    "featured": true,
+    "date": "2024-12"
   }
 ]
