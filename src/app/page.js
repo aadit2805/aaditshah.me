@@ -21,11 +21,11 @@ export default function Home() {
             <span className="font-sans text-sm text-landing-muted pt-2">work</span>
             <div>
               <div className="flex items-baseline justify-between py-2">
-                <span className="font-sans font-medium text-landing-primary">Texas A&amp;M Baseball</span>
+                <a href="https://12thman.com/sports/baseball/" target="_blank" rel="noopener noreferrer" className="font-sans font-medium text-landing-primary hover:text-landing-hover transition-colors">Texas A&amp;M Baseball</a>
                 <span className="hidden sm:inline font-sans text-landing-muted text-sm">Analytics &amp; computer vision</span>
               </div>
               <div className="flex items-baseline justify-between py-2">
-                <span className="font-sans font-medium text-landing-primary">Cox Automotive</span>
+                <a href="https://www.coxautoinc.com" target="_blank" rel="noopener noreferrer" className="font-sans font-medium text-landing-primary hover:text-landing-hover transition-colors">Cox Automotive</a>
                 <span className="hidden sm:inline font-sans text-landing-muted text-sm">Vehicle marketplace technology</span>
               </div>
             </div>
