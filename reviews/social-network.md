@@ -5,7 +5,6 @@ artist: "David Fincher"
 type: "movie"
 rating: 9.9
 reviewDate: "2024-11-08"
-image: "/images/socialnetwork.png"
 ---
 
 When I was shown this film, I was skeptical at first. I mean, how good can a biopic about a student creating a social media platform be? And from there, I was clearly mistaken. 

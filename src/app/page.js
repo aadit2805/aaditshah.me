@@ -1,5 +1,3 @@
-"use client";
-
 import Link from 'next/link';
 import MinimalNav from '../components/MinimalNav';
 
@@ -12,7 +10,8 @@ export default function Home() {
         {/* Intro */}
         <p className="font-sans text-landing-secondary mb-16 leading-relaxed">
           Howdy, I&apos;m Aadit! I&apos;m studying Computer Science at Texas A&amp;M
-          and enjoy building things for the web in my free time.
+          and enjoy building things for the web in my free time, and I recently won the Capital
+          One Challenge at TAMUhack!
         </p>
 
         {/* Work */}

@@ -5,7 +5,6 @@ artist: "Director/Creator/Artist"
 type: "movie" # or "show"
 rating: 8.5
 reviewDate: "2024-12-01"
-image: "/images/filename.png"
 ---
 
 Write your review here. You can use markdown formatting like **bold** and *italics*.

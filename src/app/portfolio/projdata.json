@@ -1,6 +1,22 @@
 [
   {
     "id": 1,
+    "title": "Booth Map",
+    "tagline": "Career fair booth assignment tool",
+    "description": "Interactive tool to import companies from a spreadsheet, drag them onto a floor map, and export finalized booth assignments.",
+    "technologies": ["Next.js", "TypeScript", "React Konva", "Prisma", "Supabase", "Zustand", "Tailwind CSS"],
+    "highlights": [
+      "Interactive canvas-based floor map with drag-and-drop",
+      "Spreadsheet import/export for company data",
+      "Real-time booth assignment management"
+    ],
+    "github": "https://github.com/aadit2805/booth-map",
+    "live": "https://booth-map.vercel.app",
+    "featured": true,
+    "date": "2026-02"
+  },
+  {
+    "id": 2,
     "title": "Drift",
     "tagline": "Monte Carlo financial simulation platform",
     "description": "Monte Carlo simulations to predict the likelihood of hitting your financial goals. Won Capital One's challenge at TAMUhack!",
@@ -10,14 +26,13 @@
       "Natural language goal parsing with Google Gemini",
       "Winner of Capital One Challenge at TAMUhack"
     ],
-    "image": "/images/drift.png",
     "github": "https://github.com/aadit2805/drift",
     "live": "",
     "featured": true,
     "date": "2026-01"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Double Down",
     "tagline": "Bet on it with friends",
     "description": "Native iOS app for placing friendly bets with friends. Real-time sync powered by Convex.",
@@ -26,14 +41,13 @@
       "Native iOS app built with Swift",
       "Real-time backend powered by Convex"
     ],
-    "image": "/images/double-down.png",
     "github": "https://github.com/aadit2805/double-down",
     "live": "",
     "featured": true,
     "date": "2026-01"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Espress",
     "tagline": "Your personal coffee companion",
     "description": "Track your coffee drinks, discover flavor preferences, and get recommendations for what to order next.",
@@ -43,14 +57,13 @@
       "Binary comparison ranking system for taste profiling",
       "Spending analytics and flavor trend visualization"
     ],
-    "image": "/images/espress.png",
     "github": "https://github.com/aadit2805/espress",
     "live": "",
     "featured": true,
     "date": "2025-12"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Panda Express POS",
     "tagline": "Full-stack point-of-sale system",
     "description": "Full POS system for Panda Express with customer ordering, inventory management, and real time order tracking.",
@@ -59,14 +72,13 @@
       "Monorepo architecture with separate frontend and backend",
       "Full POS functionality for restaurant operations"
     ],
-    "image": "/images/panda-pos.png",
     "github": "https://github.com/aadit2805/project3_group7_deploy",
     "live": "https://project3-group7.up.railway.app/",
     "featured": true,
     "date": "2025-08"
   },
   {
-    "id": 5,
+    "id": 6,
     "title": "GitaChat",
     "tagline": "Spiritual guidance from the Bhagavad Gita",
     "description": "Semantic search across 700+ Bhagavad Gita verses with AI-summarized commentary for spiritual guidance.",
@@ -76,7 +88,6 @@
       "Summarized commentary for contextual understanding",
       "Query history persistence with user authentication"
     ],
-    "image": "/images/gitachat.png",
     "github": "https://github.com/aadit2805/gitachat.org",
     "live": "https://gitachat.org",
     "featured": true,

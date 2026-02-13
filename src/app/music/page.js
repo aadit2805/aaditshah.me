@@ -1,6 +1,3 @@
-"use client";
-
-import React from 'react';
 import TerminalNav from '../../components/TerminalNav';
 import { Card, CardContent } from '@/components/ui/card';
 

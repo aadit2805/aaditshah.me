@@ -1,6 +1,3 @@
-"use client";
-
-import React from 'react';
 import MinimalNav from '../../components/MinimalNav';
 import ProjectShowcase from '../../components/ProjectShowcase';
 

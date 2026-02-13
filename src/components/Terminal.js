@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
+import songdata from '../app/favorites/songdata.json';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TERMINAL CONFIGURATION - Ghostty-inspired settings
@@ -188,6 +189,7 @@ const HELP_TEXT = `
   \x1b[38;5;79mresume\x1b[0m     Download resume
 
 \x1b[1;38;5;250mMedia\x1b[0m
+  \x1b[38;5;79mfavorites\x1b[0m  Monthly favorites
   \x1b[38;5;79mreviews\x1b[0m    Film & TV reviews
   \x1b[38;5;79mmusic\x1b[0m      What I'm listening to
 
@@ -281,15 +283,24 @@ const PROJECTS_TEXT = `
 
 `;
 
+const generateFavoritesText = () => {
+  const recent = [...songdata].reverse().slice(0, 5);
+  const songs = recent.map(s =>
+    `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${s.month} ${s.year}\x1b[0m  ${s.title} — \x1b[38;5;244m${s.artist}\x1b[0m\n    \x1b[4;38;5;81m${s.spotify.replace('https://', '')}\x1b[0m`
+  ).join('\n\n');
+  const more = songdata.length > 5 ? `\n\n\x1b[38;5;244m… and ${songdata.length - 5} more on the full page\x1b[0m` : '';
+  return `\n\x1b[1;38;5;79m━━━ FAVORITES ━━━\x1b[0m\n\n\x1b[1;38;5;250mSong of the Month\x1b[0m\n\n${songs}${more}\n\n`;
+};
+
 const COMMANDS = [
-  'help', 'about', 'projects', 'skills', 'reviews', 'music',
+  'help', 'about', 'projects', 'skills', 'favorites', 'reviews', 'music',
   'resume', 'socials', 'chat', 'clear', 'ls', 'pwd', 'cd',
   'cat', 'echo', 'env', 'whoami', 'date', 'neofetch', 'exit',
   'history', 'which', 'man', 'grep', 'head', 'tail', 'tree'
 ];
 
 // Navigation commands that work with 'cd'
-const NAV_COMMANDS = ['about', 'skills', 'projects', 'socials', 'resume', 'reviews', 'music'];
+const NAV_COMMANDS = ['about', 'skills', 'projects', 'favorites', 'socials', 'resume', 'reviews', 'music'];
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TAB SESSION STATE
@@ -819,6 +830,8 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
       case 'projects':
       case 'work':
         return { type: 'projects', content: PROJECTS_TEXT };
+      case 'favorites':
+        return { type: 'favorites', content: generateFavoritesText() };
       case 'socials':
       case 'contact':
       case 'links':
@@ -877,6 +890,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
         if (target === 'about') return { type: 'raw', content: ABOUT_TEXT };
         if (target === 'skills') return { type: 'raw', content: SKILLS_TEXT };
         if (target === 'projects' || target === 'work') return { type: 'projects', content: PROJECTS_TEXT };
+        if (target === 'favorites') return { type: 'favorites', content: generateFavoritesText() };
         if (target === 'socials' || target === 'contact' || target === 'links') return { type: 'raw', content: SOCIALS_TEXT };
         if (target === 'reviews') {
           updateActiveTab({
@@ -1468,6 +1482,24 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
               >
                 <span className="text-emerald-500">❯</span>
                 <span>View All Projects</span>
+                <span className="text-zinc-500">→</span>
+              </button>
+            </div>
+          </motion.div>
+        );
+      case 'favorites':
+        return (
+          <motion.div key={index} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.15 }}>
+            <pre className="text-zinc-300 whitespace-pre-wrap font-mono leading-relaxed">
+              {renderAnsiText(line.content)}
+            </pre>
+            <div className="mt-2 mb-4">
+              <button
+                onClick={() => window.location.href = '/favorites'}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-400 font-mono text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span className="text-emerald-500">❯</span>
+                <span>View All Favorites</span>
                 <span className="text-zinc-500">→</span>
               </button>
             </div>

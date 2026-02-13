@@ -27,7 +27,17 @@
       "Bash(gh repo view:*)",
       "WebFetch(domain:github.com)",
       "Bash(npx shadcn@latest add:*)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(du -sh:*)",
+      "Bash(file:*)",
+      "Bash(node -e:*)",
+      "Bash(sips:*)",
+      "Bash(done)",
+      "Bash(ls:*)",
+      "Bash(node scripts/build-reviews.js:*)",
+      "Bash(for:*)",
+      "Bash(do sed -i '' '/^image:/d' \"$f\")",
+      "Bash(echo:*)"
     ]
   }
 }

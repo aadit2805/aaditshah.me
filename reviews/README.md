@@ -13,7 +13,6 @@ artist: "Director/Creator"
 type: "movie" # or "show"
 rating: 8.5
 reviewDate: "2024-12-01"
-image: "/images/filename.png"
 ---
 
 Write your review here using markdown formatting.

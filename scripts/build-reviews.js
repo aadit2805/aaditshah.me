@@ -63,7 +63,6 @@ function buildReviews() {
         type: metadata.type,
         rating: metadata.rating,
         reviewDate: metadata.reviewDate,
-        image: metadata.image,
         review: body
       };
       

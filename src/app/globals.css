@@ -296,6 +296,30 @@
   background: rgba(16, 185, 129, 0.4);
 }
 
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .animate-marquee,
+  .spin-slow,
+  .stagger-children > * {
+    animation: none;
+  }
+
+  .stagger-children > * {
+    opacity: 1;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
 /* Smooth image loading */
 img {
   opacity: 1;
