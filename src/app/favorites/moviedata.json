@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Marty Supreme",
+    "star": "Timothée Chalamet",
+    "director": "Josh Safdie",
+    "month": "Jan",
+    "year": "2026",
+    "imdb": "https://www.imdb.com/title/tt27461498/"
+  },
+  {
+    "id": 2,
+    "title": "Free Solo",
+    "star": "Alex Honnold",
+    "director": "Jimmy Chin & Elizabeth Chai Vasarhelyi",
+    "month": "Feb",
+    "year": "2026",
+    "imdb": "https://www.imdb.com/title/tt7775622/"
+  }
+]
