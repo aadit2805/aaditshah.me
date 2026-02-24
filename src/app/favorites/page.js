@@ -91,7 +91,7 @@ export default function Favorites() {
           )}
 
           <p className="font-sans text-xs text-landing-muted mt-10">
-            *not necessarily released that month, just my favorite discovery or revisit at the time.
+            *not necessarily released that month, just my favorite discovery/revisit at the time
           </p>
         </div>
       </main>
