@@ -1,0 +1,39 @@
+{
+  "name": "Aadit Shah",
+  "bio": "Howdy, I'm Aadit! I'm studying Computer Science at Texas A&M and enjoy building things for the web in my free time, and I recently won the Capital One Challenge at TAMUhack!",
+  "school": "Texas A&M University",
+  "major": "Computer Science",
+  "skills": ["JavaScript/TypeScript", "Python", "Java", "C/C++", "Swift", "React/Next.js", "Node.js", "FastAPI"],
+  "interests": ["full-stack development", "systems programming", "AI/ML"],
+  "work": [
+    {
+      "company": "Texas A&M Baseball",
+      "url": "https://12thman.com/sports/baseball/",
+      "description": "Performance analytics & computer vision"
+    },
+    {
+      "company": "Cox Automotive",
+      "url": "https://www.coxautoinc.com",
+      "description": "Dealer platform infrastructure"
+    }
+  ],
+  "socials": {
+    "github": {
+      "label": "GitHub",
+      "url": "https://github.com/aadit2805"
+    },
+    "twitter": {
+      "label": "Twitter",
+      "url": "https://x.com/aadit2805"
+    },
+    "linkedin": {
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/aadit2805"
+    },
+    "email": {
+      "label": "hello",
+      "url": "mailto:aadit2805@gmail.com",
+      "address": "aadit2805@gmail.com"
+    }
+  }
+}

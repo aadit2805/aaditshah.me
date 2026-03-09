@@ -16,5 +16,14 @@
     "month": "Feb",
     "year": "2026",
     "imdb": "https://www.imdb.com/title/tt7775622/"
+  },
+  {
+    "id": 3,
+    "title": "The Thinking Game",
+    "star": "Demis Hassabis",
+    "director": "YouTube Documentary",
+    "month": "Mar",
+    "year": "2026",
+    "imdb": "https://www.youtube.com/watch?v=d95J8yzvjbQ&t=2192s"
   }
 ]
