@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
@@ -335,6 +336,8 @@ const createTabSession = (id, pid) => ({
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const Terminal = () => {
+  const router = useRouter();
+
   // Tab management
   const [tabs, setTabs] = useState([]);
   const [activeTabId, setActiveTabId] = useState(null);
@@ -361,6 +364,7 @@ const Terminal = () => {
 
   const terminalRef = useRef(null);
   const hiddenInputRef = useRef(null);
+  const prevChatModeRef = useRef(false);
 
   // Load reviews data
   useEffect(() => {
@@ -499,6 +503,35 @@ const Terminal = () => {
       terminalRef.current.scrollTo({ top: terminalRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [activeTab?.lines, activeTab?.currentInput]);
+
+  // Auto-greeting when entering chat mode
+  useEffect(() => {
+    const isInChat = activeTab?.isInChatMode || false;
+    const wasInChat = prevChatModeRef.current;
+    prevChatModeRef.current = isInChat;
+
+    if (isInChat && !wasInChat && activeTab && activeTab.chatHistory.length === 0) {
+      const greetings = [
+        "Howdy! What's up?",
+        "Howdy — what can I help you with?",
+        "Howdy! Ask me anything about my work, projects, or whatever.",
+        "Howdy! Welcome to my corner of the internet — what's on your mind?"
+      ];
+      const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+      const greetingLineId = Date.now() + 1;
+
+      // Add greeting as a chat response
+      setTabs(prev => prev.map(tab =>
+        tab.id === activeTabId
+          ? {
+              ...tab,
+              chatHistory: [{ role: 'assistant', content: greeting }],
+              lines: [...tab.lines, { type: 'chat-response', content: greeting, id: greetingLineId }]
+            }
+          : tab
+      ));
+    }
+  }, [activeTab?.isInChatMode, activeTab, activeTabId]);
 
   // Handle resize
   useEffect(() => {
@@ -862,7 +895,6 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
 │  CHAT WITH AADIT                                                 │
 └──────────────────────────────────────────────────────────────────┘\x1b[0m
 
-  You're chatting with an \x1b[1mAI version\x1b[0m of Aadit.
   Type \x1b[38;5;79mexit\x1b[0m to leave.
 
 `
@@ -1545,7 +1577,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
           <div className="flex items-center justify-between px-4 py-2.5">
             {/* Traffic lights */}
             <div className="flex items-center gap-2">
-              <motion.div whileHover={{ scale: 1.1 }} className="w-3 h-3 rounded-full bg-[#ff5f57] shadow-[0_0_6px_rgba(255,95,87,0.5)] cursor-pointer" onClick={() => closeTab(activeTabId)} />
+              <motion.div whileHover={{ scale: 1.1 }} className="w-3 h-3 rounded-full bg-[#ff5f57] shadow-[0_0_6px_rgba(255,95,87,0.5)] cursor-pointer" onClick={() => router.push('/')} />
               <motion.div whileHover={{ scale: 1.1 }} className="w-3 h-3 rounded-full bg-[#febc2e] shadow-[0_0_6px_rgba(254,188,46,0.5)] cursor-pointer" />
               <motion.div whileHover={{ scale: 1.1 }} className="w-3 h-3 rounded-full bg-[#28c840] shadow-[0_0_6px_rgba(40,200,64,0.5)] cursor-pointer" />
             </div>
@@ -1563,7 +1595,6 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             <div className="flex items-center gap-3 text-xs text-zinc-600">
               <span className="text-zinc-700">PID {activeTab.pid}</span>
               <span className="text-emerald-500/70">{memoryInfo.used}MB</span>
-              <a href="/" className="text-zinc-500 hover:text-emerald-400 transition-colors">← home</a>
             </div>
           </div>
 
