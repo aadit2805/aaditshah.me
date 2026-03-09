@@ -6,6 +6,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
 import songdata from '../app/favorites/songdata.json';
+import moviedata from '../app/favorites/moviedata.json';
+import sitedata from '../data/sitedata.json';
+import personality from '../data/personality.json';
+import projdata from '../app/portfolio/projdata.json';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TERMINAL CONFIGURATION - Ghostty-inspired settings
@@ -174,7 +178,7 @@ const ASCII_BANNER_MOBILE = `\x1b[38;5;79m
 
 const SYSTEM_INFO = `\x1b[1;38;5;79maadit.sh\x1b[0m \x1b[38;5;244m—\x1b[0m \x1b[38;5;250mv2.0.0\x1b[0m \x1b[38;5;244m(pid: %%PID%%)\x1b[0m
 
-\x1b[38;5;79m◉\x1b[0m \x1b[1mCS & Math\x1b[0m @ Texas A&M
+\x1b[38;5;79m◉\x1b[0m \x1b[1m${sitedata.major}\x1b[0m @ ${sitedata.school}
 \x1b[38;5;79m◉\x1b[0m Building for the web
 
 `;
@@ -192,8 +196,6 @@ const HELP_TEXT = `
 \x1b[1;38;5;250mMedia\x1b[0m
   \x1b[38;5;79mfavorites\x1b[0m  Monthly favorites
   \x1b[38;5;79mreviews\x1b[0m    Film & TV reviews
-  \x1b[38;5;79mmusic\x1b[0m      What I'm listening to
-
 \x1b[1;38;5;250mInteractive\x1b[0m
   \x1b[38;5;79mchat\x1b[0m       Chat with AI Aadit
 
@@ -207,44 +209,21 @@ const HELP_TEXT = `
 const ABOUT_TEXT = `
 \x1b[1;38;5;79m━━━ ABOUT ━━━\x1b[0m
 
-Howdy, I'm \x1b[1;38;5;79mAadit Shah\x1b[0m.
-
-I'm a Computer Science and Mathematics
-student at \x1b[1mTexas A&M University\x1b[0m.
-
-I build solutions for the web and
-think about problems worth solving.
+${sitedata.bio}
 
 \x1b[1;38;5;250mCurrently interested in:\x1b[0m
-  \x1b[38;5;79m❯\x1b[0m Full-stack development
-  \x1b[38;5;79m❯\x1b[0m AI/ML applications
+${sitedata.interests.map(i => `  \x1b[38;5;79m❯\x1b[0m ${i}`).join('\n')}
+
+\x1b[1;38;5;250mExperience:\x1b[0m
+${sitedata.work.map(w => `  \x1b[38;5;79m❯\x1b[0m \x1b[1m${w.company}\x1b[0m — \x1b[38;5;244m${w.description}\x1b[0m`).join('\n')}
 
 `;
 
 const SKILLS_TEXT = `
 \x1b[1;38;5;79m━━━ SKILLS ━━━\x1b[0m
 
-\x1b[1;38;5;250mLanguages\x1b[0m
-  \x1b[38;5;79m❯\x1b[0m JavaScript / TypeScript
-  \x1b[38;5;79m❯\x1b[0m Python
-  \x1b[38;5;79m❯\x1b[0m Java
-  \x1b[38;5;79m❯\x1b[0m C++
-  \x1b[38;5;79m❯\x1b[0m SQL
-
-\x1b[1;38;5;250mFrontend\x1b[0m
-  \x1b[38;5;79m❯\x1b[0m React / Next.js
-  \x1b[38;5;79m❯\x1b[0m Tailwind CSS
-  \x1b[38;5;79m❯\x1b[0m HTML / CSS
-
-\x1b[1;38;5;250mBackend\x1b[0m
-  \x1b[38;5;79m❯\x1b[0m Node.js / Express
-  \x1b[38;5;79m❯\x1b[0m PostgreSQL
-  \x1b[38;5;79m❯\x1b[0m MongoDB
-
-\x1b[1;38;5;250mTools & Platforms\x1b[0m
-  \x1b[38;5;79m❯\x1b[0m Git / GitHub
-  \x1b[38;5;79m❯\x1b[0m AWS / Vercel / Railway
-  \x1b[38;5;79m❯\x1b[0m Linux
+\x1b[1;38;5;250mTechnical Stack\x1b[0m
+${sitedata.skills.map(s => `  \x1b[38;5;79m❯\x1b[0m ${s}`).join('\n')}
 
 `;
 
@@ -253,55 +232,52 @@ const SOCIALS_TEXT = `
 
 Find me on the internet:
 
-\x1b[38;5;79m◉\x1b[0m \x1b[1mGitHub\x1b[0m
-  \x1b[4;38;5;81mgithub.com/aadit2805\x1b[0m
-
-\x1b[38;5;79m◉\x1b[0m \x1b[1mLinkedIn\x1b[0m
-  \x1b[4;38;5;81mlinkedin.com/in/aadit2805\x1b[0m
-
-\x1b[38;5;79m◉\x1b[0m \x1b[1mTwitter\x1b[0m
-  \x1b[4;38;5;81mtwitter.com/aadit2805\x1b[0m
-
-\x1b[38;5;79m◉\x1b[0m \x1b[1mEmail\x1b[0m
-  \x1b[4;38;5;81maadit2805@gmail.com\x1b[0m
+${Object.values(sitedata.socials).map(s => {
+  const display = s.address || s.url.replace('https://', '').replace('mailto:', '');
+  return `\x1b[38;5;79m◉\x1b[0m \x1b[1m${s.label}\x1b[0m\n  \x1b[4;38;5;81m${display}\x1b[0m`;
+}).join('\n\n')}
 
 `;
 
 const PROJECTS_TEXT = `
 \x1b[1;38;5;79m━━━ PROJECTS ━━━\x1b[0m
 
-\x1b[1;38;5;250m[1] GitaChat\x1b[0m
-    \x1b[38;5;79m❯\x1b[0m Spiritual guidance from the Bhagavad Gita
-    \x1b[38;5;244mSemantic search across 700+ verses with synthesized commentary\x1b[0m
-    \x1b[38;5;244mStack:\x1b[0m Next.js, FastAPI, Pinecone, Sentence Transformers, OpenAI
-    \x1b[4;38;5;81mgithub.com/aadit2805/gitachat.org\x1b[0m
-
-\x1b[1;38;5;250m[2] Espress\x1b[0m
-    \x1b[38;5;79m❯\x1b[0m Your personal coffee companion
-    \x1b[38;5;244mTrack drinks, discover flavors, get personalized recommendations\x1b[0m
-    \x1b[38;5;244mStack:\x1b[0m Next.js, Express.js, PostgreSQL, Claude AI, Google Maps
-    \x1b[4;38;5;81mgithub.com/aadit2805/espress\x1b[0m
+${projdata.map((p, i) => {
+  const ghUrl = p.github.replace('https://', '');
+  return `\x1b[1;38;5;250m[${i + 1}] ${p.title}\x1b[0m
+    \x1b[38;5;79m❯\x1b[0m ${p.tagline}
+    \x1b[38;5;244m${p.description}\x1b[0m
+    \x1b[38;5;244mStack:\x1b[0m ${p.technologies.join(', ')}
+    \x1b[4;38;5;81m${ghUrl}\x1b[0m`;
+}).join('\n\n')}
 
 `;
 
 const generateFavoritesText = () => {
-  const recent = [...songdata].reverse().slice(0, 5);
-  const songs = recent.map(s =>
+  const recentSongs = [...songdata].reverse().slice(0, 5);
+  const songs = recentSongs.map(s =>
     `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${s.month} ${s.year}\x1b[0m  ${s.title} — \x1b[38;5;244m${s.artist}\x1b[0m\n    \x1b[4;38;5;81m${s.spotify.replace('https://', '')}\x1b[0m`
   ).join('\n\n');
-  const more = songdata.length > 5 ? `\n\n\x1b[38;5;244m… and ${songdata.length - 5} more on the full page\x1b[0m` : '';
-  return `\n\x1b[1;38;5;79m━━━ FAVORITES ━━━\x1b[0m\n\n\x1b[1;38;5;250mSong of the Month\x1b[0m\n\n${songs}${more}\n\n`;
+  const moreSongs = songdata.length > 5 ? `\n\n\x1b[38;5;244m… and ${songdata.length - 5} more on the full page\x1b[0m` : '';
+
+  const recentMovies = [...moviedata].reverse().slice(0, 5);
+  const movies = recentMovies.map(m =>
+    `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${m.month} ${m.year}\x1b[0m  ${m.title} — \x1b[38;5;244m${m.director}\x1b[0m\n    \x1b[4;38;5;81m${m.imdb.replace('https://', '')}\x1b[0m`
+  ).join('\n\n');
+  const moreMovies = moviedata.length > 5 ? `\n\n\x1b[38;5;244m… and ${moviedata.length - 5} more on the full page\x1b[0m` : '';
+
+  return `\n\x1b[1;38;5;79m━━━ FAVORITES ━━━\x1b[0m\n\n\x1b[1;38;5;250mSong of the Month\x1b[0m\n\n${songs}${moreSongs}\n\n\x1b[1;38;5;250mMovie of the Month\x1b[0m\n\n${movies}${moreMovies}\n\n`;
 };
 
 const COMMANDS = [
-  'help', 'about', 'projects', 'skills', 'favorites', 'reviews', 'music',
+  'help', 'about', 'projects', 'skills', 'favorites', 'reviews',
   'resume', 'socials', 'chat', 'clear', 'ls', 'pwd', 'cd',
   'cat', 'echo', 'env', 'whoami', 'date', 'neofetch', 'exit',
   'history', 'which', 'man', 'grep', 'head', 'tail', 'tree'
 ];
 
 // Navigation commands that work with 'cd'
-const NAV_COMMANDS = ['about', 'skills', 'projects', 'favorites', 'socials', 'resume', 'reviews', 'music'];
+const NAV_COMMANDS = ['about', 'skills', 'projects', 'favorites', 'socials', 'resume', 'reviews'];
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TAB SESSION STATE
@@ -320,7 +296,7 @@ const createTabSession = (id, pid) => ({
   chatHistory: [],
   isTyping: false,
   // Interactive mode state
-  interactiveMode: null, // 'reviews' | 'music' | null
+  interactiveMode: null, // 'reviews' | null
   reviewsState: {
     selectedIndex: 0,
     filterType: 'all',
@@ -511,12 +487,7 @@ const Terminal = () => {
     prevChatModeRef.current = isInChat;
 
     if (isInChat && !wasInChat && activeTab && activeTab.chatHistory.length === 0) {
-      const greetings = [
-        "Howdy! What's up?",
-        "Howdy — what can I help you with?",
-        "Howdy! Ask me anything about my work, projects, or whatever.",
-        "Howdy! Welcome to my corner of the internet — what's on your mind?"
-      ];
+      const greetings = personality.greeting_messages;
       const greeting = greetings[Math.floor(Math.random() * greetings.length)];
       const greetingLineId = Date.now() + 1;
 
@@ -683,42 +654,6 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
     return output;
   }, [reviewsData]);
 
-  // Generate music TUI
-  const generateMusicTUI = useCallback(() => {
-    return `
-\x1b[1;38;5;79m┌──────────────────────────────────────────────────────────────────┐
-│  MUSIC                                              \x1b[38;5;244m[TUI v1.0.0]\x1b[1;38;5;79m │
-└──────────────────────────────────────────────────────────────────┘\x1b[0m
-
-  \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
-
-  \x1b[1;38;5;250mSpotify Integration\x1b[0m
-
-  \x1b[38;5;79m❯\x1b[0m  Recently played tracks are synced from Spotify
-  \x1b[38;5;79m❯\x1b[0m  Visit the web version for embedded playlists
-
-  \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
-
-  \x1b[1;38;5;250mPlaylists\x1b[0m
-
-  \x1b[38;5;79m[1]\x1b[0m  \x1b[38;5;250mSunday Snooze\x1b[0m
-       \x1b[38;5;244mChill vibes for lazy weekends\x1b[0m
-       \x1b[4;38;5;81mopen.spotify.com/playlist/2hJ9vjNCXEVrbPDmr8RRaY\x1b[0m
-
-  \x1b[38;5;79m[2]\x1b[0m  \x1b[38;5;250mFocus\x1b[0m
-       \x1b[38;5;244mLocked in on work, great for the gym\x1b[0m
-       \x1b[4;38;5;81mopen.spotify.com/playlist/2N0n81gJrPqZzFxeteHPUI\x1b[0m
-
-  \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
-
-  \x1b[38;5;250mUser:\x1b[0m \x1b[38;5;79maadit2805\x1b[0m
-  \x1b[38;5;250mProfile:\x1b[0m \x1b[4;38;5;81mopen.spotify.com/user/aadit2805\x1b[0m
-
-  \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
-  \x1b[38;5;244mPress\x1b[0m \x1b[1;38;5;79m1-2\x1b[0m \x1b[38;5;244mto open playlist\x1b[0m  \x1b[38;5;244m│\x1b[0m  \x1b[38;5;244mPress\x1b[0m \x1b[1;38;5;79mq\x1b[0m \x1b[38;5;244mor\x1b[0m \x1b[1;38;5;79mESC\x1b[0m \x1b[38;5;244mto quit\x1b[0m
-
-`;
-  }, []);
 
   // Autocomplete
   const handleAutocomplete = useCallback(() => {
@@ -879,9 +814,6 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
           reviewsState: { selectedIndex: 0, filterType: 'all', sortBy: 'date', sortDir: 'desc', searchQuery: '', viewingReview: null }
         });
         return { type: 'raw', content: generateReviewsTUI({ selectedIndex: 0, filterType: 'all', sortBy: 'date', sortDir: 'desc', searchQuery: '', viewingReview: null }) };
-      case 'music':
-        updateActiveTab({ interactiveMode: 'music' });
-        return { type: 'raw', content: generateMusicTUI() };
       case 'clear':
       case 'cls':
         updateActiveTab({ lines: [] });
@@ -930,10 +862,6 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             reviewsState: { selectedIndex: 0, filterType: 'all', sortBy: 'date', sortDir: 'desc', searchQuery: '', viewingReview: null }
           });
           return { type: 'raw', content: generateReviewsTUI({ selectedIndex: 0, filterType: 'all', sortBy: 'date', sortDir: 'desc', searchQuery: '', viewingReview: null }) };
-        }
-        if (target === 'music') {
-          updateActiveTab({ interactiveMode: 'music' });
-          return { type: 'raw', content: generateMusicTUI() };
         }
         if (target === 'resume' || target === 'cv') {
           window.open('/resume.pdf', '_blank');
@@ -992,7 +920,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
       default:
         return { type: 'error', content: `\n\x1b[31mbash:\x1b[0m command not found: ${mainCmd}\n` };
     }
-  }, [activeTab, updateActiveTab, generateNeofetch, generateReviewsTUI, generateMusicTUI, uptime, tabs.length, memoryInfo]);
+  }, [activeTab, updateActiveTab, generateNeofetch, generateReviewsTUI, uptime, tabs.length, memoryInfo]);
 
   // Handle interactive mode keys
   const handleInteractiveKey = useCallback((e) => {
@@ -1071,22 +999,6 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
           reviewsState: newState,
           lines: [...activeTab.lines.slice(0, -1), { type: 'raw', content: generateReviewsTUI(newState) }]
         });
-        return true;
-      }
-      if (e.key === 'q' || e.key === 'Escape') {
-        updateActiveTab({ interactiveMode: null });
-        return true;
-      }
-      return true;
-    }
-
-    if (mode === 'music') {
-      if (e.key === '1') {
-        window.open('https://open.spotify.com/playlist/2hJ9vjNCXEVrbPDmr8RRaY', '_blank');
-        return true;
-      }
-      if (e.key === '2') {
-        window.open('https://open.spotify.com/playlist/2N0n81gJrPqZzFxeteHPUI', '_blank');
         return true;
       }
       if (e.key === 'q' || e.key === 'Escape') {
