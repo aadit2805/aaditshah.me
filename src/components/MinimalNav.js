@@ -10,7 +10,7 @@ import {
 
 const navLinks = [
   { href: '/portfolio', label: 'projects', key: 'projects' },
-  { href: '/favorites', label: 'favorites', key: 'favorites' },
+  { href: '/shortlist', label: 'shortlist', key: 'shortlist' },
   { href: '/reviews', label: 'reviews', key: 'reviews' },
   { href: '/resume', label: 'resume', key: 'resume' },
 ];

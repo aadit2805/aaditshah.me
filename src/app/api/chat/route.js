@@ -2,8 +2,8 @@ import { headers } from 'next/headers';
 import Anthropic from '@anthropic-ai/sdk';
 import sitedata from '../../../data/sitedata.json';
 import personality from '../../../data/personality.json';
-import songdata from '../../favorites/songdata.json';
-import moviedata from '../../favorites/moviedata.json';
+import songdata from '../../shortlist/songdata.json';
+import moviedata from '../../shortlist/moviedata.json';
 import projdata from '../../portfolio/projdata.json';
 import revdata from '../../reviews/revdata.json';
 

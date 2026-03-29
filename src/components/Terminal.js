@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
-import songdata from '../app/favorites/songdata.json';
-import moviedata from '../app/favorites/moviedata.json';
+import songdata from '../app/shortlist/songdata.json';
+import moviedata from '../app/shortlist/moviedata.json';
 import sitedata from '../data/sitedata.json';
 import personality from '../data/personality.json';
 import projdata from '../app/portfolio/projdata.json';
@@ -194,7 +194,7 @@ const HELP_TEXT = `
   \x1b[38;5;79mresume\x1b[0m     Download resume
 
 \x1b[1;38;5;250mMedia\x1b[0m
-  \x1b[38;5;79mfavorites\x1b[0m  Monthly favorites
+  \x1b[38;5;79mshortlist\x1b[0m  Monthly shortlist
   \x1b[38;5;79mreviews\x1b[0m    Film & TV reviews
 \x1b[1;38;5;250mInteractive\x1b[0m
   \x1b[38;5;79mchat\x1b[0m       Chat with AI Aadit
@@ -266,18 +266,18 @@ const generateFavoritesText = () => {
   ).join('\n\n');
   const moreMovies = moviedata.length > 5 ? `\n\n\x1b[38;5;244m… and ${moviedata.length - 5} more on the full page\x1b[0m` : '';
 
-  return `\n\x1b[1;38;5;79m━━━ FAVORITES ━━━\x1b[0m\n\n\x1b[1;38;5;250mSong of the Month\x1b[0m\n\n${songs}${moreSongs}\n\n\x1b[1;38;5;250mMovie of the Month\x1b[0m\n\n${movies}${moreMovies}\n\n`;
+  return `\n\x1b[1;38;5;79m━━━ SHORTLIST ━━━\x1b[0m\n\n\x1b[1;38;5;250mSong of the Month\x1b[0m\n\n${songs}${moreSongs}\n\n\x1b[1;38;5;250mMovie of the Month\x1b[0m\n\n${movies}${moreMovies}\n\n`;
 };
 
 const COMMANDS = [
-  'help', 'about', 'projects', 'skills', 'favorites', 'reviews',
+  'help', 'about', 'projects', 'skills', 'shortlist', 'reviews',
   'resume', 'socials', 'chat', 'clear', 'ls', 'pwd', 'cd',
   'cat', 'echo', 'env', 'whoami', 'date', 'neofetch', 'exit',
   'history', 'which', 'man', 'grep', 'head', 'tail', 'tree'
 ];
 
 // Navigation commands that work with 'cd'
-const NAV_COMMANDS = ['about', 'skills', 'projects', 'favorites', 'socials', 'resume', 'reviews'];
+const NAV_COMMANDS = ['about', 'skills', 'projects', 'shortlist', 'socials', 'resume', 'reviews'];
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TAB SESSION STATE
@@ -798,8 +798,8 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
       case 'projects':
       case 'work':
         return { type: 'projects', content: PROJECTS_TEXT };
-      case 'favorites':
-        return { type: 'favorites', content: generateFavoritesText() };
+      case 'shortlist':
+        return { type: 'shortlist', content: generateFavoritesText() };
       case 'socials':
       case 'contact':
       case 'links':
@@ -854,7 +854,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
         if (target === 'about') return { type: 'raw', content: ABOUT_TEXT };
         if (target === 'skills') return { type: 'raw', content: SKILLS_TEXT };
         if (target === 'projects' || target === 'work') return { type: 'projects', content: PROJECTS_TEXT };
-        if (target === 'favorites') return { type: 'favorites', content: generateFavoritesText() };
+        if (target === 'shortlist') return { type: 'shortlist', content: generateFavoritesText() };
         if (target === 'socials' || target === 'contact' || target === 'links') return { type: 'raw', content: SOCIALS_TEXT };
         if (target === 'reviews') {
           updateActiveTab({
@@ -1431,7 +1431,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             </div>
           </motion.div>
         );
-      case 'favorites':
+      case 'shortlist':
         return (
           <motion.div key={index} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.15 }}>
             <pre className="text-zinc-300 whitespace-pre-wrap font-mono leading-relaxed">
@@ -1439,11 +1439,11 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             </pre>
             <div className="mt-2 mb-4">
               <button
-                onClick={() => window.location.href = '/favorites'}
+                onClick={() => window.location.href = '/shortlist'}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-400 font-mono text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span className="text-emerald-500">❯</span>
-                <span>View All Favorites</span>
+                <span>View Full Shortlist</span>
                 <span className="text-zinc-500">→</span>
               </button>
             </div>

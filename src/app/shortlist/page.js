@@ -4,37 +4,34 @@ import { useState } from 'react';
 import MinimalNav from '../../components/MinimalNav';
 import songdata from './songdata.json';
 import moviedata from './moviedata.json';
+import summerdata from './summerdata.json';
 
-export default function Favorites() {
+export default function Shortlist() {
   const [tab, setTab] = useState('songs');
   const songs = [...songdata].reverse();
   const movies = [...moviedata].reverse();
 
+  const tabClass = (key) =>
+    `font-sans text-sm transition-colors ${
+      tab === key
+        ? 'text-landing-primary'
+        : 'text-landing-muted hover:text-landing-secondary'
+    }`;
+
   return (
     <div className="min-h-screen bg-landing-bg">
-      <MinimalNav currentPage="favorites" />
+      <MinimalNav currentPage="shortlist" />
       <main>
         <div className="max-w-2xl mx-auto px-8 pb-24">
           <div className="flex gap-6 mb-6">
-            <button
-              onClick={() => setTab('songs')}
-              className={`font-sans text-sm transition-colors ${
-                tab === 'songs'
-                  ? 'text-landing-primary'
-                  : 'text-landing-muted hover:text-landing-secondary'
-              }`}
-            >
+            <button onClick={() => setTab('songs')} className={tabClass('songs')}>
               song of the month
             </button>
-            <button
-              onClick={() => setTab('movies')}
-              className={`font-sans text-sm transition-colors ${
-                tab === 'movies'
-                  ? 'text-landing-primary'
-                  : 'text-landing-muted hover:text-landing-secondary'
-              }`}
-            >
+            <button onClick={() => setTab('movies')} className={tabClass('movies')}>
               movie of the month
+            </button>
+            <button onClick={() => setTab('summer')} className={tabClass('summer')}>
+              summer
             </button>
           </div>
 
@@ -90,9 +87,29 @@ export default function Favorites() {
             </div>
           )}
 
-          <p className="font-sans text-xs text-landing-muted mt-10">
-            *not necessarily released that month, just my favorite discovery/revisit at the time
-          </p>
+          {tab === 'summer' && (
+            <div className="space-y-1">
+              {summerdata.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-3 py-2 border-b border-dashed border-landing-border"
+                >
+                  <span className={`font-mono text-sm ${item.done ? 'text-landing-muted' : 'text-landing-muted/40'}`}>
+                    {item.done ? '[x]' : '[ ]'}
+                  </span>
+                  <span className={`font-sans text-sm ${item.done ? 'text-landing-muted line-through' : 'text-landing-primary'}`}>
+                    {item.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab !== 'summer' && (
+            <p className="font-sans text-xs text-landing-muted mt-10">
+              *not necessarily released that month, just my favorite discovery/revisit at the time
+            </p>
+          )}
         </div>
       </main>
     </div>

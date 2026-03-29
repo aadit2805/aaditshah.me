@@ -10,7 +10,9 @@ export default function Home() {
       <main className="max-w-2xl mx-auto px-8 pb-24">
         {/* Intro */}
         <p className="font-sans text-landing-secondary mb-16 leading-relaxed">
-          {sitedata.bio}
+          Howdy, I&apos;m Aadit! I&apos;m studying Computer Science at Texas A&amp;M and enjoy building things for the web in my free time. I&apos;ll be interning at{' '}
+          <a href="https://mintlify.com" target="_blank" rel="noopener noreferrer" className="text-landing-primary hover:text-landing-hover transition-colors underline underline-offset-2">Mintlify</a>
+          {' '}this summer and I recently won the Capital One Challenge at TAMUhack!
         </p>
 
         {/* Work */}
