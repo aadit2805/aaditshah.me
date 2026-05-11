@@ -94,10 +94,35 @@ export default function Shortlist() {
                   key={item.id}
                   className="flex items-center gap-3 py-2 border-b border-dashed border-landing-border"
                 >
-                  <span className={`font-mono text-sm ${item.done ? 'text-landing-muted' : 'text-landing-muted/40'}`}>
-                    {item.done ? '[x]' : '[ ]'}
+                  <span
+                    aria-hidden="true"
+                    className={`inline-flex h-5 w-5 shrink-0 items-center justify-center border ${
+                      item.done
+                        ? 'border-landing-secondary bg-landing-muted/10 text-landing-secondary'
+                        : 'border-landing-muted'
+                    }`}
+                  >
+                    {item.done && (
+                      <svg
+                        viewBox="0 0 16 16"
+                        className="h-3.5 w-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="3 8.5 6.5 12 13 4.5" />
+                      </svg>
+                    )}
                   </span>
-                  <span className={`font-sans text-sm ${item.done ? 'text-landing-muted line-through' : 'text-landing-primary'}`}>
+                  <span
+                    className={`font-sans font-medium ${
+                      item.done
+                        ? 'text-landing-muted line-through'
+                        : 'text-landing-primary'
+                    }`}
+                  >
                     {item.text}
                   </span>
                 </div>
