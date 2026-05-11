@@ -25,7 +25,6 @@
   },
   {
     "id": 4,
-<<<<<<< HEAD
     "title": "My Own Worst Enemy",
     "artist": "Lit",
     "month": "Apr",
@@ -39,12 +38,5 @@
     "month": "May",
     "year": "2026",
     "spotify": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT"
-=======
-    "title": "Amarillo By Morning",
-    "artist": "George Strait",
-    "month": "May",
-    "year": "2026",
-    "spotify": "https://open.spotify.com/track/4TnUKixNWMfajncgdSwFoi"
->>>>>>> 9b42ba23a56bcef1496a2bc7f78163bb70799ac4
   }
 ]
