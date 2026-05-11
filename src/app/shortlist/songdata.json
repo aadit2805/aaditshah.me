@@ -22,5 +22,21 @@
     "month": "Mar",
     "year": "2026",
     "spotify": "https://open.spotify.com/track/5p2OeKfFaKVKd6wEPjUYBy"
+  },
+  {
+    "id": 4,
+    "title": "My Own Worst Enemy",
+    "artist": "Lit",
+    "month": "Apr",
+    "year": "2026",
+    "spotify": "https://open.spotify.com/track/33iv3wnGMrrDugd7GBso1z"
+  },
+  {
+    "id": 5,
+    "title": "Self Aware",
+    "artist": "Temper City",
+    "month": "May",
+    "year": "2026",
+    "spotify": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT"
   }
 ]
