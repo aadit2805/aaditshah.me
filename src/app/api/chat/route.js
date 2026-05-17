@@ -1,10 +1,10 @@
 import { headers } from 'next/headers';
 import Anthropic from '@anthropic-ai/sdk';
-import sitedata from '../../../data/sitedata.json';
-import personality from '../../../data/personality.json';
-import songdata from '../../shortlist/songdata.json';
-import moviedata from '../../shortlist/moviedata.json';
-import projdata from '../../portfolio/projdata.json';
+import sitedata from '../../../../content/site.json';
+import personality from '../../../../content/personality.json';
+import songdata from '../../../../content/shortlist/songs.json';
+import moviedata from '../../../../content/shortlist/movies.json';
+import projdata from '../../../../content/projects.json';
 import revdata from '../../reviews/revdata.json';
 
 const anthropic = new Anthropic();

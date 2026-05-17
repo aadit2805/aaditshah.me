@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import MinimalNav from '../../components/MinimalNav';
-import songdata from './songdata.json';
-import moviedata from './moviedata.json';
-import summerdata from './summerdata.json';
+import songdata from '../../../content/shortlist/songs.json';
+import moviedata from '../../../content/shortlist/movies.json';
+import summerdata from '../../../content/shortlist/summer.json';
 
 export default function Shortlist() {
   const [tab, setTab] = useState('songs');

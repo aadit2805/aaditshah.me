@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import projdata from '../app/portfolio/projdata.json';
+import projdata from '../../content/projects.json';
 import {
   Tooltip,
   TooltipContent,

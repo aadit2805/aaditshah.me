@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import MinimalNav from '../components/MinimalNav';
-import sitedata from '../data/sitedata.json';
+import sitedata from '../../content/site.json';
 
 export default function Home() {
   return (

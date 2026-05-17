@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
-import songdata from '../app/shortlist/songdata.json';
-import moviedata from '../app/shortlist/moviedata.json';
-import sitedata from '../data/sitedata.json';
-import personality from '../data/personality.json';
-import projdata from '../app/portfolio/projdata.json';
+import songdata from '../../content/shortlist/songs.json';
+import moviedata from '../../content/shortlist/movies.json';
+import sitedata from '../../content/site.json';
+import personality from '../../content/personality.json';
+import projdata from '../../content/projects.json';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TERMINAL CONFIGURATION - Ghostty-inspired settings

@@ -34,7 +34,7 @@ function parseFrontmatter(content) {
 }
 
 function buildReviews() {
-  const reviewsDir = path.join(__dirname, '../reviews');
+  const reviewsDir = path.join(__dirname, '../content/reviews');
   const outputFile = path.join(__dirname, '../src/app/reviews/revdata.json');
   
   if (!fs.existsSync(reviewsDir)) {
