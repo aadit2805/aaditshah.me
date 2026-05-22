@@ -1,6 +1,6 @@
 {
   "name": "Aadit Shah",
-  "bio": "Howdy, I'm Aadit! I'm studying Computer Science at Texas A&M and enjoy building things for the web in my free time. I'll be interning at Mintlify this summer and I recently won the Capital One Challenge at TAMUhack!",
+  "bio": "Howdy, I'm Aadit! I'm studying Computer Science at Texas A&M and enjoy building things for the web in my free time. I'm currently interning at Mintlify and I recently won the Capital One Challenge at TAMUhack!",
   "school": "Texas A&M University",
   "major": "Computer Science and Mathematics",
   "skills": ["JavaScript/TypeScript", "Python", "Java", "C/C++", "Swift", "React/Next.js", "Node.js", "FastAPI"],
@@ -9,7 +9,7 @@
     {
       "company": "Mintlify",
       "url": "https://mintlify.com",
-      "description": "Incoming Summer 2026"
+      "description": "building amazing things"
     },
     {
       "company": "Texas A&M Baseball",
