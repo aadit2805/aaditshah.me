@@ -1,5 +1,6 @@
 [
   { "id": 1, "text": "Giants game @ Oracle Park", "done": false },
   { "id": 2, "text": "Trip to Yosemite", "done": false },
-  { "id": 3, "text": "Roadtrip down Highway 1", "done": false }
+  { "id": 3, "text": "Roadtrip down Highway 1", "done": false },
+  { "id": 4, "text": "Win trivia @ Danny Coyle's", "done": false }
 ]
