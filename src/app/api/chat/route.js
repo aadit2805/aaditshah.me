@@ -6,74 +6,24 @@ import songdata from '../../../../content/shortlist/songs.json';
 import moviedata from '../../../../content/shortlist/movies.json';
 import projdata from '../../../../content/projects.json';
 import revdata from '../../reviews/revdata.json';
+import { checkRateLimit } from '@/lib/ratelimit';
 
 const anthropic = new Anthropic();
 
 const MAX_HISTORY_EXCHANGES = 10;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// RATE LIMITING
-// ═══════════════════════════════════════════════════════════════════════════════
-
 const RATE_LIMIT = {
-  windowMs: 60 * 1000,       // 1 minute window
-  maxRequests: 15,            // max requests per window per IP
-  globalMaxPerMinute: 100,    // global max across all IPs
-  maxMessageLength: 1000,     // max characters per message
-  maxHistoryLength: 30,       // max history messages accepted
+  maxMessageLength: 1000,
+  maxHistoryLength: 30,
 };
 
-// In-memory store — resets on deploy/restart, which is fine for a portfolio site
-const ipRequestMap = new Map();
-let globalRequestCount = 0;
-let globalWindowStart = Date.now();
-
 function getClientIp(headersList) {
-  // Vercel sets x-forwarded-for
   const forwarded = headersList.get('x-forwarded-for');
   if (forwarded) return forwarded.split(',')[0].trim();
   const real = headersList.get('x-real-ip');
   if (real) return real;
   return 'unknown';
 }
-
-function checkRateLimit(ip) {
-  const now = Date.now();
-
-  // Reset global counter if window expired
-  if (now - globalWindowStart > RATE_LIMIT.windowMs) {
-    globalRequestCount = 0;
-    globalWindowStart = now;
-  }
-  globalRequestCount++;
-  if (globalRequestCount > RATE_LIMIT.globalMaxPerMinute) {
-    return { allowed: false, reason: 'Server is busy. Try again in a minute.' };
-  }
-
-  // Per-IP rate limiting
-  const record = ipRequestMap.get(ip);
-  if (!record || now - record.windowStart > RATE_LIMIT.windowMs) {
-    ipRequestMap.set(ip, { windowStart: now, count: 1 });
-    return { allowed: true };
-  }
-
-  record.count++;
-  if (record.count > RATE_LIMIT.maxRequests) {
-    return { allowed: false, reason: 'Slow down — too many messages. Try again in a minute.' };
-  }
-
-  return { allowed: true };
-}
-
-// Clean up stale entries every 5 minutes to prevent memory leak
-setInterval(() => {
-  const now = Date.now();
-  for (const [ip, record] of ipRequestMap) {
-    if (now - record.windowStart > RATE_LIMIT.windowMs * 5) {
-      ipRequestMap.delete(ip);
-    }
-  }
-}, 5 * 60 * 1000);
 
 function buildSystemPrompt() {
   // --- Identity ---
@@ -233,10 +183,10 @@ function trimHistory(history) {
 
 export async function POST(request) {
   try {
-    // --- IP-based rate limiting ---
+    // --- IP-based rate limiting (Upstash if configured, in-memory fallback otherwise) ---
     const headersList = await headers();
     const ip = getClientIp(headersList);
-    const rateCheck = checkRateLimit(ip);
+    const rateCheck = await checkRateLimit(ip);
     if (!rateCheck.allowed) {
       return Response.json({ error: rateCheck.reason }, { status: 429 });
     }
