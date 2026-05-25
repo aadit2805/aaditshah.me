@@ -96,44 +96,91 @@ export default function ShortlistTab({ params }) {
 
           {tab === 'summer-26' && (
             <div className="space-y-1">
-              {summerdata.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center gap-3 py-2 border-b border-dashed border-landing-border"
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`inline-flex h-5 w-5 shrink-0 items-center justify-center border ${
-                      item.done
-                        ? 'border-landing-secondary bg-landing-muted/10 text-landing-secondary'
-                        : 'border-landing-muted'
-                    }`}
-                  >
-                    {item.done && (
-                      <svg
-                        viewBox="0 0 16 16"
-                        className="h-3.5 w-3.5"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+              {summerdata.map((item) => {
+                const hasChildren = item.children && item.children.length > 0;
+                const parentDone = hasChildren
+                  ? item.children.every((c) => c.done)
+                  : item.done;
+                return (
+                  <div key={item.id}>
+                    <div className="flex items-center gap-3 py-2 border-b border-dashed border-landing-border">
+                      <span
+                        aria-hidden="true"
+                        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center border ${
+                          parentDone
+                            ? 'border-landing-secondary bg-landing-muted/10 text-landing-secondary'
+                            : 'border-landing-muted'
+                        }`}
                       >
-                        <polyline points="3 8.5 6.5 12 13 4.5" />
-                      </svg>
+                        {parentDone && (
+                          <svg
+                            viewBox="0 0 16 16"
+                            className="h-3.5 w-3.5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <polyline points="3 8.5 6.5 12 13 4.5" />
+                          </svg>
+                        )}
+                      </span>
+                      <span
+                        className={`font-sans font-medium ${
+                          parentDone
+                            ? 'text-landing-muted line-through'
+                            : 'text-landing-primary'
+                        }`}
+                      >
+                        {item.text}
+                      </span>
+                    </div>
+                    {hasChildren && (
+                      <div className="pl-8">
+                        {item.children.map((child) => (
+                          <div
+                            key={child.id}
+                            className="flex items-center gap-2.5 py-1.5"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className={`inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center border ${
+                                child.done
+                                  ? 'border-landing-muted bg-landing-muted/10 text-landing-muted'
+                                  : 'border-landing-muted/60'
+                              }`}
+                            >
+                              {child.done && (
+                                <svg
+                                  viewBox="0 0 16 16"
+                                  className="h-2.5 w-2.5"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <polyline points="3 8.5 6.5 12 13 4.5" />
+                                </svg>
+                              )}
+                            </span>
+                            <span
+                              className={`font-sans text-sm ${
+                                child.done
+                                  ? 'text-landing-muted line-through'
+                                  : 'text-landing-secondary'
+                              }`}
+                            >
+                              {child.text}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     )}
-                  </span>
-                  <span
-                    className={`font-sans font-medium ${
-                      item.done
-                        ? 'text-landing-muted line-through'
-                        : 'text-landing-primary'
-                    }`}
-                  >
-                    {item.text}
-                  </span>
-                </div>
-              ))}
+                  </div>
+                );
+              })}
             </div>
           )}
 

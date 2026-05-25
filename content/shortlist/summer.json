@@ -2,5 +2,14 @@
   { "id": 1, "text": "Giants game @ Oracle Park", "done": false },
   { "id": 2, "text": "Trip to Yosemite", "done": false },
   { "id": 3, "text": "Roadtrip down Highway 1", "done": false },
-  { "id": 4, "text": "Win trivia @ Danny Coyle's", "done": false }
+  { "id": 4, "text": "Win trivia @ Danny Coyle's", "done": false },
+  { "id": 5, "text": "Food spots", "children": [
+    { "id": 51, "text": "La Taqueria", "done": false },
+    { "id": 52, "text": "Arsicault Bakery", "done": false },
+    { "id": 53, "text": "b. patisserie", "done": false },
+    { "id": 54, "text": "El Farolito", "done": false },
+    { "id": 55, "text": "Third Wheel Coffee", "done": false },
+    { "id": 56, "text": "The Buena Vista", "done": false }
+  ]},
+  { "id": 6, "text": "Visit Napa", "done": false }
 ]
