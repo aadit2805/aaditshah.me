@@ -381,3 +381,55 @@ img[data-loading="true"] {
     rgba(207, 194, 170, 0.3) 11px
   );
 }
+
+/* Notes prose styling — applied to markdown-rendered article bodies */
+.prose-aadit {
+  @apply font-serif text-landing-primary leading-relaxed;
+  font-size: 17px;
+}
+.prose-aadit > * + * {
+  @apply mt-5;
+}
+.prose-aadit p {
+  @apply leading-relaxed;
+}
+.prose-aadit h2 {
+  @apply font-serif text-2xl text-landing-primary mt-10 mb-3;
+}
+.prose-aadit h3 {
+  @apply font-serif text-xl text-landing-primary mt-8 mb-2;
+}
+.prose-aadit a {
+  @apply text-landing-primary underline underline-offset-2 decoration-landing-border hover:decoration-landing-muted transition-colors;
+}
+.prose-aadit strong {
+  @apply font-semibold;
+}
+.prose-aadit em {
+  @apply italic;
+}
+.prose-aadit ul,
+.prose-aadit ol {
+  @apply pl-6 space-y-2;
+}
+.prose-aadit ul {
+  @apply list-disc;
+}
+.prose-aadit ol {
+  @apply list-decimal;
+}
+.prose-aadit code {
+  @apply font-mono text-sm bg-landing-muted/15 px-1.5 py-0.5 rounded;
+}
+.prose-aadit pre {
+  @apply font-mono text-sm bg-zinc-900 text-zinc-100 p-4 rounded overflow-x-auto;
+}
+.prose-aadit pre code {
+  @apply bg-transparent p-0 text-inherit;
+}
+.prose-aadit blockquote {
+  @apply border-l-2 border-landing-border pl-4 italic text-landing-secondary;
+}
+.prose-aadit hr {
+  @apply border-landing-border my-10;
+}

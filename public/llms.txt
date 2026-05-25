@@ -14,6 +14,7 @@
 
 - [Home](https://aaditshah.me): Bio, work history, social links
 - [Portfolio](https://aaditshah.me/portfolio): Project showcase — Booth Map, Drift, Double Down, Espress, Panda Express POS, GitaChat
+- [Notes](https://aaditshah.me/notes): Essays and short pieces on software engineering, AI, and ideas Aadit is thinking about
 - [Reviews](https://aaditshah.me/reviews): Movie and TV reviews with ratings
 - [Music](https://aaditshah.me/music): Recently played tracks and playlists from Spotify
 - [Shortlist - Songs](https://aaditshah.me/shortlist/songs): Monthly song favorites

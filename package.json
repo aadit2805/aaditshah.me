@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/build-reviews.js",
+    "prebuild": "node scripts/build-reviews.js && node scripts/build-notes.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build-reviews": "node scripts/build-reviews.js"
+    "build-reviews": "node scripts/build-reviews.js",
+    "build-notes": "node scripts/build-notes.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
+    "marked": "^18.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0"
   }
