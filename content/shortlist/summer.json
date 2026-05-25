@@ -1,3 +1,4 @@
 [
-  { "id": 1, "text": "Go to a Giants game @ Oracle Park", "done": false }
+  { "id": 1, "text": "Go to a Giants game @ Oracle Park", "done": false },
+  { "id": 2, "text": "Go on a trip to Yosemite", "done": false }
 ]
