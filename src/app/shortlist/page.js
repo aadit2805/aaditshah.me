@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-const TABS = ['songs', 'movies', 'summer-26'];
+const TABS = ['songs', 'movies', 'summer-26', 'books'];
 
 export default function Shortlist({ searchParams }) {
   const legacy = searchParams?.tab;

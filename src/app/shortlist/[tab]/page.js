@@ -4,11 +4,47 @@ import MinimalNav from '../../../components/MinimalNav';
 import songdata from '../../../../content/shortlist/songs.json';
 import moviedata from '../../../../content/shortlist/movies.json';
 import summerdata from '../../../../content/shortlist/summer.json';
+import booksdata from '../../../../content/shortlist/books.json';
 
-const TABS = ['songs', 'movies', 'summer-26'];
+const TABS = ['songs', 'movies', 'summer-26', 'books'];
+
+const META = {
+  songs: {
+    title: 'Song of the month',
+    description: 'A monthly log of Aadit Shah’s favorite song discoveries and revisits.',
+  },
+  movies: {
+    title: 'Movie of the month',
+    description: 'A monthly log of Aadit Shah’s favorite film discoveries and revisits.',
+  },
+  'summer-26': {
+    title: 'Summer 26',
+    description: 'Aadit Shah’s summer 2026 list — things to do, places to eat, trips to take.',
+  },
+  books: {
+    title: 'Currently reading',
+    description: 'Books Aadit Shah is reading and planning to read.',
+  },
+};
 
 export function generateStaticParams() {
   return TABS.map((tab) => ({ tab }));
+}
+
+export function generateMetadata({ params }) {
+  const meta = META[params.tab];
+  if (!meta) return {};
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: { canonical: `/shortlist/${params.tab}` },
+    openGraph: {
+      title: `${meta.title} | Aadit Shah`,
+      description: meta.description,
+      url: `https://aaditshah.me/shortlist/${params.tab}`,
+      type: 'website',
+    },
+  };
 }
 
 export default function ShortlistTab({ params }) {
@@ -39,6 +75,9 @@ export default function ShortlistTab({ params }) {
             </Link>
             <Link href="/shortlist/summer-26" className={tabClass('summer-26')}>
               summer 26
+            </Link>
+            <Link href="/shortlist/books" className={tabClass('books')}>
+              currently reading
             </Link>
           </div>
 
@@ -184,7 +223,60 @@ export default function ShortlistTab({ params }) {
             </div>
           )}
 
-          {tab !== 'summer-26' && (
+          {tab === 'books' && (
+            <div className="space-y-1">
+              {booksdata.length === 0 && (
+                <p className="font-sans text-sm text-landing-muted py-4">
+                  Nothing on the shelf yet — check back soon.
+                </p>
+              )}
+              {booksdata.map((book) => (
+                <div
+                  key={book.id}
+                  className="flex items-baseline gap-3 py-2 border-b border-dashed border-landing-border"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`inline-flex h-5 w-5 shrink-0 items-center justify-center border self-center ${
+                      book.done
+                        ? 'border-landing-secondary bg-landing-muted/10 text-landing-secondary'
+                        : 'border-landing-muted'
+                    }`}
+                  >
+                    {book.done && (
+                      <svg
+                        viewBox="0 0 16 16"
+                        className="h-3.5 w-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="3 8.5 6.5 12 13 4.5" />
+                      </svg>
+                    )}
+                  </span>
+                  <span
+                    className={`font-sans font-medium ${
+                      book.done
+                        ? 'text-landing-muted line-through'
+                        : 'text-landing-primary'
+                    }`}
+                  >
+                    {book.title}
+                  </span>
+                  {book.author && (
+                    <span className="font-sans text-landing-muted text-sm">
+                      {book.author}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {(tab === 'songs' || tab === 'movies') && (
             <p className="font-sans text-xs text-landing-muted mt-10">
               *not necessarily released that month, just my favorite discovery/revisit at the time
             </p>

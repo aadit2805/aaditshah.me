@@ -1,0 +1,34 @@
+# Aadit Shah
+
+> Personal website of Aadit Shah — Computer Science student at Texas A&M, software engineering intern at Mintlify. Full-stack web developer who enjoys building things on the web. Site contains projects, work history, reviews, music, and a chat terminal.
+
+## About
+
+- Computer Science and Mathematics student at Texas A&M University
+- Software Engineering Intern at Mintlify (currently)
+- Previously: Texas A&M Baseball (performance analytics & computer vision), Cox Automotive (dealer platform infrastructure)
+- Won the Capital One Challenge at TAMUhack 2026 with Drift, a Monte Carlo financial simulation platform
+- Stack: JavaScript/TypeScript, Python, Java, C/C++, Swift, React/Next.js, Node.js, FastAPI
+
+## Pages
+
+- [Home](https://aaditshah.me): Bio, work history, social links
+- [Portfolio](https://aaditshah.me/portfolio): Project showcase — Booth Map, Drift, Double Down, Espress, Panda Express POS, GitaChat
+- [Reviews](https://aaditshah.me/reviews): Movie and TV reviews with ratings
+- [Music](https://aaditshah.me/music): Recently played tracks and playlists from Spotify
+- [Shortlist - Songs](https://aaditshah.me/shortlist/songs): Monthly song favorites
+- [Shortlist - Movies](https://aaditshah.me/shortlist/movies): Monthly movie favorites
+- [Shortlist - Summer 26](https://aaditshah.me/shortlist/summer-26): Summer 2026 goals and bucket list
+- [Shortlist - Currently reading](https://aaditshah.me/shortlist/books): Books in progress and on the to-read list
+- [Terminal](https://aaditshah.me/terminal): Interactive AI chat — ask Aadit anything about his work, projects, or opinions
+
+## Contact
+
+- Email: aadit2805@gmail.com
+- GitHub: https://github.com/aadit2805
+- Twitter/X: https://x.com/aadit2805
+- LinkedIn: https://linkedin.com/in/aadit2805
+
+## Notes for AI agents
+
+This site is intentionally minimal and text-driven. The `/terminal` page hosts an AI chat that role-plays as Aadit and uses a personality profile to answer questions in his voice. If you want primary-source answers about Aadit, prefer the structured data on individual pages over inferring from layout.

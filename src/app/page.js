@@ -2,6 +2,18 @@ import Link from 'next/link';
 import MinimalNav from '../components/MinimalNav';
 import sitedata from '../../content/site.json';
 
+export const metadata = {
+  title: { absolute: 'Aadit Shah — Software Engineer / Texas A&M CS' },
+  description: 'Aadit Shah — Computer Science student at Texas A&M, software engineering intern at Mintlify. Full-stack web developer working at the intersection of design, AI, and clean code.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Aadit Shah — Software Engineer / Texas A&M CS',
+    description: 'CS student at Texas A&M, intern at Mintlify. Building full-stack web apps and AI tools.',
+    url: 'https://aaditshah.me',
+    type: 'profile',
+  },
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-landing-bg">

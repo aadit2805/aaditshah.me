@@ -1,6 +1,7 @@
 import { Lora, Inter } from 'next/font/google';
 import './globals.css';
 import { Analytics } from '@vercel/analytics/react';
+import sitedata from '../../content/site.json';
 
 const lora = Lora({
   subsets: ['latin'],
@@ -14,31 +15,83 @@ const inter = Inter({
   display: 'swap',
 });
 
+const SITE_DESCRIPTION =
+  'Aadit Shah — Computer Science student at Texas A&M, software engineering intern at Mintlify. Full-stack web developer working at the intersection of design, AI, and clean code.';
+
 export const metadata = {
   title: {
     default: 'Aadit Shah',
     template: '%s | Aadit Shah',
   },
-  description: 'Computer Science student at Texas A&M. Building things for the web.',
+  description: SITE_DESCRIPTION,
   metadataBase: new URL('https://aaditshah.me'),
+  keywords: [
+    'Aadit Shah',
+    'Texas A&M',
+    'Computer Science',
+    'software engineering intern',
+    'Mintlify',
+    'full-stack developer',
+    'Next.js',
+    'TypeScript',
+    'AI',
+  ],
+  authors: [{ name: 'Aadit Shah', url: 'https://aaditshah.me' }],
+  creator: 'Aadit Shah',
   openGraph: {
     title: 'Aadit Shah',
-    description: 'Computer Science student at Texas A&M. Building things for the web.',
+    description: SITE_DESCRIPTION,
     url: 'https://aaditshah.me',
     siteName: 'Aadit Shah',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Aadit Shah',
-    description: 'Computer Science student at Texas A&M. Building things for the web.',
+    description: SITE_DESCRIPTION,
     creator: '@aadit2805',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+    },
   },
+};
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: sitedata.name,
+  url: 'https://aaditshah.me',
+  jobTitle: 'Software Engineering Intern',
+  worksFor: { '@type': 'Organization', name: 'Mintlify', url: 'https://mintlify.com' },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Texas A&M University',
+    url: 'https://www.tamu.edu',
+  },
+  sameAs: [
+    sitedata.socials.github.url,
+    sitedata.socials.twitter.url,
+    sitedata.socials.linkedin.url,
+  ],
+  email: `mailto:${sitedata.socials.email.address}`,
+  knowsAbout: [
+    'Software Engineering',
+    'Full-stack Web Development',
+    'Next.js',
+    'TypeScript',
+    'Python',
+    'Machine Learning',
+    'AI Applications',
+  ],
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({ children }) {
@@ -47,6 +100,10 @@ export default function RootLayout({ children }) {
       <body className="font-serif antialiased">
         {children}
         <Analytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
       </body>
     </html>
   );
