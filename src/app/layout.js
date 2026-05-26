@@ -47,7 +47,7 @@ export const metadata = {
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Aadit Shah',
     description: SITE_DESCRIPTION,
     creator: '@aadit2805',
