@@ -3,7 +3,7 @@ import MinimalNav from '../components/MinimalNav';
 import sitedata from '../../content/site.json';
 
 export const metadata = {
-  title: { absolute: 'Aadit Shah — Software Engineer / Texas A&M CS' },
+  title: { absolute: 'Aadit Shah' },
   description: 'Aadit Shah — Computer Science student at Texas A&M, software engineering intern at Mintlify. Full-stack web developer working at the intersection of design, AI, and clean code.',
   alternates: { canonical: '/' },
   openGraph: {
