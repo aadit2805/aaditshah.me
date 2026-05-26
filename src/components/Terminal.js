@@ -7,6 +7,9 @@ import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
 import songdata from '../../content/shortlist/songs.json';
 import moviedata from '../../content/shortlist/movies.json';
+import booksdata from '../../content/shortlist/books.json';
+import summerdata from '../../content/shortlist/summer.json';
+import ballparkdata from '../../content/shortlist/ballparks.json';
 import sitedata from '../../content/site.json';
 import personality from '../../content/personality.json';
 import projdata from '../../content/projects.json';
@@ -194,7 +197,12 @@ const HELP_TEXT = `
   \x1b[38;5;79mresume\x1b[0m     Download resume
 
 \x1b[1;38;5;250mMedia\x1b[0m
-  \x1b[38;5;79mshortlist\x1b[0m  Monthly shortlist
+  \x1b[38;5;79mshortlist\x1b[0m  Overview of every list
+  \x1b[38;5;79msongs\x1b[0m      Song of the month
+  \x1b[38;5;79mmovies\x1b[0m     Movie of the month
+  \x1b[38;5;79mbooks\x1b[0m      Currently reading
+  \x1b[38;5;79msummer\x1b[0m     Summer 26 list
+  \x1b[38;5;79mballparks\x1b[0m  Ballparks visited
   \x1b[38;5;79mreviews\x1b[0m    Film & TV reviews
 \x1b[1;38;5;250mInteractive\x1b[0m
   \x1b[38;5;79mchat\x1b[0m       Chat with AI Aadit
@@ -253,31 +261,118 @@ ${projdata.map((p, i) => {
 
 `;
 
-const generateFavoritesText = () => {
-  const recentSongs = [...songdata].reverse().slice(0, 5);
-  const songs = recentSongs.map(s =>
-    `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${s.month} ${s.year}\x1b[0m  ${s.title} — \x1b[38;5;244m${s.artist}\x1b[0m\n    \x1b[4;38;5;81m${s.spotify.replace('https://', '')}\x1b[0m`
-  ).join('\n\n');
-  const moreSongs = songdata.length > 5 ? `\n\n\x1b[38;5;244m… and ${songdata.length - 5} more on the full page\x1b[0m` : '';
+// ─── Shortlist category renderers ────────────────────────────────────────────
+// Compact one-liners (used in the `shortlist` overview) and full variants with
+// links (used by the dedicated `songs` / `movies` / … commands).
 
-  const recentMovies = [...moviedata].reverse().slice(0, 5);
-  const movies = recentMovies.map(m =>
-    `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${m.month} ${m.year}\x1b[0m  ${m.title} — \x1b[38;5;244m${m.director}\x1b[0m\n    \x1b[4;38;5;81m${m.imdb.replace('https://', '')}\x1b[0m`
-  ).join('\n\n');
-  const moreMovies = moviedata.length > 5 ? `\n\n\x1b[38;5;244m… and ${moviedata.length - 5} more on the full page\x1b[0m` : '';
+const songLine = (s) =>
+  `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${s.month} ${s.year}\x1b[0m  ${s.title} — \x1b[38;5;244m${s.artist}\x1b[0m`;
+const songLineFull = (s) =>
+  `${songLine(s)}\n    \x1b[4;38;5;81m${s.spotify.replace('https://', '')}\x1b[0m`;
 
-  return `\n\x1b[1;38;5;79m━━━ SHORTLIST ━━━\x1b[0m\n\n\x1b[1;38;5;250mSong of the Month\x1b[0m\n\n${songs}${moreSongs}\n\n\x1b[1;38;5;250mMovie of the Month\x1b[0m\n\n${movies}${moreMovies}\n\n`;
+const movieLine = (m) =>
+  `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${m.month} ${m.year}\x1b[0m  ${m.title} — \x1b[38;5;244m${m.director}\x1b[0m`;
+const movieLineFull = (m) =>
+  `${movieLine(m)}\n    \x1b[4;38;5;81m${m.imdb.replace('https://', '')}\x1b[0m`;
+
+const bookLine = (b) => {
+  const mark = b.done ? '\x1b[38;5;79m✓\x1b[0m' : '\x1b[38;5;79m❯\x1b[0m';
+  const title = b.done ? `\x1b[9;38;5;244m${b.title}\x1b[0m` : b.title;
+  return `${mark} ${title}${b.author ? ` — \x1b[38;5;244m${b.author}\x1b[0m` : ''}`;
+};
+
+const summerBox = (item) =>
+  item.children && item.children.length
+    ? (item.children.every((c) => c.done) ? '\x1b[38;5;79m[x]\x1b[0m' : '\x1b[38;5;244m[ ]\x1b[0m')
+    : (item.done ? '\x1b[38;5;79m[x]\x1b[0m' : '\x1b[38;5;244m[ ]\x1b[0m');
+const summerLine = (item) => `${summerBox(item)} ${item.text}`;
+const summerLineFull = (item) => {
+  let out = summerLine(item);
+  if (item.children && item.children.length) {
+    out += '\n' + item.children.map((c) => {
+      const cbox = c.done ? '\x1b[38;5;79m✓\x1b[0m' : '\x1b[38;5;244m·\x1b[0m';
+      const ctext = c.done ? `\x1b[9;38;5;244m${c.text}\x1b[0m` : `\x1b[38;5;250m${c.text}\x1b[0m`;
+      return `      ${cbox} ${ctext}`;
+    }).join('\n');
+  }
+  return out;
+};
+
+const ballparkLine = (p, i) => {
+  const date = p.date ? `  \x1b[38;5;244m(${p.date})\x1b[0m` : '';
+  return `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${i + 1}.\x1b[0m ${p.name} — \x1b[38;5;244m${p.team} · ${p.city}\x1b[0m${date}`;
+};
+
+// Full dedicated-command output
+const generateSongsText = () =>
+  `\n\x1b[1;38;5;79m━━━ SONG OF THE MONTH ━━━\x1b[0m\n\n${[...songdata].reverse().map(songLineFull).join('\n\n')}\n`;
+
+const generateMoviesText = () =>
+  `\n\x1b[1;38;5;79m━━━ MOVIE OF THE MONTH ━━━\x1b[0m\n\n${[...moviedata].reverse().map(movieLineFull).join('\n\n')}\n`;
+
+const generateBooksText = () =>
+  booksdata.length
+    ? `\n\x1b[1;38;5;79m━━━ CURRENTLY READING ━━━\x1b[0m\n\n${booksdata.map(bookLine).join('\n')}\n`
+    : `\n\x1b[1;38;5;79m━━━ CURRENTLY READING ━━━\x1b[0m\n\n  \x1b[38;5;244mNothing on the shelf yet.\x1b[0m\n`;
+
+const generateSummerText = () =>
+  `\n\x1b[1;38;5;79m━━━ SUMMER 26 ━━━\x1b[0m\n\n${summerdata.map(summerLineFull).join('\n')}\n`;
+
+const generateBallparksText = () => {
+  const teams = new Set(ballparkdata.map((p) => p.team)).size;
+  return `\n\x1b[1;38;5;79m━━━ BALLPARKS ━━━\x1b[0m\n\n${ballparkdata.map(ballparkLine).join('\n')}\n\n\x1b[38;5;244m${ballparkdata.length} ballparks · ${teams} of 30 MLB teams\x1b[0m\n`;
+};
+
+// Compact overview shown by `shortlist`: a few per category, each pointing to
+// its dedicated command for the full list.
+const generateShortlistText = () => {
+  const LIMIT = 3;
+  const header = (label, cmd) =>
+    `\x1b[1;38;5;250m${label}\x1b[0m  \x1b[38;5;244m· type '${cmd}' for all\x1b[0m`;
+
+  const songs = [...songdata].reverse().slice(0, LIMIT).map(songLine).join('\n');
+  const movies = [...moviedata].reverse().slice(0, LIMIT).map(movieLine).join('\n');
+  const books = booksdata.length
+    ? booksdata.slice(0, LIMIT).map(bookLine).join('\n')
+    : '  \x1b[38;5;244mnothing yet\x1b[0m';
+  const summer = summerdata.slice(0, LIMIT).map(summerLine).join('\n');
+  const ballparks = ballparkdata.slice(0, LIMIT).map(ballparkLine).join('\n');
+
+  return `
+\x1b[1;38;5;79m━━━ SHORTLIST ━━━\x1b[0m
+
+${header('Song of the month', 'songs')}
+${songs}
+
+${header('Movie of the month', 'movies')}
+${movies}
+
+${header('Currently reading', 'books')}
+${books}
+
+${header('Summer 26', 'summer')}
+${summer}
+
+${header('Ballparks', 'ballparks')}
+${ballparks}
+
+\x1b[38;5;244mShowing up to ${LIMIT} per list — run a category name for the rest.\x1b[0m
+`;
 };
 
 const COMMANDS = [
-  'help', 'about', 'projects', 'skills', 'shortlist', 'reviews',
+  'help', 'about', 'projects', 'skills', 'shortlist', 'songs', 'movies',
+  'books', 'summer', 'ballparks', 'reviews',
   'resume', 'socials', 'chat', 'clear', 'ls', 'pwd', 'cd',
   'cat', 'echo', 'env', 'whoami', 'date', 'neofetch', 'exit',
   'history', 'which', 'man', 'grep', 'head', 'tail', 'tree'
 ];
 
 // Navigation commands that work with 'cd'
-const NAV_COMMANDS = ['about', 'skills', 'projects', 'shortlist', 'socials', 'resume', 'reviews'];
+const NAV_COMMANDS = [
+  'about', 'skills', 'projects', 'shortlist', 'songs', 'movies', 'books',
+  'summer', 'ballparks', 'socials', 'resume', 'reviews'
+];
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TAB SESSION STATE
@@ -799,7 +894,25 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
       case 'work':
         return { type: 'projects', content: PROJECTS_TEXT };
       case 'shortlist':
-        return { type: 'shortlist', content: generateFavoritesText() };
+        return { type: 'shortlist', content: generateShortlistText() };
+      case 'songs':
+      case 'song':
+        return { type: 'raw', content: generateSongsText() };
+      case 'movies':
+      case 'movie':
+        return { type: 'raw', content: generateMoviesText() };
+      case 'books':
+      case 'book':
+      case 'reading':
+        return { type: 'raw', content: generateBooksText() };
+      case 'summer':
+      case 'summer26':
+      case 'summer-26':
+        return { type: 'raw', content: generateSummerText() };
+      case 'ballparks':
+      case 'ballpark':
+      case 'stadiums':
+        return { type: 'raw', content: generateBallparksText() };
       case 'socials':
       case 'contact':
       case 'links':
@@ -854,7 +967,12 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
         if (target === 'about') return { type: 'raw', content: ABOUT_TEXT };
         if (target === 'skills') return { type: 'raw', content: SKILLS_TEXT };
         if (target === 'projects' || target === 'work') return { type: 'projects', content: PROJECTS_TEXT };
-        if (target === 'shortlist') return { type: 'shortlist', content: generateFavoritesText() };
+        if (target === 'shortlist') return { type: 'shortlist', content: generateShortlistText() };
+        if (target === 'songs' || target === 'song') return { type: 'raw', content: generateSongsText() };
+        if (target === 'movies' || target === 'movie') return { type: 'raw', content: generateMoviesText() };
+        if (target === 'books' || target === 'book' || target === 'reading') return { type: 'raw', content: generateBooksText() };
+        if (target === 'summer' || target === 'summer26' || target === 'summer-26') return { type: 'raw', content: generateSummerText() };
+        if (target === 'ballparks' || target === 'ballpark' || target === 'stadiums') return { type: 'raw', content: generateBallparksText() };
         if (target === 'socials' || target === 'contact' || target === 'links') return { type: 'raw', content: SOCIALS_TEXT };
         if (target === 'reviews') {
           updateActiveTab({
