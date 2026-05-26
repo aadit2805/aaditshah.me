@@ -2,7 +2,7 @@ import TerminalNav from '../../components/TerminalNav';
 import { Card, CardContent } from '@/components/ui/card';
 
 export const metadata = {
-  title: 'Music',
+  title: 'music',
   description: 'Recently played tracks and playlists from Aadit Shah on Spotify.',
   alternates: { canonical: '/music' },
   openGraph: {

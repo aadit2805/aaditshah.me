@@ -20,8 +20,8 @@ const SITE_DESCRIPTION =
 
 export const metadata = {
   title: {
-    default: 'Aadit Shah',
-    template: '%s | Aadit Shah',
+    default: 'aadit shah',
+    template: '%s | aadit shah',
   },
   description: SITE_DESCRIPTION,
   metadataBase: new URL('https://aaditshah.me'),

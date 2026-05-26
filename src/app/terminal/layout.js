@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Terminal',
+  title: 'terminal',
   description: 'Chat with an AI version of Aadit Shah. Ask about his projects, work, opinions, or anything else.',
   alternates: { canonical: '/terminal' },
   openGraph: {

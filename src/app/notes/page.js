@@ -3,7 +3,7 @@ import MinimalNav from '../../components/MinimalNav';
 import notesdata from './notesdata.json';
 
 export const metadata = {
-  title: 'Notes',
+  title: 'notes',
   description: 'Essays and short pieces by Aadit Shah on software engineering, AI, and the things he is thinking about.',
   alternates: { canonical: '/notes' },
   openGraph: {
