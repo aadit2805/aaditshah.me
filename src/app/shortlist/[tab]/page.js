@@ -1,12 +1,22 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import MinimalNav from '../../../components/MinimalNav';
+import BallparksList from '../../../components/BallparksList';
 import songdata from '../../../../content/shortlist/songs.json';
 import moviedata from '../../../../content/shortlist/movies.json';
 import summerdata from '../../../../content/shortlist/summer.json';
 import booksdata from '../../../../content/shortlist/books.json';
+import ballparkdata from '../../../../content/shortlist/ballparks.json';
 
-const TABS = ['songs', 'movies', 'summer-26', 'books'];
+const TABS = ['songs', 'movies', 'books', 'summer-26', 'ballparks'];
+
+const TAB_LABELS = {
+  songs: 'songs',
+  movies: 'movies',
+  books: 'books',
+  'summer-26': 'summer 26',
+  ballparks: 'ballparks',
+};
 
 const META = {
   songs: {
@@ -17,13 +27,17 @@ const META = {
     title: 'Movie of the month',
     description: 'A monthly log of Aadit Shah’s favorite film discoveries and revisits.',
   },
+  books: {
+    title: 'Currently reading',
+    description: 'Books Aadit Shah is reading and planning to read.',
+  },
   'summer-26': {
     title: 'Summer 26',
     description: 'Aadit Shah’s summer 2026 list — things to do, places to eat, trips to take.',
   },
-  books: {
-    title: 'Currently reading',
-    description: 'Books Aadit Shah is reading and planning to read.',
+  ballparks: {
+    title: 'Ballparks visited',
+    description: 'MLB ballparks Aadit Shah has been to.',
   },
 };
 
@@ -35,11 +49,11 @@ export function generateMetadata({ params }) {
   const meta = META[params.tab];
   if (!meta) return {};
   return {
-    title: meta.title,
+    title: TAB_LABELS[params.tab],
     description: meta.description,
     alternates: { canonical: `/shortlist/${params.tab}` },
     openGraph: {
-      title: `${meta.title} | Aadit Shah`,
+      title: `${TAB_LABELS[params.tab]} | Aadit Shah`,
       description: meta.description,
       url: `https://aaditshah.me/shortlist/${params.tab}`,
       type: 'website',
@@ -66,19 +80,16 @@ export default function ShortlistTab({ params }) {
       <MinimalNav currentPage="shortlist" />
       <main>
         <div className="max-w-2xl mx-auto px-8 pb-24">
-          <div className="flex gap-6 mb-6">
-            <Link href="/shortlist/songs" className={tabClass('songs')}>
-              song of the month
-            </Link>
-            <Link href="/shortlist/movies" className={tabClass('movies')}>
-              movie of the month
-            </Link>
-            <Link href="/shortlist/summer-26" className={tabClass('summer-26')}>
-              summer 26
-            </Link>
-            <Link href="/shortlist/books" className={tabClass('books')}>
-              currently reading
-            </Link>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 mb-6">
+            {TABS.map((key) => (
+              <Link
+                key={key}
+                href={`/shortlist/${key}`}
+                className={tabClass(key)}
+              >
+                {TAB_LABELS[key]}
+              </Link>
+            ))}
           </div>
 
           {tab === 'songs' && (
@@ -275,6 +286,8 @@ export default function ShortlistTab({ params }) {
               ))}
             </div>
           )}
+
+          {tab === 'ballparks' && <BallparksList parks={ballparkdata} />}
 
           {(tab === 'songs' || tab === 'movies') && (
             <p className="font-sans text-xs text-landing-muted mt-10">

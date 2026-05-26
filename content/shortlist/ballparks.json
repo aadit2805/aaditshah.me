@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Globe Life Park",
+    "team": "Texas Rangers",
+    "city": "Arlington, TX",
+    "date": "",
+    "photos": []
+  },
+  {
+    "id": 2,
+    "name": "Globe Life Field",
+    "team": "Texas Rangers",
+    "city": "Arlington, TX",
+    "date": "July 27, 2021",
+    "photos": ["/ballparks/globe-life-field-2021/1.jpeg"]
+  },
+  {
+    "id": 3,
+    "name": "Daikin Park",
+    "team": "Houston Astros",
+    "city": "Houston, TX",
+    "date": "July 13, 2025",
+    "photos": ["/ballparks/daikin-park-2025/1.jpeg"]
+  }
+]
