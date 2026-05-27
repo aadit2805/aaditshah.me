@@ -22,5 +22,13 @@
     "city": "Houston, TX",
     "date": "July 13, 2025",
     "photos": ["/ballparks/daikin-park-2025/1.jpeg"]
+  },
+  {
+    "id": 4,
+    "name": "Oracle Park",
+    "team": "San Francisco Giants",
+    "city": "San Francisco, CA",
+    "date": "May 26, 2026",
+    "photos": ["/ballparks/oracle-park-2026/1.jpeg"]
   }
 ]
