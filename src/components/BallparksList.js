@@ -55,21 +55,18 @@ export default function BallparksList({ parks }) {
         );
 
         return (
-          <div
-            key={park.id}
-            className="border-b border-dashed border-landing-border"
-          >
+          <div key={park.id}>
             {hasPhotos ? (
               <button
                 type="button"
                 onClick={() => setOpenId(isOpen ? null : park.id)}
                 aria-expanded={isOpen}
-                className="group flex w-full items-baseline justify-between py-2 text-left cursor-pointer hover:border-landing-muted"
+                className="group flex w-full items-baseline justify-between py-2 text-left cursor-pointer border-b border-dashed border-landing-border hover:border-landing-muted transition-colors"
               >
                 {rowInner}
               </button>
             ) : (
-              <div className="flex items-baseline justify-between py-2">
+              <div className="flex items-baseline justify-between py-2 border-b border-dashed border-landing-border">
                 {rowInner}
               </div>
             )}
