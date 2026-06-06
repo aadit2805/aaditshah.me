@@ -4,7 +4,7 @@ import sitedata from '../../content/site.json';
 
 export const metadata = {
   title: { absolute: 'aadit shah' },
-  description: 'Aadit Shah — Computer Science student at Texas A&M, software engineering intern at Mintlify. Full-stack web developer working at the intersection of design, AI, and clean code.',
+  description: 'building @ mintlify | cs @ texas a&m',
   alternates: { canonical: '/' },
 };
 

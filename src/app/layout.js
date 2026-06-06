@@ -15,8 +15,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-const SITE_DESCRIPTION =
-  'Aadit Shah — Computer Science student at Texas A&M, software engineering intern at Mintlify. Full-stack web developer working at the intersection of design, AI, and clean code.';
+const SITE_DESCRIPTION = 'building @ mintlify | cs @ texas a&m';
 
 export const metadata = {
   title: {
