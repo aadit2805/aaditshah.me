@@ -38,20 +38,6 @@ export const metadata = {
   ],
   authors: [{ name: 'Aadit Shah', url: 'https://aaditshah.me' }],
   creator: 'Aadit Shah',
-  openGraph: {
-    title: 'Aadit Shah',
-    description: SITE_DESCRIPTION,
-    url: 'https://aaditshah.me',
-    siteName: 'Aadit Shah',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Aadit Shah',
-    description: SITE_DESCRIPTION,
-    creator: '@aadit2805',
-  },
   robots: {
     index: true,
     follow: true,

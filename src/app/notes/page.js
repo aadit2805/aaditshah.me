@@ -6,12 +6,6 @@ export const metadata = {
   title: 'notes',
   description: 'Essays and short pieces by Aadit Shah on software engineering, AI, and the things he is thinking about.',
   alternates: { canonical: '/notes' },
-  openGraph: {
-    title: 'Notes | Aadit Shah',
-    description: 'Essays and short pieces on software engineering, AI, and the things Aadit is thinking about.',
-    url: 'https://aaditshah.me/notes',
-    type: 'website',
-  },
 };
 
 function formatDate(iso) {

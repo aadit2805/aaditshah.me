@@ -46,6 +46,8 @@ const MediaRatingSystem = () => {
       <div className="flex gap-4 mb-8">
         <button
           onClick={() => handleSort('date')}
+          aria-pressed={sortConfig.key === 'date'}
+          aria-label={`Sort by date${sortConfig.key === 'date' ? `, ${sortConfig.direction === 'desc' ? 'newest first' : 'oldest first'}` : ''}`}
           className={`font-sans text-sm transition-colors ${
             sortConfig.key === 'date'
               ? 'text-landing-primary font-medium'
@@ -56,6 +58,8 @@ const MediaRatingSystem = () => {
         </button>
         <button
           onClick={() => handleSort('rating')}
+          aria-pressed={sortConfig.key === 'rating'}
+          aria-label={`Sort by rating${sortConfig.key === 'rating' ? `, ${sortConfig.direction === 'desc' ? 'highest first' : 'lowest first'}` : ''}`}
           className={`font-sans text-sm transition-colors ${
             sortConfig.key === 'rating'
               ? 'text-landing-primary font-medium'

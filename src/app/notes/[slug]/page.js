@@ -14,13 +14,6 @@ export function generateMetadata({ params }) {
     title: note.title,
     description: note.summary || `${note.title} — a note by Aadit Shah.`,
     alternates: { canonical: `/notes/${note.slug}` },
-    openGraph: {
-      title: `${note.title} | Aadit Shah`,
-      description: note.summary || `${note.title} — a note by Aadit Shah.`,
-      url: `https://aaditshah.me/notes/${note.slug}`,
-      type: 'article',
-      publishedTime: note.date,
-    },
   };
 }
 

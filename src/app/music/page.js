@@ -5,12 +5,6 @@ export const metadata = {
   title: 'music',
   description: 'Recently played tracks and playlists from Aadit Shah on Spotify.',
   alternates: { canonical: '/music' },
-  openGraph: {
-    title: 'Music | Aadit Shah',
-    description: 'Recently played tracks and playlists.',
-    url: 'https://aaditshah.me/music',
-    type: 'website',
-  },
 };
 
 export default function Music() {

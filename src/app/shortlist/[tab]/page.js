@@ -52,12 +52,6 @@ export function generateMetadata({ params }) {
     title: TAB_LABELS[params.tab],
     description: meta.description,
     alternates: { canonical: `/shortlist/${params.tab}` },
-    openGraph: {
-      title: `${TAB_LABELS[params.tab]} | Aadit Shah`,
-      description: meta.description,
-      url: `https://aaditshah.me/shortlist/${params.tab}`,
-      type: 'website',
-    },
   };
 }
 

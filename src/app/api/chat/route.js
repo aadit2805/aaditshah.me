@@ -70,7 +70,7 @@ function buildSystemPrompt() {
 
   // --- Film opinions & reviews ---
   const filmTakes = personality.opinions.film.takes.map(t => `- ${t}`).join('\n');
-  const topReviews = revdata
+  const topReviews = [...revdata]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 10)
     .map(r => {
