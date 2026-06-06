@@ -41,26 +41,26 @@ const ProjectShowcase = () => {
                 </a>
               </HoverCardTrigger>
 
-              <HoverCardContent align="start" className="w-80">
+              <HoverCardContent align="start" className="w-64 p-3">
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-sans font-semibold text-landing-primary">
+                  <h3 className="font-sans text-sm font-semibold text-landing-primary">
                     {project.title}
                   </h3>
-                  <span className="font-mono text-xs text-landing-muted shrink-0">
+                  <span className="font-mono text-[11px] text-landing-muted shrink-0">
                     {formatYear(project.date)}
                   </span>
                 </div>
 
-                <p className="mt-1.5 font-sans text-sm text-landing-secondary leading-relaxed">
+                <p className="mt-1 font-sans text-[13px] text-landing-secondary leading-snug">
                   {project.description}
                 </p>
 
                 {project.technologies?.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-1.5">
+                  <div className="mt-2.5 flex flex-wrap gap-1">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-full border border-landing-border bg-landing-muted/5 px-2 py-0.5 font-mono text-[11px] text-landing-muted"
+                        className="rounded-full border border-landing-border bg-landing-muted/5 px-1.5 py-0.5 font-mono text-[10px] text-landing-muted"
                       >
                         {tech}
                       </span>
@@ -69,7 +69,7 @@ const ProjectShowcase = () => {
                 )}
 
                 {(project.live || project.github) && (
-                  <div className="mt-3 flex items-center gap-4 border-t border-dashed border-landing-border pt-2.5">
+                  <div className="mt-2.5 flex items-center gap-4 border-t border-dashed border-landing-border pt-2">
                     {project.live && (
                       <a
                         href={project.live}
