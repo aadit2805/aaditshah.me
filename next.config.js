@@ -10,6 +10,11 @@ const nextConfig = {
         destination: '/resume.pdf',
         permanent: true,
       },
+      {
+        source: '/portfolio',
+        destination: '/projects',
+        permanent: true,
+      },
     ]
   },
   async headers() {

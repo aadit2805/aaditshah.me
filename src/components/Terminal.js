@@ -1539,7 +1539,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             </pre>
             <div className="mt-2 mb-4">
               <button
-                onClick={() => window.location.href = '/portfolio'}
+                onClick={() => window.location.href = '/projects'}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-400 font-mono text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span className="text-emerald-500">❯</span>

@@ -4,7 +4,7 @@ export default function sitemap() {
   const now = new Date();
   const routes = [
     '',
-    '/portfolio',
+    '/projects',
     '/music',
     '/reviews',
     '/shortlist',

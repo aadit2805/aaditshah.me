@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/sheet';
 
 const navLinks = [
-  { href: '/portfolio', label: 'projects', key: 'projects' },
+  { href: '/projects', label: 'projects', key: 'projects' },
   { href: '/shortlist', label: 'shortlist', key: 'shortlist' },
   { href: '/reviews', label: 'reviews', key: 'reviews' },
   { href: '/resume.pdf', label: 'resume', key: 'resume' },

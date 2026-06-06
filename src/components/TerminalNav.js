@@ -23,7 +23,7 @@ const TerminalNav = ({ currentPage }) => {
 
         <div className="flex items-center gap-4 font-mono text-sm">
           <Link
-            href="/portfolio"
+            href="/projects"
             className={`transition-colors ${currentPage === 'projects' ? 'text-emerald-400' : 'text-zinc-500 hover:text-zinc-300'}`}
           >
             projects
