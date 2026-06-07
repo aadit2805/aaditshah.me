@@ -130,40 +130,39 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
 
       <Dialog open={!!lightbox} onOpenChange={(open) => { if (!open) setLightbox(null); }}>
         <DialogContent
+          onClick={() => setLightbox(null)}
           onKeyDown={(e) => {
             if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
             if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
           }}
-          className="max-w-[96vw] sm:max-w-5xl border-0 bg-transparent p-0 shadow-none [&>button]:hidden"
+          className="fixed inset-0 z-50 flex h-[100dvh] w-screen max-w-none translate-x-0 translate-y-0 items-center justify-center gap-0 rounded-none border-0 bg-transparent p-0 shadow-none [&>button]:hidden"
         >
           {lightbox && (() => {
             const total = lightbox.photos.length;
             const multiple = total > 1;
             const src = lightbox.photos[lightbox.index];
             const alt = `${lightbox.name} — ${lightbox.date || 'visit'} (${lightbox.index + 1})`;
+            const btn =
+              'absolute flex items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
             return (
-              <div className="relative">
+              <>
                 <DialogTitle className="sr-only">{alt}</DialogTitle>
 
-                <div className="relative mx-auto h-[82vh] w-full">
-                  <Image
-                    key={src}
-                    src={src}
-                    alt={alt}
-                    fill
-                    sizes="96vw"
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
-                    className="rounded-lg object-contain"
-                  />
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  key={src}
+                  src={src}
+                  alt={alt}
+                  onClick={(e) => e.stopPropagation()}
+                  className="max-h-[92dvh] max-w-[94vw] select-none rounded-lg object-contain"
+                />
 
-                {/* Close */}
+                {/* Close — anchored to the viewport corner */}
                 <button
                   type="button"
-                  onClick={() => setLightbox(null)}
+                  onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
                   aria-label="Close"
-                  className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/75"
+                  className={`${btn} right-3 top-3 h-10 w-10 sm:right-5 sm:top-5`}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -172,26 +171,26 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
                   <>
                     <button
                       type="button"
-                      onClick={() => step(-1)}
+                      onClick={(e) => { e.stopPropagation(); step(-1); }}
                       aria-label="Previous photo"
-                      className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/75"
+                      className={`${btn} left-2 top-1/2 h-11 w-11 -translate-y-1/2 sm:left-4`}
                     >
                       <ChevronLeft className="h-6 w-6" />
                     </button>
                     <button
                       type="button"
-                      onClick={() => step(1)}
+                      onClick={(e) => { e.stopPropagation(); step(1); }}
                       aria-label="Next photo"
-                      className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/75"
+                      className={`${btn} right-2 top-1/2 h-11 w-11 -translate-y-1/2 sm:right-4`}
                     >
                       <ChevronRight className="h-6 w-6" />
                     </button>
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 font-mono text-xs text-white">
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 font-mono text-xs text-white backdrop-blur-sm">
                       {lightbox.index + 1} / {total}
                     </div>
                   </>
                 )}
-              </div>
+              </>
             );
           })()}
         </DialogContent>
