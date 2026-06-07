@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import type { Park } from '@/types/content';
 
 // Tiny warm-toned placeholder so photos fade in instead of popping.
@@ -10,6 +11,7 @@ const BLUR_DATA_URL =
 
 export default function BallparksList({ parks }: { parks: Park[] }) {
   const [openId, setOpenId] = useState<Park['id'] | null>(null);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const teamsSeen = new Set(parks.map((p) => p.team)).size;
 
   return (
@@ -78,26 +80,29 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
 
             {hasPhotos && isOpen && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pb-4 pt-1">
-                {park.photos?.map((src, idx) => (
-                  <a
-                    key={idx}
-                    href={src}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative block aspect-square overflow-hidden rounded-md bg-landing-muted/10 hover-lift"
-                  >
-                    <Image
-                      src={src}
-                      alt={`${park.name} — ${park.date || 'visit'} (${idx + 1})`}
-                      fill
-                      sizes="(max-width: 640px) 50vw, 33vw"
-                      quality={70}
-                      placeholder="blur"
-                      blurDataURL={BLUR_DATA_URL}
-                      className="object-cover"
-                    />
-                  </a>
-                ))}
+                {park.photos?.map((src, idx) => {
+                  const alt = `${park.name} — ${park.date || 'visit'} (${idx + 1})`;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setLightbox({ src, alt })}
+                      aria-label={`View photo: ${alt}`}
+                      className="relative block aspect-square overflow-hidden rounded-md bg-landing-muted/10 hover-lift cursor-zoom-in"
+                    >
+                      <Image
+                        src={src}
+                        alt={alt}
+                        fill
+                        sizes="(max-width: 640px) 50vw, 33vw"
+                        quality={70}
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
+                        className="object-cover"
+                      />
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -107,6 +112,23 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
       <p className="font-sans text-xs text-landing-muted pt-3">
         {parks.length} ballparks · {teamsSeen} of 30 MLB teams
       </p>
+
+      <Dialog open={!!lightbox} onOpenChange={(open) => { if (!open) setLightbox(null); }}>
+        <DialogContent className="max-w-[95vw] sm:max-w-4xl border-0 bg-transparent p-0 shadow-none">
+          <DialogTitle className="sr-only">{lightbox?.alt ?? 'Photo'}</DialogTitle>
+          {lightbox && (
+            <div className="relative mx-auto h-[82vh] w-full">
+              <Image
+                src={lightbox.src}
+                alt={lightbox.alt}
+                fill
+                sizes="95vw"
+                className="rounded-lg object-contain"
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
