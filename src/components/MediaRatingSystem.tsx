@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import revdata from '../app/reviews/revdata.json';
+import type { Review } from '@/types/content';
 import {
   Dialog,
   DialogContent,
@@ -12,25 +13,25 @@ import {
 
 const MediaRatingSystem = () => {
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'desc' });
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<Review | null>(null);
 
-  const handleSort = (key) => {
+  const handleSort = (key: string) => {
     setSortConfig(prevConfig => ({
       key,
       direction: prevConfig.key === key && prevConfig.direction === 'desc' ? 'asc' : 'desc',
     }));
   };
 
-  const sortedItems = [...revdata].sort((a, b) => {
+  const sortedItems = [...(revdata as Review[])].sort((a, b) => {
     if (sortConfig.key === 'rating') {
       return sortConfig.direction === 'desc' ? b.rating - a.rating : a.rating - b.rating;
     }
     return sortConfig.direction === 'desc'
-      ? new Date(b.reviewDate) - new Date(a.reviewDate)
-      : new Date(a.reviewDate) - new Date(b.reviewDate);
+      ? new Date(b.reviewDate).getTime() - new Date(a.reviewDate).getTime()
+      : new Date(a.reviewDate).getTime() - new Date(b.reviewDate).getTime();
   });
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',

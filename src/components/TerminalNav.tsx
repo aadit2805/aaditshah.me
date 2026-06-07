@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const TerminalNav = ({ currentPage }) => {
+const TerminalNav = ({ currentPage }: { currentPage?: string }) => {
   return (
     <div className="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">

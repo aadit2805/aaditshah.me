@@ -11,7 +11,7 @@ import {
 const ProjectShowcase = () => {
   const projects = projdata;
 
-  const formatYear = (dateString) => dateString.split('-')[0];
+  const formatYear = (dateString: string) => dateString.split('-')[0];
 
   return (
     <div className="max-w-2xl mx-auto px-8 pb-24">

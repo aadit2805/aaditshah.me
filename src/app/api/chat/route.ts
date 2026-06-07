@@ -17,7 +17,9 @@ const RATE_LIMIT = {
   maxHistoryLength: 30,
 };
 
-function getClientIp(headersList) {
+type ChatMessage = { role: 'user' | 'assistant'; content: string };
+
+function getClientIp(headersList: { get(name: string): string | null }) {
   const forwarded = headersList.get('x-forwarded-for');
   if (forwarded) return forwarded.split(',')[0].trim();
   const real = headersList.get('x-real-ip');
@@ -51,7 +53,7 @@ function buildSystemPrompt() {
   // --- Projects with stories ---
   const projects = projdata.map(p => {
     const storyKey = p.title.toLowerCase().replace(/\s+/g, '_');
-    const story = personality.stories[storyKey] || '';
+    const story = (personality.stories as Record<string, string>)[storyKey] || '';
     const tech = p.technologies.join(', ');
     const live = p.live ? ` Live: ${p.live}` : '';
     return `- ${p.title}: ${p.description} (${tech})${live}${story ? `\n  Story: ${story}` : ''}`;
@@ -155,7 +157,7 @@ Skills: ${sitedata.skills.join(', ')}
 
 const SYSTEM_PROMPT = buildSystemPrompt();
 
-function getMaxTokens(message) {
+function getMaxTokens(message: string) {
   const lower = message.toLowerCase().trim();
 
   // Quick facts: links, names, short lookups
@@ -174,14 +176,14 @@ function getMaxTokens(message) {
   return 500;
 }
 
-function trimHistory(history) {
+function trimHistory(history: ChatMessage[]): ChatMessage[] {
   // Keep last N exchanges (user + assistant pairs)
   const maxMessages = MAX_HISTORY_EXCHANGES * 2;
   if (history.length <= maxMessages) return history;
   return history.slice(-maxMessages);
 }
 
-export async function POST(request) {
+export async function POST(request: Request) {
   try {
     // --- IP-based rate limiting (Upstash if configured, in-memory fallback otherwise) ---
     const headersList = await headers();
@@ -228,13 +230,16 @@ export async function POST(request) {
         (msg.role === 'user' || msg.role === 'assistant') &&
         msg.content.length <= RATE_LIMIT.maxMessageLength * 2
       )
-      .map(msg => ({ role: msg.role, content: msg.content }));
+      .map((msg): ChatMessage => ({
+        role: msg.role as 'user' | 'assistant',
+        content: msg.content,
+      }));
 
     const trimmedHistory = trimHistory(sanitizedHistory);
 
-    const messages = [
+    const messages: ChatMessage[] = [
       ...trimmedHistory,
-      { role: 'user', content: trimmedMessage }
+      { role: 'user', content: trimmedMessage },
     ];
 
     const stream = anthropic.messages.stream({
@@ -273,7 +278,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Chat API error:', error);
 
-    if (error.status === 401) {
+    if ((error as { status?: number }).status === 401) {
       return Response.json(
         { error: 'API key not configured. Set ANTHROPIC_API_KEY environment variable.' },
         { status: 500 }

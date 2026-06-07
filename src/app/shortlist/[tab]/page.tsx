@@ -45,24 +45,24 @@ export function generateStaticParams() {
   return TABS.map((tab) => ({ tab }));
 }
 
-export function generateMetadata({ params }) {
-  const meta = META[params.tab];
+export function generateMetadata({ params }: { params: { tab: string } }) {
+  const meta = META[params.tab as keyof typeof META];
   if (!meta) return {};
   return {
-    title: TAB_LABELS[params.tab],
+    title: TAB_LABELS[params.tab as keyof typeof TAB_LABELS],
     description: meta.description,
     alternates: { canonical: `/shortlist/${params.tab}` },
   };
 }
 
-export default function ShortlistTab({ params }) {
+export default function ShortlistTab({ params }: { params: { tab: string } }) {
   const { tab } = params;
   if (!TABS.includes(tab)) notFound();
 
   const songs = [...songdata].reverse();
   const movies = [...moviedata].reverse();
 
-  const tabClass = (key) =>
+  const tabClass = (key: string) =>
     `font-sans text-sm transition-colors ${
       tab === key
         ? 'text-landing-primary'
@@ -81,7 +81,7 @@ export default function ShortlistTab({ params }) {
                 href={`/shortlist/${key}`}
                 className={tabClass(key)}
               >
-                {TAB_LABELS[key]}
+                {TAB_LABELS[key as keyof typeof TAB_LABELS]}
               </Link>
             ))}
           </div>

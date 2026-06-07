@@ -15,7 +15,7 @@ const navLinks = [
   { href: '/resume.pdf', label: 'resume', key: 'resume' },
 ];
 
-export default function MinimalNav({ currentPage }) {
+export default function MinimalNav({ currentPage }: { currentPage?: string }) {
   return (
     <header className="max-w-2xl mx-auto px-8 py-12 md:py-16">
       <div className="flex items-baseline justify-between">

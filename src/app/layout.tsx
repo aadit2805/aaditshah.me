@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Lora, Inter } from 'next/font/google';
 import './globals.css';
 import { Analytics } from '@vercel/analytics/react';
@@ -79,7 +80,7 @@ const personSchema = {
   description: SITE_DESCRIPTION,
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${lora.variable} ${inter.variable}`}>
       <body className="font-serif antialiased">

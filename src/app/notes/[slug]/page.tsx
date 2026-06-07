@@ -1,13 +1,16 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import MinimalNav from '../../../components/MinimalNav';
-import notesdata from '../notesdata.json';
+import notesRaw from '../notesdata.json';
+import type { Note as NoteEntry } from '@/types/content';
+
+const notesdata = notesRaw as NoteEntry[];
 
 export function generateStaticParams() {
   return notesdata.map((n) => ({ slug: n.slug }));
 }
 
-export function generateMetadata({ params }) {
+export function generateMetadata({ params }: { params: { slug: string } }) {
   const note = notesdata.find((n) => n.slug === params.slug);
   if (!note) return {};
   return {
@@ -17,14 +20,14 @@ export function generateMetadata({ params }) {
   };
 }
 
-function formatDate(iso) {
+function formatDate(iso: string) {
   if (!iso) return '';
   const d = new Date(iso);
-  if (isNaN(d)) return iso;
+  if (isNaN(d.getTime())) return iso;
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-export default function Note({ params }) {
+export default function Note({ params }: { params: { slug: string } }) {
   const note = notesdata.find((n) => n.slug === params.slug);
   if (!note) notFound();
 

@@ -1,11 +1,13 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-const PER_IP = { tokens: 15, window: '60 s' };
-const GLOBAL = { tokens: 100, window: '60 s' };
+type RateLimitResult = { allowed: boolean; reason?: string };
 
-let perIpLimiter = null;
-let globalLimiter = null;
+const PER_IP = { tokens: 15, window: '60 s' } as const;
+const GLOBAL = { tokens: 100, window: '60 s' } as const;
+
+let perIpLimiter: Ratelimit | null = null;
+let globalLimiter: Ratelimit | null = null;
 
 const upstashConfigured =
   !!process.env.UPSTASH_REDIS_REST_URL && !!process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -27,12 +29,12 @@ if (upstashConfigured) {
 }
 
 // ───────── In-memory fallback (when Upstash is not configured) ─────────
-const memMap = new Map();
+const memMap = new Map<string, { windowStart: number; count: number }>();
 let memGlobalCount = 0;
 let memGlobalStart = Date.now();
 const WINDOW_MS = 60 * 1000;
 
-function memCheck(ip) {
+function memCheck(ip: string): RateLimitResult {
   const now = Date.now();
   if (now - memGlobalStart > WINDOW_MS) {
     memGlobalCount = 0;
@@ -64,12 +66,12 @@ if (!upstashConfigured && typeof setInterval !== 'undefined') {
   }, 5 * 60 * 1000);
 }
 
-export async function checkRateLimit(ip) {
+export async function checkRateLimit(ip: string): Promise<RateLimitResult> {
   if (!upstashConfigured) return memCheck(ip);
 
   const [globalRes, ipRes] = await Promise.all([
-    globalLimiter.limit('site'),
-    perIpLimiter.limit(ip || 'unknown'),
+    globalLimiter!.limit('site'),
+    perIpLimiter!.limit(ip || 'unknown'),
   ]);
 
   if (!globalRes.success) {

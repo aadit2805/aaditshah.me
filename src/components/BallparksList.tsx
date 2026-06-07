@@ -2,9 +2,14 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import type { Park } from '@/types/content';
 
-export default function BallparksList({ parks }) {
-  const [openId, setOpenId] = useState(null);
+// Tiny warm-toned placeholder so photos fade in instead of popping.
+const BLUR_DATA_URL =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlM2RjY2IiLz48L3N2Zz4=';
+
+export default function BallparksList({ parks }: { parks: Park[] }) {
+  const [openId, setOpenId] = useState<Park['id'] | null>(null);
   const teamsSeen = new Set(parks.map((p) => p.team)).size;
 
   return (
@@ -73,7 +78,7 @@ export default function BallparksList({ parks }) {
 
             {hasPhotos && isOpen && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pb-4 pt-1">
-                {park.photos.map((src, idx) => (
+                {park.photos?.map((src, idx) => (
                   <a
                     key={idx}
                     href={src}
@@ -86,6 +91,9 @@ export default function BallparksList({ parks }) {
                       alt={`${park.name} — ${park.date || 'visit'} (${idx + 1})`}
                       fill
                       sizes="(max-width: 640px) 50vw, 33vw"
+                      quality={70}
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
                       className="object-cover"
                     />
                   </a>

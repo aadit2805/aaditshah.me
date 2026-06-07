@@ -13,6 +13,7 @@ import ballparkdata from '../../content/shortlist/ballparks.json';
 import sitedata from '../../content/site.json';
 import personality from '../../content/personality.json';
 import projdata from '../../content/projects.json';
+import type { Review } from '@/types/content';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // TERMINAL CONFIGURATION - Ghostty-inspired settings
@@ -40,7 +41,7 @@ const TERM_CONFIG = {
 // ANSI ESCAPE CODE PARSER - Real terminal color support
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const ANSI_COLORS = {
+const ANSI_COLORS: Record<number, string> = {
   30: '#1a1b26', 31: '#f7768e', 32: '#9ece6a', 33: '#e0af68',
   34: '#7aa2f7', 35: '#bb9af7', 36: '#7dcfff', 37: '#c0caf5',
   90: '#414868', 91: '#f7768e', 92: '#9ece6a', 93: '#e0af68',
@@ -71,12 +72,12 @@ const ANSI_256_COLORS = (() => {
   return colors;
 })();
 
-const parseAnsi = (text) => {
-  const segments = [];
+const parseAnsi = (text: string) => {
+  const segments: { text: string; style: React.CSSProperties }[] = [];
   const regex = /\x1b\[([0-9;]*)m/g;
   let lastIndex = 0;
-  let currentStyle = {};
-  let match;
+  let currentStyle: React.CSSProperties = {};
+  let match: RegExpExecArray | null;
 
   while ((match = regex.exec(text)) !== null) {
     if (match.index > lastIndex) {
@@ -118,7 +119,7 @@ const parseAnsi = (text) => {
 // SHELL ENVIRONMENT SIMULATION
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const SHELL_ENV = {
+const SHELL_ENV: Record<string, string> = {
   USER: 'aadit',
   HOME: '/home/aadit',
   PWD: '/home/aadit',
@@ -136,7 +137,7 @@ const SHELL_ENV = {
   HOSTNAME: 'portfolio',
 };
 
-const FILESYSTEM = {
+const FILESYSTEM: Record<string, { type: string; contents: string[] }> = {
   '/home/aadit': {
     type: 'dir',
     contents: ['about.txt', 'skills.txt', 'socials.txt', 'projects/', '.config/', '.ssh/', 'resume.pdf', '.bashrc', '.gitconfig']
@@ -240,7 +241,7 @@ const SOCIALS_TEXT = `
 
 Find me on the internet:
 
-${Object.values(sitedata.socials).map(s => {
+${Object.values(sitedata.socials).map((s: { label: string; url: string; address?: string }) => {
   const display = s.address || s.url.replace('https://', '').replace('mailto:', '');
   return `\x1b[38;5;79m◉\x1b[0m \x1b[1m${s.label}\x1b[0m\n  \x1b[4;38;5;81m${display}\x1b[0m`;
 }).join('\n\n')}
@@ -265,28 +266,34 @@ ${projdata.map((p, i) => {
 // Compact one-liners (used in the `shortlist` overview) and full variants with
 // links (used by the dedicated `songs` / `movies` / … commands).
 
-const songLine = (s) =>
+const songLine = (s: (typeof songdata)[number]) =>
   `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${s.month} ${s.year}\x1b[0m  ${s.title} — \x1b[38;5;244m${s.artist}\x1b[0m`;
-const songLineFull = (s) =>
+const songLineFull = (s: (typeof songdata)[number]) =>
   `${songLine(s)}\n    \x1b[4;38;5;81m${s.spotify.replace('https://', '')}\x1b[0m`;
 
-const movieLine = (m) =>
+const movieLine = (m: (typeof moviedata)[number]) =>
   `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${m.month} ${m.year}\x1b[0m  ${m.title} — \x1b[38;5;244m${m.director}\x1b[0m`;
-const movieLineFull = (m) =>
+const movieLineFull = (m: (typeof moviedata)[number]) =>
   `${movieLine(m)}\n    \x1b[4;38;5;81m${m.imdb.replace('https://', '')}\x1b[0m`;
 
-const bookLine = (b) => {
+type SummerItem = {
+  text: string;
+  done?: boolean;
+  children?: { text: string; done?: boolean }[];
+};
+
+const bookLine = (b: (typeof booksdata)[number]) => {
   const mark = b.done ? '\x1b[38;5;79m✓\x1b[0m' : '\x1b[38;5;79m❯\x1b[0m';
   const title = b.done ? `\x1b[9;38;5;244m${b.title}\x1b[0m` : b.title;
   return `${mark} ${title}${b.author ? ` — \x1b[38;5;244m${b.author}\x1b[0m` : ''}`;
 };
 
-const summerBox = (item) =>
+const summerBox = (item: SummerItem) =>
   item.children && item.children.length
     ? (item.children.every((c) => c.done) ? '\x1b[38;5;79m[x]\x1b[0m' : '\x1b[38;5;244m[ ]\x1b[0m')
     : (item.done ? '\x1b[38;5;79m[x]\x1b[0m' : '\x1b[38;5;244m[ ]\x1b[0m');
-const summerLine = (item) => `${summerBox(item)} ${item.text}`;
-const summerLineFull = (item) => {
+const summerLine = (item: SummerItem) => `${summerBox(item)} ${item.text}`;
+const summerLineFull = (item: SummerItem) => {
   let out = summerLine(item);
   if (item.children && item.children.length) {
     out += '\n' + item.children.map((c) => {
@@ -298,7 +305,7 @@ const summerLineFull = (item) => {
   return out;
 };
 
-const ballparkLine = (p, i) => {
+const ballparkLine = (p: (typeof ballparkdata)[number], i: number) => {
   const date = p.date ? `  \x1b[38;5;244m(${p.date})\x1b[0m` : '';
   return `\x1b[38;5;79m❯\x1b[0m \x1b[1;38;5;250m${i + 1}.\x1b[0m ${p.name} — \x1b[38;5;244m${p.team} · ${p.city}\x1b[0m${date}`;
 };
@@ -327,7 +334,7 @@ const generateBallparksText = () => {
 // its dedicated command for the full list.
 const generateShortlistText = () => {
   const LIMIT = 3;
-  const header = (label, cmd) =>
+  const header = (label: string, cmd: string) =>
     `\x1b[1;38;5;250m${label}\x1b[0m  \x1b[38;5;244m· type '${cmd}' for all\x1b[0m`;
 
   const songs = [...songdata].reverse().slice(0, LIMIT).map(songLine).join('\n');
@@ -378,7 +385,42 @@ const NAV_COMMANDS = [
 // TAB SESSION STATE
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const createTabSession = (id, pid) => ({
+type ChatTurn = { role: 'user' | 'assistant'; content: string };
+
+type TerminalLine = {
+  type: string;
+  content?: string;
+  id?: number;
+  color?: string;
+  [key: string]: any;
+};
+
+type ReviewsState = {
+  selectedIndex: number;
+  filterType: string;
+  sortBy: string;
+  sortDir: string;
+  searchQuery: string;
+  viewingReview: number | null;
+};
+
+type Tab = {
+  id: number;
+  pid: number;
+  name: string;
+  lines: TerminalLine[];
+  commandHistory: string[];
+  historyIndex: number;
+  currentInput: string;
+  cursorPosition: number;
+  isInChatMode: boolean;
+  chatHistory: ChatTurn[];
+  isTyping: boolean;
+  interactiveMode: string | null;
+  reviewsState: ReviewsState;
+};
+
+const createTabSession = (id: number, pid: number): Tab => ({
   id,
   pid,
   name: 'bash',
@@ -410,31 +452,31 @@ const Terminal = () => {
   const router = useRouter();
 
   // Tab management
-  const [tabs, setTabs] = useState([]);
-  const [activeTabId, setActiveTabId] = useState(null);
+  const [tabs, setTabs] = useState<Tab[]>([]);
+  const [activeTabId, setActiveTabId] = useState<number | null>(null);
   const [nextTabId, setNextTabId] = useState(1);
   const [basePid, setBasePid] = useState(10000);
 
   // Global state
   const [cursorVisible, setCursorVisible] = useState(true);
   const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const [autocompleteOptions, setAutocompleteOptions] = useState([]);
+  const [autocompleteOptions, setAutocompleteOptions] = useState<string[]>([]);
   const [autocompleteIndex, setAutocompleteIndex] = useState(0);
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<string[]>([]);
   const [searchIndex, setSearchIndex] = useState(0);
   const [bellFlash, setBellFlash] = useState(false);
   const [dimensions, setDimensions] = useState({ cols: 120, rows: 40 });
   const [uptime, setUptime] = useState(0);
-  const [memoryInfo, setMemoryInfo] = useState({ used: 0, total: 0, percent: 0 });
+  const [memoryInfo, setMemoryInfo] = useState<{ used: number; total: number; percent: number | string }>({ used: 0, total: 0, percent: 0 });
   const [isMobile, setIsMobile] = useState(false);
 
   // Reviews data
-  const [reviewsData, setReviewsData] = useState([]);
+  const [reviewsData, setReviewsData] = useState<Review[]>([]);
 
-  const terminalRef = useRef(null);
-  const hiddenInputRef = useRef(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
   const prevChatModeRef = useRef(false);
 
   // Load reviews data
@@ -475,7 +517,7 @@ const Terminal = () => {
   const activeTab = useMemo(() => tabs.find(t => t.id === activeTabId), [tabs, activeTabId]);
 
   // Update active tab
-  const updateActiveTab = useCallback((updates) => {
+  const updateActiveTab = useCallback((updates: Partial<Tab>) => {
     setTabs(prev => prev.map(tab =>
       tab.id === activeTabId ? { ...tab, ...updates } : tab
     ));
@@ -495,7 +537,7 @@ const Terminal = () => {
   }, [basePid, nextTabId, getBanner]);
 
   // Close tab
-  const closeTab = useCallback((tabId) => {
+  const closeTab = useCallback((tabId: number) => {
     setTabs(prev => {
       const newTabs = prev.filter(t => t.id !== tabId);
       if (newTabs.length === 0) {
@@ -524,7 +566,7 @@ const Terminal = () => {
     const updateMemory = () => {
       try {
         // Try performance.memory (Chrome only, needs --enable-precise-memory-info flag for accurate results)
-        const perfMemory = performance?.memory;
+        const perfMemory = (performance as any)?.memory;
         if (perfMemory && perfMemory.usedJSHeapSize > 0) {
           const used = Math.round(perfMemory.usedJSHeapSize / 1024 / 1024);
           const total = Math.round(perfMemory.jsHeapSizeLimit / 1024 / 1024);
@@ -532,7 +574,7 @@ const Terminal = () => {
           setMemoryInfo({ used, total, percent });
         } else {
           // Fallback: estimate based on deviceMemory or simulate realistic values
-          const deviceMem = typeof navigator !== 'undefined' ? (navigator.deviceMemory || 8) : 8;
+          const deviceMem = typeof navigator !== 'undefined' ? ((navigator as any).deviceMemory || 8) : 8;
           const total = deviceMem * 1024;
           // Simulate realistic browser memory usage (varies between 80-200MB typically)
           const baseUsed = 80 + Math.floor(Math.random() * 40);
@@ -632,7 +674,7 @@ const Terminal = () => {
   };
 
   // Format uptime
-  const formatUptime = (seconds) => {
+  const formatUptime = (seconds: number) => {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = seconds % 60;
@@ -664,7 +706,7 @@ const Terminal = () => {
   }, [uptime, dimensions, memoryInfo]);
 
   // Generate reviews TUI
-  const generateReviewsTUI = useCallback((state) => {
+  const generateReviewsTUI = useCallback((state: ReviewsState) => {
     const { selectedIndex, filterType, sortBy, sortDir, searchQuery: sq, viewingReview } = state;
 
     let filtered = reviewsData
@@ -673,7 +715,7 @@ const Terminal = () => {
 
     filtered = filtered.sort((a, b) => {
       if (sortBy === 'rating') return sortDir === 'desc' ? b.rating - a.rating : a.rating - b.rating;
-      return sortDir === 'desc' ? new Date(b.reviewDate) - new Date(a.reviewDate) : new Date(a.reviewDate) - new Date(b.reviewDate);
+      return sortDir === 'desc' ? new Date(b.reviewDate).getTime() - new Date(a.reviewDate).getTime() : new Date(a.reviewDate).getTime() - new Date(b.reviewDate).getTime();
     });
 
     const total = reviewsData.length;
@@ -700,7 +742,7 @@ const Terminal = () => {
 
   \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
 
-${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') : '  \x1b[38;5;244mNo review text available.\x1b[0m'}
+${review.review ? review.review.split('\n').map((line: string) => `  ${line}`).join('\n') : '  \x1b[38;5;244mNo review text available.\x1b[0m'}
 
   \x1b[38;5;244m─────────────────────────────────────────────────────────────────\x1b[0m
   \x1b[38;5;244mPress\x1b[0m \x1b[1;38;5;79mq\x1b[0m \x1b[38;5;244mor\x1b[0m \x1b[1;38;5;79mESC\x1b[0m \x1b[38;5;244mto go back\x1b[0m
@@ -773,9 +815,9 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
   }, [activeTab, isSearchMode, triggerBell, updateActiveTab]);
 
   // History search
-  const handleHistorySearch = useCallback((query) => {
+  const handleHistorySearch = useCallback((query: string) => {
     if (!activeTab) return;
-    const results = activeTab.commandHistory.filter(cmd =>
+    const results = activeTab.commandHistory.filter((cmd: string) =>
       cmd.toLowerCase().includes(query.toLowerCase())
     ).reverse();
     setSearchResults(results);
@@ -783,7 +825,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
   }, [activeTab]);
 
   // Process command
-  const processCommand = useCallback(async (cmd) => {
+  const processCommand = useCallback(async (cmd: string) => {
     if (!activeTab) return null;
 
     const trimmedCmd = cmd.trim();
@@ -817,7 +859,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
 
         if (!response.ok) throw new Error('Failed');
 
-        const reader = response.body.getReader();
+        const reader = response.body!.getReader();
         const decoder = new TextDecoder();
         let fullResponse = '';
 
@@ -996,7 +1038,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
       case 'env':
         return { type: 'raw', content: `\n${Object.entries(SHELL_ENV).map(([k, v]) => `\x1b[38;5;79m${k}\x1b[0m=${v}`).join('\n')}\n` };
       case 'echo':
-        const processed = args.slice(1).join(' ').replace(/\$(\w+)/g, (_, n) => SHELL_ENV[n] || '');
+        const processed = args.slice(1).join(' ').replace(/\$(\w+)/g, (_: string, n: string) => SHELL_ENV[n] || '');
         return { type: 'raw', content: `\n${processed}\n` };
       case 'cat':
         const file = args[1];
@@ -1041,7 +1083,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
   }, [activeTab, updateActiveTab, generateNeofetch, generateReviewsTUI, uptime, tabs.length, memoryInfo]);
 
   // Handle interactive mode keys
-  const handleInteractiveKey = useCallback((e) => {
+  const handleInteractiveKey = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!activeTab?.interactiveMode) return false;
 
     const mode = activeTab.interactiveMode;
@@ -1156,7 +1198,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
   }, [activeTab, activeTabId, processCommand, updateActiveTab]);
 
   // Handle key press
-  const handleKeyDown = async (e) => {
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!activeTab) return;
 
     // Tab shortcuts (Cmd+T, Cmd+W, Cmd+1-9)
@@ -1168,7 +1210,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
       }
       if (e.key === 'w') {
         e.preventDefault();
-        closeTab(activeTabId);
+        if (activeTabId !== null) closeTab(activeTabId);
         return;
       }
       if (e.key >= '1' && e.key <= '9') {
@@ -1437,7 +1479,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
   };
 
   // Render ANSI text
-  const renderAnsiText = (text) => {
+  const renderAnsiText = (text: string | undefined = '') => {
     const segments = parseAnsi(text);
     // URL regex - must have domain.tld format with valid TLD, exclude .js/.ts etc
     const urlRegex = /((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+\.(?:com|org|net|io|dev|co|me|app|xyz|tech|ai|gg|tv|fm|so)(?:\/[^\s]*)?)/g;
@@ -1477,7 +1519,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
   };
 
   // Render line
-  const renderLine = (line, index) => {
+  const renderLine = (line: TerminalLine, index: number) => {
     switch (line.type) {
       case 'raw':
         return (
@@ -1539,7 +1581,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             </pre>
             <div className="mt-2 mb-4">
               <button
-                onClick={() => window.location.href = '/projects'}
+                onClick={() => router.push('/projects')}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-400 font-mono text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span className="text-emerald-500">❯</span>
@@ -1557,7 +1599,7 @@ ${review.review ? review.review.split('\n').map(line => `  ${line}`).join('\n') 
             </pre>
             <div className="mt-2 mb-4">
               <button
-                onClick={() => window.location.href = '/shortlist'}
+                onClick={() => router.push('/shortlist')}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-400 font-mono text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span className="text-emerald-500">❯</span>

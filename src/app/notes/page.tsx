@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import MinimalNav from '../../components/MinimalNav';
-import notesdata from './notesdata.json';
+import notesRaw from './notesdata.json';
+import type { Note } from '@/types/content';
+
+const notesdata = notesRaw as Note[];
 
 export const metadata = {
   title: 'notes',
@@ -8,10 +11,10 @@ export const metadata = {
   alternates: { canonical: '/notes' },
 };
 
-function formatDate(iso) {
+function formatDate(iso: string) {
   if (!iso) return '';
   const d = new Date(iso);
-  if (isNaN(d)) return iso;
+  if (isNaN(d.getTime())) return iso;
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
