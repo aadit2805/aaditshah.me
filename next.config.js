@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    formats: ['image/webp', 'image/avif'],
+    // Prefer AVIF (smaller) then WebP; cache optimized variants for a year.
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
   },
   async redirects() {
     return [
@@ -21,6 +23,15 @@ const nextConfig = {
     return [
       {
         source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/ballparks/:path*',
         headers: [
           {
             key: 'Cache-Control',
