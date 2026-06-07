@@ -3,26 +3,32 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+   * shadcn semantic tokens — kept in lockstep with the brand palette in
+   * tailwind.config.js (landing / bone / espresso / terracotta). This makes the
+   * named scales and the shadcn tokens a single source of truth, so any shadcn
+   * component inherits the brand by default. Hex equivalents noted inline.
+   */
   :root {
-    --background: 40 33% 96%;
-    --foreground: 30 20% 18%;
-    --card: 40 40% 98%;
-    --card-foreground: 30 20% 18%;
-    --popover: 40 33% 96%;
-    --popover-foreground: 30 20% 18%;
-    --primary: 24 45% 53%;
-    --primary-foreground: 40 40% 98%;
-    --secondary: 30 15% 90%;
-    --secondary-foreground: 30 20% 25%;
-    --muted: 35 20% 92%;
-    --muted-foreground: 30 15% 45%;
-    --accent: 30 25% 88%;
-    --accent-foreground: 30 25% 25%;
+    --background: 45 38% 94%;          /* landing.bg     #f5f2e9 */
+    --foreground: 27 20% 20%;          /* espresso-900   #3D3229 */
+    --card: 40 43% 99%;                /* bone-50        #FDFCFA */
+    --card-foreground: 27 20% 20%;     /* espresso-900   #3D3229 */
+    --popover: 45 38% 94%;             /* landing.bg     #f5f2e9 */
+    --popover-foreground: 27 20% 20%;  /* espresso-900   #3D3229 */
+    --primary: 21 40% 53%;             /* terracotta-500 #B87A58 */
+    --primary-foreground: 40 43% 99%;  /* bone-50        #FDFCFA */
+    --secondary: 40 43% 93%;           /* bone-200       #F5F0E6 */
+    --secondary-foreground: 25 19% 24%;/* espresso-800   #4A3C32 */
+    --muted: 40 43% 93%;               /* bone-200       #F5F0E6 */
+    --muted-foreground: 0 0% 42%;      /* landing.muted  #6A6A6A */
+    --accent: 40 34% 88%;              /* bone-300       #EBE4D6 */
+    --accent-foreground: 25 19% 24%;   /* espresso-800   #4A3C32 */
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 35 20% 85%;
-    --input: 35 20% 85%;
-    --ring: 24 45% 53%;
+    --border: 60 4% 91%;               /* landing.border #E8E8E6 */
+    --input: 60 4% 91%;                /* landing.border #E8E8E6 */
+    --ring: 21 40% 53%;                /* terracotta-500 #B87A58 */
     --radius: 0.75rem;
   }
 
