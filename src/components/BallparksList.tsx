@@ -130,7 +130,6 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
 
       <Dialog open={!!lightbox} onOpenChange={(open) => { if (!open) setLightbox(null); }}>
         <DialogContent
-          onClick={() => setLightbox(null)}
           onKeyDown={(e) => {
             if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
             if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
@@ -145,7 +144,10 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
             const btn =
               'absolute flex items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
             return (
-              <>
+              <div
+                className="relative flex h-full w-full items-center justify-center"
+                onClick={() => setLightbox(null)}
+              >
                 <DialogTitle className="sr-only">{alt}</DialogTitle>
 
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -190,7 +192,7 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
                     </div>
                   </>
                 )}
-              </>
+              </div>
             );
           })()}
         </DialogContent>
