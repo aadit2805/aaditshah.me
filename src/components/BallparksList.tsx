@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import type { Park } from '@/types/content';
+
+type Lightbox = { photos: string[]; index: number; name: string; date?: string };
 
 // Tiny warm-toned placeholder so photos fade in instead of popping.
 const BLUR_DATA_URL =
@@ -11,8 +14,13 @@ const BLUR_DATA_URL =
 
 export default function BallparksList({ parks }: { parks: Park[] }) {
   const [openId, setOpenId] = useState<Park['id'] | null>(null);
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [lightbox, setLightbox] = useState<Lightbox | null>(null);
   const teamsSeen = new Set(parks.map((p) => p.team)).size;
+
+  const step = (delta: number) =>
+    setLightbox((lb) =>
+      lb ? { ...lb, index: (lb.index + delta + lb.photos.length) % lb.photos.length } : lb
+    );
 
   return (
     <div className="space-y-1">
@@ -86,7 +94,14 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => setLightbox({ src, alt })}
+                      onClick={() =>
+                        setLightbox({
+                          photos: park.photos ?? [],
+                          index: idx,
+                          name: park.name,
+                          date: park.date,
+                        })
+                      }
                       aria-label={`View photo: ${alt}`}
                       className="relative block aspect-square overflow-hidden rounded-md bg-landing-muted/10 hover-lift cursor-zoom-in"
                     >
@@ -114,19 +129,71 @@ export default function BallparksList({ parks }: { parks: Park[] }) {
       </p>
 
       <Dialog open={!!lightbox} onOpenChange={(open) => { if (!open) setLightbox(null); }}>
-        <DialogContent className="max-w-[95vw] sm:max-w-4xl border-0 bg-transparent p-0 shadow-none">
-          <DialogTitle className="sr-only">{lightbox?.alt ?? 'Photo'}</DialogTitle>
-          {lightbox && (
-            <div className="relative mx-auto h-[82vh] w-full">
-              <Image
-                src={lightbox.src}
-                alt={lightbox.alt}
-                fill
-                sizes="95vw"
-                className="rounded-lg object-contain"
-              />
-            </div>
-          )}
+        <DialogContent
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+            if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+          }}
+          className="max-w-[96vw] sm:max-w-5xl border-0 bg-transparent p-0 shadow-none [&>button]:hidden"
+        >
+          {lightbox && (() => {
+            const total = lightbox.photos.length;
+            const multiple = total > 1;
+            const src = lightbox.photos[lightbox.index];
+            const alt = `${lightbox.name} — ${lightbox.date || 'visit'} (${lightbox.index + 1})`;
+            return (
+              <div className="relative">
+                <DialogTitle className="sr-only">{alt}</DialogTitle>
+
+                <div className="relative mx-auto h-[82vh] w-full">
+                  <Image
+                    key={src}
+                    src={src}
+                    alt={alt}
+                    fill
+                    sizes="96vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                    className="rounded-lg object-contain"
+                  />
+                </div>
+
+                {/* Close */}
+                <button
+                  type="button"
+                  onClick={() => setLightbox(null)}
+                  aria-label="Close"
+                  className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/75"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+
+                {multiple && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => step(-1)}
+                      aria-label="Previous photo"
+                      className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/75"
+                    >
+                      <ChevronLeft className="h-6 w-6" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => step(1)}
+                      aria-label="Next photo"
+                      className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/75"
+                    >
+                      <ChevronRight className="h-6 w-6" />
+                    </button>
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 font-mono text-xs text-white">
+                      {lightbox.index + 1} / {total}
+                    </div>
+                  </>
+                )}
+              </div>
+            );
+          })()}
         </DialogContent>
       </Dialog>
     </div>
