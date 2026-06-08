@@ -7,7 +7,7 @@
     { "id": 51, "text": "La Taqueria", "done": false },
     { "id": 52, "text": "Arsicault Bakery", "done": false },
     { "id": 53, "text": "b. patisserie", "done": false },
-    { "id": 54, "text": "El Farolito", "done": false },
+    { "id": 54, "text": "El Farolito", "done": true },
     { "id": 55, "text": "Third Wheel Coffee", "done": false },
     { "id": 56, "text": "The Buena Vista", "done": false }
   ]},
