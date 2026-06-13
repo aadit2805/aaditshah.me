@@ -43,5 +43,14 @@
     "month": "May",
     "year": "2026",
     "imdb": "https://www.imdb.com/title/tt0119217/"
+  },
+  {
+    "id": 6,
+    "title": "Obsession",
+    "star": "Michael Johnston",
+    "director": "Curry Barker",
+    "month": "Jun",
+    "year": "2026",
+    "imdb": "https://www.imdb.com/title/tt37287335/"
   }
 ]
