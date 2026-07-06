@@ -5,7 +5,7 @@
   { "id": 4, "text": "Win trivia @ Danny Coyle's", "done": true, "photos": ["/summer/danny-coyles/1.jpeg"] },
   { "id": 5, "text": "Food spots", "children": [
     { "id": 51, "text": "La Taqueria", "done": true },
-    { "id": 52, "text": "Arsicault Bakery", "done": false },
+    { "id": 52, "text": "Arsicault Bakery", "done": true },
     { "id": 53, "text": "b. patisserie", "done": false },
     { "id": 54, "text": "El Farolito", "done": true },
     { "id": 55, "text": "Third Wheel Coffee", "done": false },
