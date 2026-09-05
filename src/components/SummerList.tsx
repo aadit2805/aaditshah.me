@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import PhotoLightbox, { type LightboxState } from './PhotoLightbox';
 
-type Child = { id: number; text: string; done?: boolean };
+type Child = { id: number; text: string; done?: boolean; photos?: string[] };
 export type SummerItem = {
   id: number;
   text: string;
@@ -39,6 +39,48 @@ export default function SummerList({ items }: { items: SummerItem[] }) {
       lb ? { ...lb, index: (lb.index + delta + lb.photos.length) % lb.photos.length } : lb
     );
 
+  const thumbnails = (photos: string[], label: string) => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pb-4 pt-1 pl-8">
+      {photos.map((src, idx) => (
+        <button
+          key={idx}
+          type="button"
+          onClick={() => setLightbox({ photos, index: idx, label })}
+          aria-label={`View photo: ${label} (${idx + 1})`}
+          className="relative block aspect-square overflow-hidden rounded-md bg-landing-muted/10 hover-lift cursor-zoom-in"
+        >
+          <Image
+            src={src}
+            alt={`${label} (${idx + 1})`}
+            fill
+            sizes="(max-width: 640px) 50vw, 33vw"
+            quality={70}
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
+            className="object-cover"
+          />
+        </button>
+      ))}
+    </div>
+  );
+
+  const chevron = (open: boolean) => (
+    <svg
+      viewBox="0 0 16 16"
+      aria-hidden="true"
+      className={`ml-auto h-3.5 w-3.5 shrink-0 text-landing-muted transition-transform ${
+        open ? 'rotate-90' : ''
+      }`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="6 4 10 8 6 12" />
+    </svg>
+  );
+
   return (
     <div className="space-y-1">
       {items.map((item) => {
@@ -66,22 +108,7 @@ export default function SummerList({ items }: { items: SummerItem[] }) {
             >
               {item.text}
             </span>
-            {hasPhotos && (
-              <svg
-                viewBox="0 0 16 16"
-                aria-hidden="true"
-                className={`ml-auto h-3.5 w-3.5 shrink-0 text-landing-muted transition-transform ${
-                  isOpen ? 'rotate-90' : ''
-                }`}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="6 4 10 8 6 12" />
-              </svg>
-            )}
+            {hasPhotos && chevron(isOpen)}
           </div>
         );
 
@@ -102,56 +129,55 @@ export default function SummerList({ items }: { items: SummerItem[] }) {
 
             {hasChildren && (
               <div className="pl-8">
-                {item.children!.map((child) => (
-                  <div key={child.id} className="flex items-center gap-2.5 py-1.5">
-                    <span
-                      aria-hidden="true"
-                      className={`inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center border ${
-                        child.done
-                          ? 'border-landing-muted bg-landing-muted/10 text-landing-muted'
-                          : 'border-landing-muted/60'
-                      }`}
-                    >
-                      {child.done && <Check className="h-2.5 w-2.5" />}
-                    </span>
-                    <span
-                      className={`font-sans text-sm ${
-                        child.done ? 'text-landing-muted line-through' : 'text-landing-secondary'
-                      }`}
-                    >
-                      {child.text}
-                    </span>
-                  </div>
-                ))}
+                {item.children!.map((child) => {
+                  const childHasPhotos = !!child.photos && child.photos.length > 0;
+                  const childOpen = openId === child.id;
+
+                  const childRow = (
+                    <div className="flex items-center gap-2.5 py-1.5">
+                      <span
+                        aria-hidden="true"
+                        className={`inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center border ${
+                          child.done
+                            ? 'border-landing-muted bg-landing-muted/10 text-landing-muted'
+                            : 'border-landing-muted/60'
+                        }`}
+                      >
+                        {child.done && <Check className="h-2.5 w-2.5" />}
+                      </span>
+                      <span
+                        className={`font-sans text-sm ${
+                          child.done ? 'text-landing-muted line-through' : 'text-landing-secondary'
+                        }`}
+                      >
+                        {child.text}
+                      </span>
+                      {childHasPhotos && chevron(childOpen)}
+                    </div>
+                  );
+
+                  return (
+                    <div key={child.id}>
+                      {childHasPhotos ? (
+                        <button
+                          type="button"
+                          onClick={() => setOpenId(childOpen ? null : child.id)}
+                          aria-expanded={childOpen}
+                          className="group block w-full text-left"
+                        >
+                          {childRow}
+                        </button>
+                      ) : (
+                        childRow
+                      )}
+                      {childHasPhotos && childOpen && thumbnails(child.photos!, child.text)}
+                    </div>
+                  );
+                })}
               </div>
             )}
 
-            {hasPhotos && isOpen && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pb-4 pt-1 pl-8">
-                {item.photos!.map((src, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() =>
-                      setLightbox({ photos: item.photos ?? [], index: idx, label: item.text })
-                    }
-                    aria-label={`View photo: ${item.text} (${idx + 1})`}
-                    className="relative block aspect-square overflow-hidden rounded-md bg-landing-muted/10 hover-lift cursor-zoom-in"
-                  >
-                    <Image
-                      src={src}
-                      alt={`${item.text} (${idx + 1})`}
-                      fill
-                      sizes="(max-width: 640px) 50vw, 33vw"
-                      quality={70}
-                      placeholder="blur"
-                      blurDataURL={BLUR_DATA_URL}
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
+            {hasPhotos && isOpen && thumbnails(item.photos!, item.text)}
           </div>
         );
       })}
