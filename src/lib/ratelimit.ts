@@ -9,11 +9,14 @@ const GLOBAL = { tokens: 100, window: '60 s' } as const;
 let perIpLimiter: Ratelimit | null = null;
 let globalLimiter: Ratelimit | null = null;
 
-const upstashConfigured =
-  !!process.env.UPSTASH_REDIS_REST_URL && !!process.env.UPSTASH_REDIS_REST_TOKEN;
+// The Vercel Marketplace install of Upstash sets KV_REST_API_*; a direct Upstash
+// setup sets UPSTASH_REDIS_REST_*. Accept either so the limiter is real on both.
+const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
+const upstashConfigured = !!REDIS_URL && !!REDIS_TOKEN;
 
 if (upstashConfigured) {
-  const redis = Redis.fromEnv();
+  const redis = new Redis({ url: REDIS_URL, token: REDIS_TOKEN });
   perIpLimiter = new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(PER_IP.tokens, PER_IP.window),
@@ -84,3 +87,5 @@ export async function checkRateLimit(ip: string): Promise<RateLimitResult> {
 }
 
 export const rateLimitMode = upstashConfigured ? 'upstash' : 'in-memory';
+// One line per cold start in the function logs, so a misnamed env var is obvious.
+console.log(`[ratelimit] mode=${rateLimitMode}`);
