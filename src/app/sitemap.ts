@@ -5,6 +5,7 @@ export default function sitemap() {
   const routes = [
     '',
     '/projects',
+    '/writing',
     '/music',
     '/reviews',
     '/shortlist',

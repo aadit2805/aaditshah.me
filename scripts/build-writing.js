@@ -32,8 +32,8 @@ function slugify(filename) {
 }
 
 function buildNotes() {
-  const notesDir = path.join(__dirname, '../content/notes');
-  const outputFile = path.join(__dirname, '../src/app/notes/notesdata.json');
+  const notesDir = path.join(__dirname, '../content/writing');
+  const outputFile = path.join(__dirname, '../src/app/writing/writingdata.json');
 
   if (!fs.existsSync(notesDir)) {
     fs.mkdirSync(notesDir, { recursive: true });

@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import MinimalNav from '../../components/MinimalNav';
-import notesRaw from './notesdata.json';
+import notesRaw from './writingdata.json';
 import type { Note } from '@/types/content';
 
 const notesdata = notesRaw as Note[];
 
 export const metadata = {
-  title: 'notes',
+  title: 'writing',
   description: 'Essays and short pieces by Aadit Shah on software engineering, AI, and the things he is thinking about.',
-  alternates: { canonical: '/notes' },
+  alternates: { canonical: '/writing' },
 };
 
 function formatDate(iso: string) {
@@ -21,7 +21,7 @@ function formatDate(iso: string) {
 export default function Notes() {
   return (
     <div className="min-h-screen bg-landing-bg">
-      <MinimalNav currentPage="notes" />
+      <MinimalNav currentPage="writing" />
       <main>
         <div className="max-w-2xl mx-auto px-8 pb-24">
           {notesdata.length === 0 && (
@@ -34,7 +34,7 @@ export default function Notes() {
             {notesdata.map((note) => (
               <Link
                 key={note.slug}
-                href={`/notes/${note.slug}`}
+                href={`/writing/${note.slug}`}
                 className="group block py-4 border-b border-dashed border-landing-border hover:border-landing-muted transition-colors"
               >
                 <div className="flex items-baseline justify-between gap-4 mb-1">

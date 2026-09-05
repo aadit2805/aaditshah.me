@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import MinimalNav from '../../../components/MinimalNav';
-import notesRaw from '../notesdata.json';
+import notesRaw from '../writingdata.json';
 import type { Note as NoteEntry } from '@/types/content';
 
 const notesdata = notesRaw as NoteEntry[];
@@ -16,7 +16,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   return {
     title: note.title,
     description: note.summary || `${note.title} — a note by Aadit Shah.`,
-    alternates: { canonical: `/notes/${note.slug}` },
+    alternates: { canonical: `/writing/${note.slug}` },
   };
 }
 
@@ -33,14 +33,14 @@ export default function Note({ params }: { params: { slug: string } }) {
 
   return (
     <div className="min-h-screen bg-landing-bg">
-      <MinimalNav currentPage="notes" />
+      <MinimalNav currentPage="writing" />
       <main>
         <article className="max-w-2xl mx-auto px-8 pb-24">
           <Link
-            href="/notes"
+            href="/writing"
             className="font-sans text-sm text-landing-muted hover:text-landing-primary transition-colors"
           >
-            ← all notes
+            ← all writing
           </Link>
           <header className="mt-8 mb-10">
             <h1 className="font-serif text-3xl md:text-4xl text-landing-primary leading-tight mb-3">

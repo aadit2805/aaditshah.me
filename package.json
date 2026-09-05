@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/build-reviews.js && node scripts/build-notes.js",
+    "prebuild": "node scripts/build-reviews.js && node scripts/build-writing.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "build-reviews": "node scripts/build-reviews.js",
-    "build-notes": "node scripts/build-notes.js"
+    "build-writing": "node scripts/build-writing.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
