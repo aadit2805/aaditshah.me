@@ -1,22 +1,25 @@
 #!/bin/bash
 
-# Load nvm and node environment for Vercel CLI
+# Load nvm and node environment for Vercel CLI; launchd does not inherit the shell PATH,
+# so add Homebrew for terminal-notifier and vercel.
+export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Resume Auto-Sync Script
-# Copies resume from Documents to codebase and deploys to Vercel
+# Copies resume from Documents to the repo, commits, pushes, and deploys to Vercel
 
-SOURCE="$HOME/Documents/Aadit-Shah-Resume.pdf"
-DEST="$HOME/Documents/aaditshah.me/public/resume.pdf"
-REPO_DIR="$HOME/Documents/aaditshah.me"
-LOG_FILE="$HOME/Documents/aaditshah.me/scripts/resume-sync.log"
+SOURCE="$HOME/Documents/Aadit_Shah_Resume.pdf"
+DEST="$HOME/Code/aaditshah.me/public/resume.pdf"
+REPO_DIR="$HOME/Code/aaditshah.me"
+LOG_FILE="$HOME/Library/Logs/resume-sync/resume-sync.log"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
 }
 
 notify() {
+    command -v terminal-notifier >/dev/null || return 0
     terminal-notifier -title "Resume Sync" -message "$1" -ignoreDnD -sound default
 }
 
@@ -39,6 +42,7 @@ if [ -f "$DEST" ]; then
     fi
 fi
 
+mkdir -p "$(dirname "$LOG_FILE")"
 log "Starting resume sync..."
 
 # Copy the file
