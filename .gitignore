@@ -42,3 +42,10 @@ next-env.d.ts
 
 CLAUDE.md
 AGENTS.md
+
+# generated content artifacts (rebuilt by `npm run generate` in prebuild/predev)
+src/app/reviews/revdata.json
+src/app/writing/writingdata.json
+
+# resume sync logs
+scripts/*.log
