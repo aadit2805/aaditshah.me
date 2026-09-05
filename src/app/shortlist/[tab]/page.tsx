@@ -8,8 +8,9 @@ import moviedata from '../../../../content/shortlist/movies.json';
 import summerdata from '../../../../content/shortlist/summer.json';
 import booksdata from '../../../../content/shortlist/books.json';
 import ballparkdata from '../../../../content/shortlist/ballparks.json';
+import { SHORTLIST_TABS } from '@/lib/shortlist';
 
-const TABS = ['songs', 'movies', 'books', 'summer-26', 'ballparks'];
+const TABS: readonly string[] = SHORTLIST_TABS;
 
 const TAB_LABELS = {
   songs: 'songs',
@@ -41,6 +42,10 @@ const META = {
     description: 'MLB ballparks Aadit Shah has been to.',
   },
 };
+
+// Only the tabs above exist; anything else is a router-level 404 instead of a soft 404
+// (the loading boundary would otherwise commit a 200 before notFound() runs).
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return TABS.map((tab) => ({ tab }));

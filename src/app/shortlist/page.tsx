@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
+import { SHORTLIST_TABS } from '@/lib/shortlist';
 
-const TABS = ['songs', 'movies', 'books', 'summer-26', 'ballparks'];
+const TABS: readonly string[] = SHORTLIST_TABS;
 
 export default function Shortlist({
   searchParams,
