@@ -388,9 +388,9 @@ img[data-loading="true"] {
   );
 }
 
-/* Notes prose styling — applied to markdown-rendered article bodies */
+/* Writing prose styling: applied to markdown-rendered article bodies */
 .prose-aadit {
-  @apply font-serif text-landing-primary leading-relaxed;
+  @apply font-sans text-landing-primary leading-relaxed;
   font-size: 17px;
 }
 .prose-aadit > * + * {
@@ -400,10 +400,10 @@ img[data-loading="true"] {
   @apply leading-relaxed;
 }
 .prose-aadit h2 {
-  @apply font-serif text-2xl text-landing-primary mt-10 mb-3;
+  @apply font-sans font-semibold text-2xl text-landing-primary mt-10 mb-3;
 }
 .prose-aadit h3 {
-  @apply font-serif text-xl text-landing-primary mt-8 mb-2;
+  @apply font-sans font-semibold text-xl text-landing-primary mt-8 mb-2;
 }
 .prose-aadit a {
   @apply text-landing-primary underline underline-offset-2 decoration-landing-border hover:decoration-landing-muted transition-colors;
@@ -424,14 +424,8 @@ img[data-loading="true"] {
 .prose-aadit ol {
   @apply list-decimal;
 }
-.prose-aadit code {
-  @apply font-mono text-sm bg-landing-muted/15 px-1.5 py-0.5 rounded;
-}
-.prose-aadit pre {
-  @apply font-mono text-sm bg-zinc-900 text-zinc-100 p-4 rounded overflow-x-auto;
-}
-.prose-aadit pre code {
-  @apply bg-transparent p-0 text-inherit;
+.prose-aadit img {
+  @apply w-full h-auto rounded-lg border border-landing-border my-8;
 }
 .prose-aadit blockquote {
   @apply border-l-2 border-landing-border pl-4 italic text-landing-secondary;

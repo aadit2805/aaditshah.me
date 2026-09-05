@@ -57,6 +57,7 @@ function buildNotes() {
       title: metadata.title || file,
       date: metadata.date || '',
       summary: metadata.summary || '',
+      source: metadata.source || '',
       html: marked.parse(body),
     };
   });

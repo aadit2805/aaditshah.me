@@ -13,9 +13,9 @@ export const metadata = {
 
 function formatDate(iso: string) {
   if (!iso) return '';
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const [y, m, d] = iso.split('-').map(Number);
+  if (!y || !m || !d) return iso;
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
 export default function Notes() {
@@ -38,10 +38,10 @@ export default function Notes() {
                 className="group block py-4 border-b border-dashed border-landing-border hover:border-landing-muted transition-colors"
               >
                 <div className="flex items-baseline justify-between gap-4 mb-1">
-                  <h2 className="font-serif text-xl md:text-2xl text-landing-primary group-hover:text-landing-hover transition-colors">
+                  <h2 className="font-sans font-semibold text-xl md:text-2xl text-landing-primary group-hover:text-landing-hover transition-colors">
                     {note.title}
                   </h2>
-                  <span className="font-mono text-xs text-landing-muted shrink-0">
+                  <span className="font-sans text-sm text-landing-muted shrink-0">
                     {formatDate(note.date)}
                   </span>
                 </div>

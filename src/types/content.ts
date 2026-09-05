@@ -5,6 +5,7 @@ export type Note = {
   title: string;
   summary?: string;
   date: string;
+  source?: string;
   html: string;
 };
 
