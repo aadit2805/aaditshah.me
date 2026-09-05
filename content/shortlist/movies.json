@@ -61,5 +61,14 @@
     "month": "Jul",
     "year": "2026",
     "imdb": "https://www.imdb.com/title/tt33764258/"
+  },
+  {
+    "id": 8,
+    "title": "Spider-Man: Brand New Day",
+    "star": "Tom Holland",
+    "director": "Destin Daniel Cretton",
+    "month": "Aug",
+    "year": "2026",
+    "imdb": "https://www.imdb.com/title/tt22084616/"
   }
 ]

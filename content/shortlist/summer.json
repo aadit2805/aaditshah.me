@@ -11,5 +11,5 @@
     { "id": 55, "text": "Third Wheel Coffee", "done": false },
     { "id": 56, "text": "The Buena Vista", "done": false }
   ]},
-  { "id": 6, "text": "Visit Napa", "done": false }
+  { "id": 6, "text": "Visit Napa", "done": true }
 ]
