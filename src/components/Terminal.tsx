@@ -1080,7 +1080,7 @@ ${review.review ? review.review.split('\n').map((line: string) => `  ${line}`).j
       default:
         return { type: 'error', content: `\n\x1b[31mbash:\x1b[0m command not found: ${mainCmd}\n` };
     }
-  }, [activeTab, updateActiveTab, generateNeofetch, generateReviewsTUI, uptime, tabs.length, memoryInfo]);
+  }, [activeTab, activeTabId, updateActiveTab, generateNeofetch, generateReviewsTUI, uptime, tabs.length, memoryInfo]);
 
   // Handle interactive mode keys
   const handleInteractiveKey = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {

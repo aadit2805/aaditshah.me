@@ -19,7 +19,7 @@ export default function Music() {
             ~/music
           </h1>
           <p className="text-zinc-500 font-mono text-sm">
-            # What I've been listening to lately.
+            # What I&apos;ve been listening to lately.
           </p>
         </div>
 
