@@ -52,5 +52,14 @@
     "month": "Jun",
     "year": "2026",
     "imdb": "https://www.imdb.com/title/tt37287335/"
+  },
+  {
+    "id": 7,
+    "title": "The Odyssey",
+    "star": "Matt Damon",
+    "director": "Christopher Nolan",
+    "month": "Jul",
+    "year": "2026",
+    "imdb": "https://www.imdb.com/title/tt33764258/"
   }
 ]
