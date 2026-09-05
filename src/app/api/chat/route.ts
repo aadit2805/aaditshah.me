@@ -16,7 +16,7 @@ function getClient() {
   return anthropic;
 }
 
-const MODEL = 'claude-opus-5';
+const MODEL = 'claude-sonnet-5';
 // Includes adaptive-thinking tokens, so leave headroom above the visible reply length
 // that the system prompt's concision rules produce.
 const MAX_OUTPUT_TOKENS = 2048;
@@ -236,16 +236,12 @@ export async function POST(request: Request) {
       { role: 'user', content: trimmedMessage },
     ];
 
-    const stream = getClient().beta.messages.stream({
+    const stream = getClient().messages.stream({
       model: MODEL,
       max_tokens: MAX_OUTPUT_TOKENS,
       // Persona chat is latency-sensitive and not reasoning-heavy; low effort keeps
       // adaptive thinking short so the first token arrives quickly.
       output_config: { effort: 'low' },
-      // If Opus 5's safety classifier declines a turn, re-run it on a fallback model
-      // server-side instead of returning an empty reply.
-      betas: ['server-side-fallback-2026-07-01'],
-      fallbacks: 'default',
       system: [
         { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } },
       ],
@@ -287,6 +283,9 @@ export async function POST(request: Request) {
           controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
           controller.close();
         } catch (error) {
+          // Surfaces API rejections (bad params, auth, refusals) in the function logs
+          // instead of just dropping the connection on the client.
+          console.error('Chat stream error:', error);
           controller.error(error);
         }
       }
