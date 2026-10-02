@@ -70,5 +70,14 @@
     "month": "Aug",
     "year": "2026",
     "imdb": "https://www.imdb.com/title/tt22084616/"
+  },
+  {
+    "id": 9,
+    "title": "Primetime",
+    "star": "Robert Pattinson",
+    "director": "Lance Oppenheim",
+    "month": "Sep",
+    "year": "2026",
+    "imdb": "https://www.imdb.com/title/tt34206385/"
   }
 ]
