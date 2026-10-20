@@ -79,5 +79,14 @@
     "month": "Sep",
     "year": "2026",
     "imdb": "https://www.imdb.com/title/tt34206385/"
+  },
+  {
+    "id": 10,
+    "title": "You Can See Everything",
+    "star": "Elizabeth Holmes",
+    "director": "Nathan Fielder & Lance Oppenheim",
+    "month": "Oct",
+    "year": "2026",
+    "imdb": "https://www.imdb.com/title/tt45368240/"
   }
 ]
