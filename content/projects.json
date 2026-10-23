@@ -1,5 +1,21 @@
 [
   {
+    "id": 7,
+    "title": "pgbox",
+    "tagline": "A real Postgres for every name",
+    "description": "Name a database and you get your own Postgres, running in a Cloudflare Durable Object. Idle databases cost almost nothing, and AI agents can use them through a built-in MCP server.",
+    "technologies": ["TypeScript", "Cloudflare Workers", "Durable Objects", "PGlite", "Postgres", "WebAssembly", "MCP"],
+    "highlights": [
+      "Ran Postgres in wasm inside Durable Objects, with its files stored as 8 KB pages in SQLite",
+      "Cut new database storage from 29 MB to 10 MB, so 5 GB holds about 470 of them",
+      "MCP server so agents keep a real database across sessions"
+    ],
+    "github": "https://github.com/aadit2805/pgbox",
+    "live": "",
+    "featured": true,
+    "date": "2026-10"
+  },
+  {
     "id": 1,
     "title": "Booth Map",
     "tagline": "Career fair booth assignment tool",
